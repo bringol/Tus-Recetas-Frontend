@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {Link} from 'react-router-dom'; //<Link to='/lugar'></Link>
+
 
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -11,7 +11,7 @@ export default function Navbar() {
   html.addEventListener("click", () => setNavbarState(false));
   return (
     <>
-      <Nav>
+      <Nav className="fondo">
         <div className="brand">
           <img src={logo} alt="Icon" />
           <div className="toggle">
@@ -29,22 +29,25 @@ export default function Navbar() {
         </div>
         <ul className="links">
           <li>
-            <a href="#nosotros">
+            <a href="#home" >
               Nosotros
             </a>
           </li>
           <li>
-            <a href="#busqueda">Buscar Receta</a>
+            <a href="#search">Buscar Receta</a>
           </li>
           <li>
             <a href="#recetas">Recetas</a>
           </li>
           <li>
-            <a href="#registrarse">Registrarse</a>
+            <a href="#perfil">Perfil</a>
 
           </li>
           <li>
-            <a href="#login">Iniciar Sesion</a>
+            <a href="#mis-recetas">Mis Recetas</a>
+          </li>
+          <li>
+            <a href="#salir">Salir</a>
           </li>
         </ul>
       </Nav>
@@ -52,7 +55,7 @@ export default function Navbar() {
         <ul>
           <li>
             <a
-              href="#nosotros"
+              href="#home"
               className="active"
               onClick={() => setNavbarState(false)}
             >
@@ -60,7 +63,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#busqueda" onClick={() => setNavbarState(false)}>
+            <a href="#search" onClick={() => setNavbarState(false)}>
               Buscar Receta
             </a>
           </li>
@@ -70,14 +73,19 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#registrarse" onClick={() => setNavbarState(false)}>
-              Registrarse
+            <a href="#mis-recetas" onClick={() => setNavbarState(false)}>
+              Mis Recetas
             </a>
           </li>
           <li>
-            {/* <a href="#login" onClick={() => setNavbarState(false)}> */}              
-              <Link to='/Login'>Iniciar Sesión</Link>
-            {/* </a> */}
+            <a href="#perfil" onClick={() => setNavbarState(false)}>
+              Perfil
+            </a>
+          </li>
+          <li>
+            <a href="#salir" onClick={() => setNavbarState(false)}>
+              Salir
+            </a>
           </li>
         </ul>
       </ResponsiveNav>
