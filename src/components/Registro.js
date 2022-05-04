@@ -4,11 +4,16 @@ import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRound
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+//
+import Typography from "@mui/material/Typography"
+import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+
 
 const Registrarse = () => {
 
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: '20px auto' }
+  const paperStyle = { padding: 20, height: '45vh', width: 280, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center' }
   const avatarStyle = { backgroundColor: '#1976d2' }
+  const centradoStyle= {padding: 10, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center', color:"red"}
 
   return (
     <Grid>
@@ -23,11 +28,18 @@ const Registrarse = () => {
         <TextField id="standard-basic" label="Correo electrónico" variant="standard" size="small" fullWidth required />
         <TextField id="standard-basic" label="Contraseña" variant="standard" type="password" size="small" fullWidth required />
         <TextField id="standard-basic" label="Confirme contraseña" variant="standard" type="password" size="small" fullWidth required />
-        <FormGroup>
+        
+        {/* <FormGroup>
           <FormControlLabel control={<Checkbox defaultChecked />} label="Acepto términos y condiciones" />
-        </FormGroup>
-        <Button variant="contained" size="medium" align='center'>Confirmar</Button>
+        </FormGroup> */}
+        <Typography style={centradoStyle}>
+        *Al seleccionar Confirmar Ud. estará aceptando nuestros términos y condiciones
+        </Typography>
+        <Button variant="contained" size="medium" align='center' >
+        <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>Confirmar </NavLink>
+          </Button>
       </Paper>
+      
     </Grid>
   )
 }

@@ -3,15 +3,17 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+//import Button from '@mui/material/Button';
+import {NavLink} from 'react-router-dom';
 
-export default function Navbar() {
+
+export default function NavbarVacio() {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
   return (
     <>
-      <Nav>
+      <Nav className="fondo">
         <div className="brand">
           <img src={logo} alt="Icon" />
           <div className="toggle">
@@ -29,56 +31,25 @@ export default function Navbar() {
         </div>
         <ul className="links">
           <li>
-            <a href="#nosotros">
-              Nosotros
+            <a>
+            {/* <Button variant="text">Home</Button> */}
+            <NavLink to='/Home'>Home </NavLink>
             </a>
-          </li>
-          <li>
-            <a href="#busqueda">Buscar Receta</a>
-          </li>
-          <li>
-            <a href="#recetas">Recetas</a>
-          </li>
-          <li>
-            <a href="#registrarse">Registrarse</a>{/*Desplaza pantalla hacia abajo hasta alcanzar el componente Registrase*/}
-
-          </li>
-          <li>
-            {/* <a href="#login">Iniciar Sesion</a> */}
-            <NavLink to='/Login'>Iniciar Sesion </NavLink>
           </li>
         </ul>
       </Nav>
+
+
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <ul>
           <li>
             <a
-              href="#nosotros"
-              className="active"
-              onClick={() => setNavbarState(false)}
+              //href="#home"
+              //className="active"
+              //onClick={() => setNavbarState(false)}
             >
-              Nosotros
+             <NavLink to='/Home'>Home </NavLink>
             </a>
-          </li>
-          <li>
-            <a href="#busqueda" onClick={() => setNavbarState(false)}>
-              Buscar Receta
-            </a>
-          </li>
-          <li>
-            <a href="#recetas" onClick={() => setNavbarState(false)}>
-              Recetas
-            </a>
-          </li>
-          <li>
-            <a href="#registrarse" onClick={() => setNavbarState(false)}>
-              Registrarse {/*Desplaza pantalla hacia abajo hasta alcanzar el componente Registrase*/}
-            </a>
-          </li>
-          <li>
-            {/* <a href="#login" onClick={() => setNavbarState(false)}> */}              
-            <NavLink to='/Login'>Iniciar Sesion </NavLink>
-            {/* </a> */}
           </li>
         </ul>
       </ResponsiveNav>

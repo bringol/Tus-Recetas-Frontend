@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
+import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
 
 
 export default function Navbar() {
@@ -47,7 +48,11 @@ export default function Navbar() {
             <a href="#mis-recetas">Mis Recetas</a>
           </li>
           <li>
-            <a href="#salir">Salir</a>
+            {/* <a href="#salir"> */}
+              
+            <NavLink to='/Home' style={{ textDecoration: 'none' , color: 'white' }}>Salir</NavLink>
+            
+            {/* </a> */}
           </li>
         </ul>
       </Nav>
@@ -84,7 +89,7 @@ export default function Navbar() {
           </li>
           <li>
             <a href="#salir" onClick={() => setNavbarState(false)}>
-              Salir
+            <NavLink to='/Home' style={{ textDecoration: 'none' , color: 'white' }}>Salir</NavLink>
             </a>
           </li>
         </ul>

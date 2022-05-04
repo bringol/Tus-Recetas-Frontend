@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: "100px",
+    marginBottom: "220px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -65,7 +65,7 @@ export default function InicioSesion() {
             fullWidth
             name="contraseña"
             label="Contraseña"
-            type="contraseña"
+            type="password" //si no está escrito así se ven los caracteres
             id="contraseña"
             autoComplete="contraseña-actual"
           />
@@ -80,7 +80,7 @@ export default function InicioSesion() {
             color="primary"
             className={classes.submit}
           >
-            <NavLink to='/Home/1'>Ingresar </NavLink>
+            <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Ingresar </NavLink>
           </Button>
           <Grid container>
             
@@ -91,7 +91,7 @@ export default function InicioSesion() {
             </Grid>
             <Grid item xs>
               <Link href="#" variant="body2">
-              <NavLink to='/registro'>REGÍSTRATE AQUI</NavLink>
+              <NavLink to='/Registro'>REGÍSTRATE AQUI</NavLink>
               </Link>
             </Grid>
            

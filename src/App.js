@@ -65,7 +65,7 @@ export default function App() {
       {/*Crear homepage similar al anterior, pero para cuando este logeado*/}   
         <Route path="*" element={<div><h1>Error 404 Página no encontrada</h1></div>} />
         <Route path="/Home" element={<P_Home/>} />
-        <Route path="/HomeUser" element={<P_HomeUSR/>} />
+        <Route path="/Home/User" element={<P_HomeUSR/>} />
         <Route path="/Login" element={<P_Login/>} />
         <Route path="/Registro" element={<P_Registo/>} />
 
@@ -81,5 +81,6 @@ export default function App() {
 
     </BrowserRouter> 
     </>
+    
   );
 }

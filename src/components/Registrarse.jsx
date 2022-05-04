@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import background from "../assets/portfolio.jpg";
+//import background from "../assets/portfolio.jpg";
+import background from "../assets/portada.jpg";
+import {NavLink} from 'react-router-dom';
 
 export default function Registrarse() {
   return (
@@ -10,7 +12,9 @@ export default function Registrarse() {
       </div>
       <div className="content">
         <h1>¿Aún no tienes una cuenta?</h1>
-        <button>Registrate</button>
+        <button>
+        <NavLink to='/Registro' style={{ textDecoration: 'none' , color: 'white' }}>Registrate</NavLink>
+          </button>
       </div>
     </Section>
   );
