@@ -2,7 +2,7 @@
 # Primeros Pasos Git
 ** **Para tener descargar (solo se hacer una vez)** **
 
-`git clone https://github.com/bringol/APIS_TPO.git`
+`git clone https://github.com/bringol/Tus-Recetas-TPO`
 
 
 **Para ver cambios**
