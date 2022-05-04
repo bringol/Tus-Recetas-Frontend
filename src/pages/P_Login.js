@@ -7,7 +7,6 @@ import Login from "../components/InicioSesion"
 
 //test
 import OlvidoConstraseña from "../components/OlvidoContraseña";
-import ValidarContraseña from "../components/ValidarContraseña";
 import RestablcerContraseña from "../components/RestablecerContraseña";
 import EditarPerfil from "../components/EditarPerfil";
 

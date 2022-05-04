@@ -41,8 +41,8 @@ export default function Navbar() {
             <a href="#recetas">Recetas</a>
           </li>
           <li>
-            <a href="#perfil">Perfil</a>
-
+            {/* <a href="#perfil">Perfil</a> */}
+            <NavLink to='/User/Perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>                
           </li>
           <li>
             <a href="#mis-recetas">Mis Recetas</a>
@@ -61,7 +61,7 @@ export default function Navbar() {
           <li>
             <a
               href="#home"
-              className="active"
+              // className="active"
               onClick={() => setNavbarState(false)}
             >
               Nosotros
@@ -83,9 +83,9 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#perfil" onClick={() => setNavbarState(false)}>
-              Perfil
-            </a>
+            {/* <a href="#perfil" onClick={() => setNavbarState(false)}> */}
+            <NavLink to='/User/Perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>
+            {/* </a> */}
           </li>
           <li>
             <a href="#salir" onClick={() => setNavbarState(false)}>
