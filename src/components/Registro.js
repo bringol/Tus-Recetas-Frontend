@@ -11,7 +11,7 @@ import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textD
 
 const Registrarse = () => {
 
-  const paperStyle = { padding: 20, height: '45vh', width: 280, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center' }
+  const paperStyle = { padding: 20, height: '85vh', width: 280, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center' }
   const avatarStyle = { backgroundColor: '#1976d2' }
   const centradoStyle= {padding: 10, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center', color:"red"}
 

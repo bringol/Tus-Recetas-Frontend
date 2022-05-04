@@ -25,6 +25,7 @@ import P_Home from "./pages/P_Home"
 import P_HomeUSR from "./pages/P_HomeUSR"
 import P_Login from "./pages/P_Login";
 import P_Registo from "./pages/P_Registro";
+import P_Recover from "./pages/P_Recover";
 
 
 export default function App() {
@@ -68,6 +69,8 @@ export default function App() {
         <Route path="/Home/User" element={<P_HomeUSR/>} />
         <Route path="/Login" element={<P_Login/>} />
         <Route path="/Registro" element={<P_Registo/>} />
+        <Route path="/Recover" element={<P_Recover/>} />
+
 
 
          {/*  <ScrollToTop />
@@ -81,6 +84,6 @@ export default function App() {
 
     </BrowserRouter> 
     </>
-    
+
   );
 }

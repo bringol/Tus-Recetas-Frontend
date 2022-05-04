@@ -155,7 +155,7 @@ const ResponsiveNav = styled.div`
   top: 0;
   z-index: 10;
   background-color: #834e6d;
-  height: 100vh;
+  height: 80vh;
   width: ${({ state }) => (state ? "60%" : "0%")};
   transition: 0.3s ease-in-out;
   display: flex;

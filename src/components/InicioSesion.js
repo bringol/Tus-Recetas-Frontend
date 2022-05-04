@@ -1,14 +1,8 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+//import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@mui/material';
+import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@material-ui/core/';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
-import Container from '@material-ui/core/Container';
 import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 
 

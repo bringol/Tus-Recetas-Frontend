@@ -18,8 +18,13 @@ export default function P_Login() {
     <div>
         <ScrollToTop />
         <NavbarVacio />
-        <Login/>
+        <OlvidoConstraseña /> {/*agregar ingreso codigo y boton siguiente*/}
+        {/*<ValidarContraseña /> tira errores*/}
+        {/* <RestablcerContraseña /> acomodar,agregar repetir contraseña y sacar código validacion */}
+        {/*<EditarPerfil />acomodar y nublar campos contraseña*/}
         <Footer />
+        
+
     </div>
     );
   }
