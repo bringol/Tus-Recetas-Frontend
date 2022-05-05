@@ -1,7 +1,6 @@
 import React from "react";
 import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import NavbarVacio from "../components/NavbarVacio";
-import Hero from "../components/Hero";
 import ScrollToTop from "../components/ScrollToTop";
 import Login from "../components/InicioSesion"
 
@@ -12,15 +11,13 @@ import EditarPerfil from "../components/EditarPerfil";
 
 
 
-export default function P_Login() {
+export default function P_Perfil() {
     return (
     <div>
         <ScrollToTop />
         <NavbarVacio />
-        <OlvidoConstraseña /> {/*agregar ingreso codigo y boton siguiente*/}
+        <EditarPerfil/>
         <Footer />
-        
-
     </div>
     );
   }

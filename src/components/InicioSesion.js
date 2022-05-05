@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#834e6d",
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -65,13 +65,13 @@ export default function InicioSesion() {
           />
           
           <Link href="#" variant="body2">
-                Olvidé Mi Contraseña
+          <NavLink to='/Recover'style={{ textDecoration: 'none'}}>Olvidé Mi Contraseña </NavLink>
               </Link>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Ingresar </NavLink>

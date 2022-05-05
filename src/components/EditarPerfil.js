@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Avatar, TextField, Button } from '@mui/material';
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
+import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
 
 const EditarPerfil = () => {
 
@@ -20,7 +21,9 @@ const EditarPerfil = () => {
         <TextField id="standard-basic" label="Modificar contraseña" variant="standard" size="small" fullWidth  /> 
         <TextField id="standard-basic" label="Confirmar contraseña" variant="standard" size="small" fullWidth  /> 
         <h2> </h2>
-        <Button variant="contained" size="medium" align='center'>Guardar cambios</Button>
+        <Button variant="contained" size="medium" align='center'>
+        <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>Guardar cambios </NavLink>
+          </Button>
       </Paper>
     </Grid>
   )
