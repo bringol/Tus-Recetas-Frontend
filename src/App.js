@@ -27,6 +27,7 @@ import P_Login from "./pages/P_Login";
 import P_Registo from "./pages/P_Registro";
 import P_Recover from "./pages/P_Recover";
 import P_Perfil from "./pages/P_Perfil";
+import P_RecetaNueva from "./pages/P_RecetaNueva"
 
 export default function App() {
   useEffect(() => {
@@ -71,6 +72,7 @@ export default function App() {
         <Route path="/Registro" element={<P_Registo/>} />
         <Route path="/Recover" element={<P_Recover/>} />
         <Route path="/User/Perfil" element={<P_Perfil/>} />
+        <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
 
 
 
