@@ -69,3 +69,8 @@ section {
 .css-zcbmsk-MuiButtonBase-root-MuiButton-root{
   background: linear-gradient(to bottom, #572e57, #834e6d, #572e57);
 }
+
+#button{
+ 
+  outline:none;
+}

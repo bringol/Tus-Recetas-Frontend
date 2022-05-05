@@ -1,23 +1,111 @@
 import React from "react";
 import styled from "styled-components";
 import { TitleStyles } from "./ReusableStyles";
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import {MdDelete, MdEdit} from "react-icons/md";
+
+const columns = [
+  { id: 'id', label: 'ID', minWidth: 100 },
+  { id: 'name', label: 'Nombre', minWidth: 170 },
+  { id: 'categoria', label: 'Categoria', minWidth: 170, align: 'center' },
+  { id: 'dificultad', label: 'Dificultad', minWidth: 170, align: 'center'},
+  { id: 'modificar', label: 'Modificar', minWidth: 170, align: 'center'},
+  { id: 'eliminar', label: 'Eliminar', minWidth: 170, align: 'center'},
+];
+
+function createData(id, name, categoria, dificultad) {
+  const modificar = <button><MdEdit className="delete" size={20}/></button>;
+  const eliminar = <button><MdDelete className="delete" size={20}/></button>;
+  return { id, name, categoria, dificultad, modificar, eliminar};
+}
+
+const rows = [
+  createData(1, 'Hamburguesas', 'Carnes', 'Media'),
+  createData(2, 'Pollo al Verdeo', 'Pollos', 'Baja'),
+];
+
 export default function Newsletter() {
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
-    <Section id="newsletter">
+    <Section id="misrecetas">
       <div className="title">
         <h1>
-          <span>Subscribe</span> Newsletter
+          <span> Mis Recetas </span>
         </h1>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid quas
-          perferendis nesciunt illum, voluptas nulla laborum alias similique
-          praesentium quam.
-        </p>
-      </div>
-      <div className="container">
-        <input type="text" placeholder="Search for food ..." />
-        <button>Search</button>
-      </div>
+        <div>
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+          </div>
+          <div className="container">
+          <button>Publicar nueva receta</button>
+          </div>
+    
+        </div>
     </Section>
   );
 }
@@ -31,7 +119,7 @@ const Section = styled.section`
   align-items: center;
   ${TitleStyles};
   .container {
-    background: linear-gradient(to right, #fc4958, #e85d04, #fc4958);
+    background: linear-gradient(to right,  #572e57, #834e6d, #572e57);
     padding: 0.3vw;
     input {
       border: none;

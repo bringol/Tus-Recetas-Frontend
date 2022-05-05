@@ -68,7 +68,7 @@ export default function Search() {
               renderInput={(params) => <TextField {...params} label="Categorias" color="secondary" />}
             />
           </Grid>
-          <Grid  item xs={12} md={3}>
+          <Grid item xs={12} md={3}>
             <Autocomplete
               id="dificultad"
               size="small"
@@ -77,29 +77,33 @@ export default function Search() {
               renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
             />
           </Grid>
-          <Grid  item xs={12} md={3}>
+          <Grid item xs={12} md={3}>
             <Autocomplete
               id="ingtedientes"
               size="small"
               Ingredientes
-              color="secondary" 
+              color="secondary"
               options={topIngredientes.map((option) => option.title)}
-              renderInput={(params) => <TextField {...params} label="Ingredientes"  color="secondary"/>}
+              renderInput={(params) => <TextField {...params} label="Ingredientes" color="secondary" />}
             />
           </Grid>
-          <Grid  item xs={12} md={3}>
+          <Grid item xs={12} md={3}>
             <Autocomplete
               id="calificacion"
               size="small"
               border-color="#572e57"
               Calificación
               options={topCalificaciones.map((option) => option.title)}
-              renderInput={(params) => <TextField {...params} label="Calificación"  color="secondary" />}
+              renderInput={(params) => <TextField {...params} label="Calificación" color="secondary" />}
             />
           </Grid>
         </Grid >
       </div>
 
+      {/* <div className="container">
+          <input type="text" placeholder="Search for food ..." />
+          <button>Search</button>
+      </div> */}
     </Section >
   );
 }
