@@ -26,7 +26,12 @@ import P_HomeUSR from "./pages/P_HomeUSR"
 import P_Login from "./pages/P_Login";
 import P_Registo from "./pages/P_Registro";
 import P_Recover from "./pages/P_Recover";
+<<<<<<< HEAD
 
+=======
+import P_Perfil from "./pages/P_Perfil";
+import P_RecetaNueva from "./pages/P_RecetaNueva"
+>>>>>>> a046161e28198e2811907439314d8249707ea83d
 
 export default function App() {
   useEffect(() => {
@@ -70,6 +75,12 @@ export default function App() {
         <Route path="/Login" element={<P_Login/>} />
         <Route path="/Registro" element={<P_Registo/>} />
         <Route path="/Recover" element={<P_Recover/>} />
+<<<<<<< HEAD
+=======
+        <Route path="/User/Perfil" element={<P_Perfil/>} />
+        <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
+
+>>>>>>> a046161e28198e2811907439314d8249707ea83d
 
 
          {/*  <ScrollToTop />
