@@ -1,45 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import avatar1 from "../assets/avatar1.jpeg";
+import product1 from "../assets/product1.jpg";
+import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
+import { AiFillStar } from "react-icons/ai";
+
 export default function Testimonials() {
+
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+
   return (
+
     <Section id="testimonials">
+
       <div className="container">
         <div className="title">
           <h1>
-            <span>What</span> Customers Says
+            <span>Hamburguesas</span>
           </h1>
         </div>
-        <div className="testimonials">
-          <div className="testimonial">
-            <div className="image">
-              <img src={avatar1} alt="" />
-            </div>
-            <p>
-              He Printing and Typesetting the industry. <span>Lorem Ipsum</span>{" "}
-              has been the Industry's
-            </p>
+
+        <Grid container direction="row">
+
+          <div className="testimonials">
+
+
+            <Grid item xs={12} md={6}>
+              <div className="testimonial">
+                <div className="image">
+                  <img src={product1} alt="" />
+                </div>
+                <div className="raiting">
+                  {[...Array(5)].map((star, i) => {
+                    const ratingValue = i + 1;
+
+                    return (
+                      <label>
+                        <input
+                          type="radio"
+                          name="rating"
+                          value={ratingValue}
+                          onClick={() => setRating(ratingValue)}
+
+                        />
+                        <AiFillStar className="star"
+                          color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                          size={30}
+                          onMouseEnter={() => setHover(ratingValue)}
+                          onMouseLeave={() => setHover(null)}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <h3>Dificultad</h3>
+              <a>Media</a>
+              <h3>Ingredientes</h3>
+              <ul className="links">
+                <li>
+                  <a>Carne picada</a>
+                </li>
+                <li>
+                  <a>Cebolla</a>
+                </li>
+                <li>
+                  <a>Morron</a>
+                </li>
+                <li>
+                  <a>Carne picada</a>
+                </li>
+                <li>
+                  <a>Sal</a>
+                </li>
+              </ul>
+              <h3>Descripcion</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
+                ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
+                quae vero eligendi reiciendis cum.
+              </p>
+            </Grid>
           </div>
-          <div className="testimonial">
-            <div className="image">
-              <img src={avatar1} alt="" />
-            </div>
-            <p>
-              He Printing and Typesetting the industry. <span>Lorem Ipsum</span>{" "}
-              has been the Industry's
-            </p>
-          </div>
-          <div className="testimonial">
-            <div className="image">
-              <img src={avatar1} alt="" />
-            </div>
-            <p>
-              He Printing and Typesetting the industry. <span>Lorem Ipsum</span>{" "}
-              has been the Industry's
-            </p>
-          </div>
-        </div>
+        </Grid>
       </div>
     </Section>
   );
@@ -47,7 +93,7 @@ export default function Testimonials() {
 
 const Section = styled.section`
   margin: 5vw;
-  background: linear-gradient(to right, #fc4958, #e85d04, #fc4958);
+  background: linear-gradient(to right, #572e57, #834e6d, #572e57);
   padding: 0.2rem;
   border-radius: 1.5rem;
   position: relative;
@@ -59,7 +105,7 @@ const Section = styled.section`
     border-radius: 1rem;
     ${TitleStyles};
     .title {
-      position: absolute;
+      position: center;
       top: -1rem;
       left: 25%;
       padding: 0 2rem;
@@ -88,12 +134,21 @@ const Section = styled.section`
         }
         ${imageZoomEffect};
         .image {
+          max-height: 20rem;
           overflow: hidden;
-          width: max-content;
-          max-height: 10rem;
-          border-radius: 10rem;
+          border-radius: 1rem;
           img {
-            height: 10rem;
+            height: 20rem;
+            width: 15rem;
+            object-fit: cover;
+            align: left;
+          }
+        }
+      }
+      .links {
+        li {
+          a {
+            text-decoration: none;
           }
         }
       }

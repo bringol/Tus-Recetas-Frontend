@@ -6,8 +6,9 @@ import Registrarse from "../components/Registrarse";
 import Products from "../components/Products";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
+import Testimonials from "../components/Testimonials";
 //import Newsletter from "./components/Newsletter";
-//import Testimonials from "./components/Testimonials";
+
 //import scrollreveal from "scrollreveal";
 
 export default function P_Home() {
@@ -18,6 +19,7 @@ export default function P_Home() {
         <Hero /> 
         <Search />
         <Products />
+        <Testimonials />
         <Registrarse/>
         <Footer />
     </div>

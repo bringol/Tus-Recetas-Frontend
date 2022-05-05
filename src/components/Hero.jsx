@@ -6,7 +6,7 @@ import portfolio from "../assets/portfolio.jpg";
 export default function Hero() {
 
   return (
-    <Section id="home">
+    <Section id="nosotros">
       <div className="background">
         <img src={portfolio} alt="Background Image" />
       </div>
@@ -24,7 +24,7 @@ export default function Hero() {
 }
 
 const Section = styled.section`
-  height: 50vh;
+  height: 60vh;
   width: 100vw;
   position: relative;
   .background {

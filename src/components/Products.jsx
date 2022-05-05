@@ -17,7 +17,7 @@ export default function Products() {
   const data = [
     {
       image: product1,
-      name: "Hamburguesa",
+      name: "Hamburguesas",
     },
     {
       image: product2,

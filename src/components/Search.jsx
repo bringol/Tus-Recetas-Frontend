@@ -43,7 +43,7 @@ export default function Search() {
   ];
 
   return (
-    <Section id="search">
+    <Section id="busqueda">
       <div className="title">
         <h1>
           <span>BUSCAR RECETAS</span>

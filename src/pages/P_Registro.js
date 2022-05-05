@@ -8,13 +8,13 @@ import { Box } from '@mui/material';
 
 export default function P_Registo() {
     return (
-    <div>
-        <ScrollToTop />
-        <NavbarVacio />
-        <Box sx={{ mt: 15, mb:15 }}>
-            <Registro />
-        </Box>
-        <Footer />
-    </div>
+        <div>
+            <NavbarVacio />
+            <Box sx={{ mt: 5, mb: 10}}>
+                <Registro />
+            </Box>
+            <Footer />
+            <ScrollToTop />
+        </div>
     );
-  }
+}

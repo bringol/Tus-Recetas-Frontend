@@ -11,32 +11,33 @@ import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textD
 
 const Registrarse = () => {
 
-  const paperStyle = { padding: 20, height: '85vh', width: 280, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center' }
-  const avatarStyle = { backgroundColor: '#1976d2' }
-  const centradoStyle= {padding: 10, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center', color:"red"}
+  const paperStyle = { padding: 20, height: '80vh', width: 380, margin: '20px auto', display: 'flex',  flexDirection: 'column',  alignItems: 'center' }
+  const avatarStyle = { backgroundColor: '#834e6d'}
+  const centradoStyle= {padding: 10, margin: '20px auto', display: 'flex',  flexDirection: 'column',  textAlign: 'justify', color:'red'}
 
   return (
-    <Grid>
-      <Paper elevation={10} style={paperStyle}>
+    <Grid maxWidth="xl">
+      <Paper elevation={20} style={paperStyle}>
         <Grid align='center'>
           <Avatar style={avatarStyle}> <AppRegistrationRoundedIcon /> </Avatar>
           <h2> Registrarse </h2>
         </Grid>
-        <TextField id="standard-basic" label="Nombre" variant="standard" size="small" fullWidth required />
-        <TextField id="standard-basic" label="Apellido" variant="standard" size="small" fullWidth required />
-        <TextField id="standard-basic" label="Telefono" variant="standard" size="small" fullWidth required />
-        <TextField id="standard-basic" label="Correo electrónico" variant="standard" size="small" fullWidth required />
-        <TextField id="standard-basic" label="Contraseña" variant="standard" type="password" size="small" fullWidth required />
-        <TextField id="standard-basic" label="Confirme contraseña" variant="standard" type="password" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Nombre" variant="standard" color="secondary" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Apellido" variant="standard" color="secondary" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Telefono" variant="standard" color="secondary" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Correo electrónico" variant="standard" color="secondary" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Contraseña" variant="standard" type="password" color="secondary" size="small" fullWidth required />
+        <TextField id="standard-basic" label="Confirme contraseña" variant="standard" type="password" color="secondary" size="small" fullWidth required />
         
         {/* <FormGroup>
           <FormControlLabel control={<Checkbox defaultChecked />} label="Acepto términos y condiciones" />
         </FormGroup> */}
-        <Typography style={centradoStyle}>
-        *Al seleccionar Confirmar Ud. estará aceptando nuestros términos y condiciones
+
+        <Typography style={centradoStyle}> 
+        *Al seleccionar "Confirmar" usted estará aceptando nuestros términos y condiciones.
         </Typography>
-        <Button variant="contained" size="medium" align='center' >
-        <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>Confirmar </NavLink>
+        <Button variant="contained" size="medium" align='center' color='secondary' >
+        <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white'}}>Confirmar </NavLink>
           </Button>
       </Paper>
       

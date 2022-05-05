@@ -8,9 +8,11 @@ import {NavLink} from 'react-router-dom';
 
 
 export default function NavbarVacio() {
+  
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
+
   return (
     <>
       <Nav className="fondo">
