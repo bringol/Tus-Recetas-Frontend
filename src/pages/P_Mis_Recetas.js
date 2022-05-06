@@ -5,19 +5,20 @@ import ScrollToTop from "../components/ScrollToTop";
 //import Login from "../components/InicioSesion"
 
 //
-import PublicarReceta from "../components/PublicarReceta";
+// import PublicarReceta from "../components/PublicarReceta";
 // import Filtros from "../components/Filtros"
 // import CuadroTexto from "../components/CuadroTexto";
-// import Newsletter from "../components/Mis_Recetas";
+import Mis_Recetas from "../components/Mis_Recetas";
 
 
-export default function P_Perfil() {
+export default function P_Mis_Recetas() {
     return (
     <div>
         <ScrollToTop />
         <NavbarVacioUSR />
-        <PublicarReceta/>
-        <Footer />
+        <Mis_Recetas />
+        <Footer/>
+
     </div>
     );
   }

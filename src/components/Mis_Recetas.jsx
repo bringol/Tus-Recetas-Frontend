@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import {MdDelete, MdEdit} from "react-icons/md";
+import {NavLink} from 'react-router-dom';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -27,11 +28,11 @@ function createData(id, name, categoria, dificultad) {
 }
 
 const rows = [
-  createData(1, 'Hamburguesas', 'Carnes', 'Media'),
-  createData(2, 'Pollo al Verdeo', 'Pollos', 'Baja'),
+  createData(1, 'Hamburguesas', 'Carnes', '⭐⭐⭐'),
+  createData(2, 'Pollo al Verdeo', 'Pollos', '⭐'),
 ];
 
-export default function Newsletter() {
+export default function Mis_Recetas() {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -102,7 +103,9 @@ export default function Newsletter() {
           </Paper>
           </div>
           <div className="container">
-          <button>Publicar nueva receta</button>
+          <button>
+          <NavLink to='/User/Receta/Publicar'style={{ textDecoration: 'none', color: 'white'}}>Publicar Nueva Receta </NavLink>
+            </button>
           </div>
     
         </div>

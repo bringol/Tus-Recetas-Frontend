@@ -3,13 +3,16 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+//import Button from '@mui/material/Button';
+import {NavLink} from 'react-router-dom';
 
 
-export default function Navbar() {
+export default function NavbarVacioUSR() {
+  
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
+
   return (
     <>
       <Nav className="fondo">
@@ -30,67 +33,24 @@ export default function Navbar() {
         </div>
         <ul className="links">
           <li>
-            <a href="#home" >
-              Nosotros
+            <a>
+            {/* <Button variant="text">Home</Button> */}
+            <NavLink to='/Home/User'>Home </NavLink>
             </a>
-          </li>
-          <li>
-            <a href="#search">Buscar Receta</a>
-          </li>
-          <li>
-            <a href="#recetas">Recetas</a>
-          </li>
-          <li>
-            {/* <a href="#perfil">Perfil</a> */}
-            <NavLink to='/User/Perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>                
-          </li>
-          <li>
-            {/* <a href="#mis-recetas">Mis Recetas</a> */}
-            <NavLink to='/User/Recetas' style={{ textDecoration: 'none' , color: 'white' }}>Mis Recetas</NavLink>
-          </li>
-          <li>
-            {/* <a href="#salir"> */}
-              
-            <NavLink to='/Home' style={{ textDecoration: 'none' , color: 'white' }}>Salir</NavLink>
-            
-            {/* </a> */}
           </li>
         </ul>
       </Nav>
+
+
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <ul>
           <li>
             <a
-              href="#home"
-              // className="active"
-              onClick={() => setNavbarState(false)}
+              //href="#home"
+              //className="active"
+              //onClick={() => setNavbarState(false)}
             >
-              Nosotros
-            </a>
-          </li>
-          <li>
-            <a href="#search" onClick={() => setNavbarState(false)}>
-              Buscar Receta
-            </a>
-          </li>
-          <li>
-            <a href="#recetas" onClick={() => setNavbarState(false)}>
-              Recetas
-            </a>
-          </li>
-          <li>
-            <a href="#mis-recetas" onClick={() => setNavbarState(false)}>
-              Mis Recetas
-            </a>
-          </li>
-          <li>
-            {/* <a href="#perfil" onClick={() => setNavbarState(false)}> */}
-            <NavLink to='/User/Perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>
-            {/* </a> */}
-          </li>
-          <li>
-            <a href="#salir" onClick={() => setNavbarState(false)}>
-            <NavLink to='/Home' style={{ textDecoration: 'none' , color: 'white' }}>Salir</NavLink>
+             <NavLink to='/Home/User'>Home </NavLink>
             </a>
           </li>
         </ul>
@@ -156,7 +116,7 @@ const ResponsiveNav = styled.div`
   top: 0;
   z-index: 10;
   background-color: #834e6d;
-  height: 80vh;
+  height: 25vh;
   width: ${({ state }) => (state ? "60%" : "0%")};
   transition: 0.3s ease-in-out;
   display: flex;

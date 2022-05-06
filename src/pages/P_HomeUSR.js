@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import Hero from "../components/Hero";
 import NavbarUSR from "../components/NavbarUSR";
-import Registrarse from "../components/Registrarse";
+//import Registrarse from "../components/Registrarse";
 import Products from "../components/Products";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";

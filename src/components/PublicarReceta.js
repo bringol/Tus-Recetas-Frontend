@@ -1,7 +1,8 @@
 import React from 'react';
 import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container, Box,TextareaAutosize, Fab} from '@mui/material';
 //import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@material-ui/core/';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 import Filtros from "../components/Filtros"
@@ -29,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  botón:{
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginBottom: "220px",
+      backgroundColor: "#834e6d",
+  },
 }));
 
 export default function PublicarReceta() {
@@ -39,7 +48,7 @@ export default function PublicarReceta() {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <UploadFileIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Nueva Receta
@@ -85,7 +94,7 @@ export default function PublicarReceta() {
                     fullWidth
                     variant="contained"
                     color="secondary"
-                    className={classes.submit}
+                    className={classes.botón}
                 >
                     <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Publicar </NavLink>
                 </Button>

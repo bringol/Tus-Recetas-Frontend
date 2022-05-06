@@ -21,11 +21,11 @@ export default function Filtros() {
   ];
 
   const topDificultades = [
-    { title: '1 Estrella' },
-    { title: '2 Estrellas' },
-    { title: '3 Estrellas' },
-    { title: '4 Estrellas' },
-    { title: '5 Estrellas' },
+    { title: '⭐' },
+    { title: '⭐⭐' },
+    { title: '⭐⭐⭐' },
+    { title: '⭐⭐⭐⭐' },
+    { title: '⭐⭐⭐⭐⭐' },
   ];
 
 
