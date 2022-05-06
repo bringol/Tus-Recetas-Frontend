@@ -1,31 +1,58 @@
-import React, {useState} from 'react';
-import { Grid, Paper, Avatar, TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/material';
 import MailLockRoundedIcon from '@mui/icons-material/MailLockRounded';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
 import RestablcerContraseña from "../components/RestablecerContraseña";
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: "50px",
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: "#834e6d",
+  },
+  botón: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: "100px",
+    backgroundColor: "#834e6d",
+  },
+}));
+
+
 const OlvidoConstraseña = () => {
 
-  const paperStyle = { padding: 45, height: '35vh', width: 400, margin: '20px auto' }
-  const avatarStyle = { backgroundColor: '#1976d2' }
+  const classes = useStyles();
+
   //toggle de componentes para Mostrar/Esconder el paso siguiente desp de la validacion
-  const [toggle,setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false)
 
-  if(toggle === false)
-  {
+  if (toggle === false) {
 
-  
     return (
-      <Grid>
-        <Paper elevation={10} style={paperStyle}>
-          <Grid align='center'>
-            <Avatar style={avatarStyle}> <MailLockRoundedIcon /> </Avatar>
-            <h2>  ¿Ha olvidado su contraseña?  </h2>
-            <h3> Hemos enviado un mail a: </h3>
-            <h4> *****@gmail.com  </h4>
-          </Grid>
-          <TextField
+      <Container component="main" maxWidth="xl" >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <MailLockRoundedIcon />
+          </Avatar>
+          <h2> ¿Ha olvidado su contraseña?  </h2>
+          <h4> Hemos enviado un mail a: </h4>
+          <h5> *****@gmail.com  </h5>
+          <form className={classes.form} noValidate>
+            <TextField
               variant="outlined"
               margin="normal"
               required
@@ -33,29 +60,33 @@ const OlvidoConstraseña = () => {
               id="email"
               label="Código de Validación"
               name="codigo"
+              color='secondary'
               //autoComplete="email"
               autoFocus
             />
+          
+            <Box sx={{ mt: 5 }}>
+              <Button onClick={() => setToggle(!toggle)}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.botón}
+              >
+                Siguiente
+                {/* <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Siguiente</NavLink> */}
+              </Button>
+            </Box>
+            </form>
+         
+          {/* {toggle && ( <RestablcerContraseña/>)} */}
+        </div>
 
-            <Button onClick={()=> setToggle(!toggle)}
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"            
-            >
-              Siguiente            
-              {/* <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Siguiente</NavLink> */}
-            </Button>
-        
-        </Paper>
-        {/* {toggle && ( <RestablcerContraseña/>)} */}
-    
-      </Grid>
-
+      </Container >
     )
   }
   else//le dio a Siguiente(paso a ser verdadero), por lo tanto muestro el otro componente
-    return(<><RestablcerContraseña/></>)
+    return (<><RestablcerContraseña /></>)
 
 }
 
