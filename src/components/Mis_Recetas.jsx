@@ -11,10 +11,12 @@ import { MdDelete, MdEdit, MdBook} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+
+
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
   { id: 'name', label: 'Nombre', minWidth: 170 },
-  { id: 'categoria', label: 'Categoria', minWidth: 170, align: 'center' },
+  { id: 'categoria', label: 'Categoria', minWidth: 170, align: 'center'},
   { id: 'dificultad', label: 'Dificultad', minWidth: 170, align: 'center' },
   { id: 'modificar', label: 'Modificar', minWidth: 170, align: 'center' },
   { id: 'eliminar', label: 'Eliminar', minWidth: 170, align: 'center' },
@@ -31,6 +33,8 @@ const rows = [
   createData(2, 'Pollo al Verdeo', 'Pollos', 'Baja'),
   
 ];
+
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {

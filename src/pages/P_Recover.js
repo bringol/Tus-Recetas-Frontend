@@ -17,7 +17,7 @@ export default function P_Login() {
     <div>
         <ScrollToTop />
         <NavbarVacio />
-        <OlvidoConstraseña /> {/*agregar ingreso codigo y boton siguiente*/}
+        <OlvidoConstraseña />
         <Footer />
         
 

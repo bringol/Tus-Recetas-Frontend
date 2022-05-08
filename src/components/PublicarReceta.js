@@ -9,7 +9,10 @@ import Filtros from "../components/Filtros"
 import CuadroTexto from "../components/CuadroTexto";
 import SubirFoto from './SubirFoto';
 
+const receta={
+  id:1, nombre:"hamburguesa", cat:"carnes", dificultad:"media"
 
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -64,12 +67,13 @@ export default function PublicarReceta() {
             name="titulo"
             //autoComplete="email"
             autoFocus
+            value="mititulo"
           />
           
           <Filtros />
 
           <Box sx={{ mt: 2 }}>
-            <CuadroTexto label="Ingredientes" placeholder="Ingresar los ingredientes" />
+            <CuadroTexto label="Ingredientes" placeholder="Ingresar los ingredientes" value="mivalor" />
             </Box>
 
         <Box sx={{ mt: 2 }}>
