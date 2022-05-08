@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    textAlign: 'center',
     marginBottom: "50px",
   },
   submit: {

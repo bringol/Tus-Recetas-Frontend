@@ -67,6 +67,7 @@ export default function InicioSesion() {
           <Link href="#" variant="body2">
           <NavLink to='/Recover'style={{ textDecoration: 'none'}}>Olvidé Mi Contraseña </NavLink>
               </Link>
+          <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>
           <Button
             type="submit"
             fullWidth
@@ -74,8 +75,8 @@ export default function InicioSesion() {
             color="secondary"
             className={classes.submit}
           >
-            <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Ingresar </NavLink>
-          </Button>
+           Ingresar 
+          </Button></NavLink>
           <Grid container>
             
             <Grid item xs>

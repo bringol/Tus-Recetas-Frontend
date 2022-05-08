@@ -49,6 +49,7 @@ const EditarPerfil = () => {
           <TextField id="standard-basic" label="Confirmar contraseña" variant="standard"  type="password" size="small" color='secondary' fullWidth />
 
           <Box sx={{ mt: 5 }}>{/*margin top 5 pixeles https://mui.com/system/spacing/ */}
+          <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
             <Button
               type="submit"
               fullWidth
@@ -57,8 +58,8 @@ const EditarPerfil = () => {
               className={classes.botón}
 
             >
-              <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>Guardar cambios </NavLink>
-            </Button>
+            Guardar cambios
+            </Button></NavLink>
           </Box>
         </form>
       </div>

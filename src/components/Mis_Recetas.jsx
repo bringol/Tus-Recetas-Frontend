@@ -130,6 +130,7 @@ export default function Mis_Recetas() {
       </div>
 
       <Box sx={{ mt: 5 }}>
+        <NavLink to='/User/Receta/Publicar'style={{ textDecoration: 'none', color: 'white'}}>
         <Button
           type="submit"
           fullWidth
@@ -137,8 +138,8 @@ export default function Mis_Recetas() {
           color="secondary"
           className={classes.botón}
         >
-          <NavLink to='/User/Receta/Publicar'style={{ textDecoration: 'none', color: 'white'}}>Publicar Nueva Receta </NavLink>
-        </Button>
+         Publicar Nueva Receta
+        </Button> </NavLink>
       </Box>
     </Container>
   );

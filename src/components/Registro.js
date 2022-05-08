@@ -72,7 +72,7 @@ const Registrarse = () => {
           <Typography className={classes.centrado}>
             *Al seleccionar "Confirmar" usted estará aceptando nuestros términos y condiciones.
           </Typography>
-
+          <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
           <Button
                     type="submit"
                     fullWidth
@@ -80,8 +80,8 @@ const Registrarse = () => {
                     color="secondary"
                     className={classes.botón}
                 >
-            <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>Confirmar </NavLink>
-          </Button>
+            Confirmar 
+          </Button></NavLink>
         </form>
       </div>
     </Container>

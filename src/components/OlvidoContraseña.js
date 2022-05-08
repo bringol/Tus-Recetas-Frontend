@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: "50px",
+    textAlign: 'center',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: "#834e6d",
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
   },
   botón: {
     marginTop: theme.spacing(8),
@@ -51,7 +56,7 @@ const OlvidoConstraseña = () => {
           <h2> ¿Ha olvidado su contraseña?  </h2>
           <h4> Hemos enviado un mail a: </h4>
           <h5> *****@gmail.com  </h5>
-          <form className={classes.form} noValidate>
+          <form noValidate>
             <TextField
               variant="outlined"
               margin="normal"
