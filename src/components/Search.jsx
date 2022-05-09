@@ -21,9 +21,11 @@ export default function Search() {
   ];
 
   const topDificultades = [
-    { title: 'Baja' },
-    { title: 'Media' },
-    { title: 'Alta' },
+    { title: '1' },
+    { title: '2' },
+    { title: '3' },
+    { title: '4' },
+    { title: '5' },
   ];
 
   const topIngredientes = [
@@ -99,11 +101,6 @@ export default function Search() {
           </Grid>
         </Grid >
       </div>
-
-      {/* <div className="container">
-          <input type="text" placeholder="Search for food ..." />
-          <button>Search</button>
-      </div> */}
     </Section >
   );
 }
@@ -114,18 +111,16 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
   ${TitleStyles};
-  
   .container {
     align-item: center;
     background: linear-gradient(to right, #572e57, #834e6d, #572e57);
     padding: 0.3vw;
-    
     input {
       border: none;
       padding: 1.5rem 16rem 1.5rem 16rem;
-      font-size: 1.3rem;
+      font-size: 1.3 rem;
+      font-size: medium
       &:focus {
         outline: none;
       }
@@ -146,6 +141,7 @@ const Section = styled.section`
       }
     }
   }
+
   @media screen and (min-width: 260px) and (max-width: 1080px) {
     .container {
       padding: 0.8rem;

@@ -110,6 +110,7 @@ const Nav = styled.nav`
     }
   }
 `;
+
 const ResponsiveNav = styled.div`
   position: fixed;
   right: -100vw;

@@ -5,15 +5,17 @@ import { AiFillInstagram } from "react-icons/ai";
 import { BsTwitter } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { GrLinkedinOption } from "react-icons/gr";
+
+
 export default function Footer() {
+
   return (
     <div className="footer">
       <Section>
         <div className="brand container">
           <img src={logo} alt="" />
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis,
-            repudiandae.
+            Encontranos en nuestras redes sociales
           </p>
           <ul>
             <li>
@@ -35,9 +37,9 @@ export default function Footer() {
             <h3>About Us</h3>
           </div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-            eligendi repellat laudantium blanditiis iure nulla, ut aliquam
-            itaque unde nesciunt cum veritatis perferendis vel expedita! Nam
+            Cingolani Bruno Gabriel
+            <br></br>
+            Petit Mera Camila
           </p>
         </div>
         <div className="contact container">
@@ -47,7 +49,7 @@ export default function Footer() {
           <p>+91 1231231231</p>
           <p>tus_recetas@gmail.com</p>
           <p>@tus_recetas</p>
-          <p>9 de Julio 182, Ciudad Autónoma de Buenos Aires, Argentina</p>
+          <p>Lima 775, Ciudad Autónoma de Buenos Aires, Argentina</p>
         </div>
       </Section>
       <LowerFooter className="lower__footer">

@@ -14,8 +14,11 @@ export default function Hero() {
         <div className="info">
           <h2>¿Quiénes Somos?</h2>
           <em>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-            aspernatur itaque, eius quia voluptas numquam!
+            Tus Recetas es el sitio web ideal para aprender a preparar cientos de recetas de comida casera.
+            Con explicaciones detalladas, fotos paso a paso y los mejores trucos, estos platos siempre saldrán espectaculares.
+            Animate a cocinar todos los días para llevar una alimentación más sana y equilibrada y para sorprender a tus personas
+            favoritas en los momentos más especiales.
+            ¡Que la dificultad no sea una excusa! ¡A cocinar!
           </em>
         </div>
       </div>
@@ -33,13 +36,13 @@ const Section = styled.section`
       object-fit: cover;
       width: 100%;
       height: 100%;
-      filter: brightness(60%);
+      filter: brightness(40%);
     }
   }
     .info {
       position: absolute;
-      top: 40%;
-      right: 10%;
+      top: 30%;
+      right: 5%;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -51,27 +54,31 @@ const Section = styled.section`
       }
       em {
         color: #ffffff;
-        width: 60%;
-        text-align: end;
+        font-weight: bold;
+        width: 80%;
+        text-align: justify;
         font-size: 1.1rem;
         line-height: 2rem;
         letter-spacing: 0.1rem;
       }
     }
   }
-  @media screen and (min-width: 260px) and (max-width: 1080px) {
+  
+  @media screen and (min-width: 280px) and (max-width: 1080px) {
     .content {
       flex-direction: column;
       .sale {
         display: none;
       }
       .info {
-        top: 25%;
+        top: 5%;
         h2 {
           font-size: 2rem;
+          text-align: center;
         }
         em {
-          width: 90%;
+          line-height: 1.3rem;
+          width: 95%;
         }
       }
     }

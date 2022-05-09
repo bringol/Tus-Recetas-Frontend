@@ -222,14 +222,8 @@ const EditarPerfil = () => {
               className={classes.botón}
 
             >
-<<<<<<< HEAD
             Guardar cambios
             </Button></NavLink>
-=======
-              Guardar cambios 
-            </Button>
-            </NavLink>
->>>>>>> 669db31385cbae95ad47bc571523d6151d533e2d
           </Box>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 //import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@mui/material';
-import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@material-ui/core/';
+import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
@@ -29,6 +29,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  botón: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: "10px",
+    backgroundColor: "#834e6d",
+  },
 }));
 
 //esquema de valiadcion yup, define los campos requeridos, mjes de error, etc, todo dentro del objeto
@@ -40,6 +48,7 @@ const validationSchema=yup.object  //es libreria yup
 
 
 export default function InicioSesion() {
+  
   const classes = useStyles();
 
   const formik=useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
@@ -70,14 +79,13 @@ export default function InicioSesion() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Iniciar Sesión
-        </Typography>
+        <h2> Iniciar Sesión</h2>
         <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
            {/*ahora puedo usar la funcion de submit para el formulario */}
           <TextField
             variant="outlined"
             margin="normal"
+            color='secondary'
             required
             fullWidth
             id="email"
@@ -94,6 +102,7 @@ export default function InicioSesion() {
           <TextField
             variant="outlined"
             margin="normal"
+            color='secondary'
             required
             fullWidth
             name="contraseña"
@@ -109,43 +118,27 @@ export default function InicioSesion() {
           />
           
           <Link href="#" variant="body2">
-          <NavLink to='/Recover'style={{ textDecoration: 'none'}}>Olvidé Mi Contraseña </NavLink>
+          <NavLink to='/Recover' style={{ textDecoration: 'none'}}>Olvidé mi contraseña </NavLink>
               </Link>
-<<<<<<< HEAD
-          <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>
+          <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>
           <Button
+            className={classes.botón}
             type="submit"
             fullWidth
             variant="contained"
             color="secondary"
-            className={classes.submit}
+       
           >
            Ingresar 
           </Button></NavLink>
-=======
 
-
-          <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>
-              <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Ingresar 
-           </Button>
-          </NavLink> 
-
->>>>>>> 669db31385cbae95ad47bc571523d6151d533e2d
           <Grid container>
-            
             <Grid item xs>
-              <Typography  variant="body2">
-                ¿No tienes cuenta?
+              <Typography  variant="body2" >
+                ¿No tienes una cuenta?
               </Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs style={{ textAlign: "end" }}>
               <Link href="#" variant="body2">
               <NavLink to='/Registro'>REGÍSTRATE AQUI</NavLink>
               </Link>

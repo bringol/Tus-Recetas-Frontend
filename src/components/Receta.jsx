@@ -5,7 +5,8 @@ import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { AiFillStar } from "react-icons/ai";
 
-export default function Testimonials() {
+
+export default function Receta() {
 
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
@@ -31,6 +32,7 @@ export default function Testimonials() {
                 <div className="image">
                   <img src={product1} alt="" />
                 </div>
+                {/*
                 <div className="raiting">
                   {[...Array(5)].map((star, i) => {
                     const ratingValue = i + 1;
@@ -54,6 +56,7 @@ export default function Testimonials() {
                     );
                   })}
                 </div>
+                 */}
               </div>
             </Grid>
             <Grid item xs={12} md={6}>

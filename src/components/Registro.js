@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 
-
-
 import { NavLink } from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#834e6d",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -233,10 +231,6 @@ const Registrarse = () => {
           <Typography className={classes.centrado}>
             *Al seleccionar "Confirmar" usted estará aceptando nuestros términos y condiciones.
           </Typography>
-<<<<<<< HEAD
-=======
-
->>>>>>> 669db31385cbae95ad47bc571523d6151d533e2d
           <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
           <Button
                     type="submit"
@@ -245,14 +239,8 @@ const Registrarse = () => {
                     color="secondary"
                     className={classes.botón}
                 >
-<<<<<<< HEAD
             Confirmar 
           </Button></NavLink>
-=======
-            Confirmar
-          </Button>
-          </NavLink>
->>>>>>> 669db31385cbae95ad47bc571523d6151d533e2d
         </form>
       </div>
     </Container>

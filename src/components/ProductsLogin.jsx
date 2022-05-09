@@ -1,18 +1,14 @@
 import React, {useState} from "react";
-import {AiFillStar} from "react-icons/ai";
-import { GiStoneCrafting } from "react-icons/gi";
 import styled from "styled-components";
 import product1 from "../assets/product1.jpg";
 import product2 from "../assets/product2.jpg";
 import product3 from "../assets/product3.jpg";
 import product4 from "../assets/product4.jpg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
+import {NavLink} from 'react-router-dom';
 
 
 export default function ProductsLogin() {
-
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
 
   const data = [
     {
@@ -32,6 +28,7 @@ export default function ProductsLogin() {
       name: "Torta",
     },
   ];
+
   return (
     <Section id="recetas">
       <div className="title">
@@ -47,7 +44,9 @@ export default function ProductsLogin() {
                 <img src={product.image} alt="" />
               </div>
               <h2>{product.name}</h2>
-              <button>Ver más</button>
+              <button>
+              <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
+              </button>
             </div>
           );
         })}

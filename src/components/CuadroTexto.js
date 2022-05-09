@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 //fuente https://stackoverflow.com/questions/62475790/how-do-i-set-a-width-for-the-textareaautosize-component-in-material-ui
 

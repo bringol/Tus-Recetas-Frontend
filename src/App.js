@@ -29,7 +29,7 @@ import P_Recover from "./pages/P_Recover";
 import P_Perfil from "./pages/P_Perfil";
 import P_RecetaNueva from "./pages/P_RecetaNueva"
 import P_Mis_Recetas from "./pages/P_Mis_Recetas"
-
+import P_Receta from "./pages/P_Receta"
 
 export default function App() {
   useEffect(() => {
@@ -76,6 +76,8 @@ export default function App() {
         <Route path="/User/Perfil" element={<P_Perfil/>} />
         <Route path="/User/Recetas" element={<P_Mis_Recetas/>} />
         <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
+        <Route path="/Login/Receta" element={<P_Receta/>} />
+
 
 
 
