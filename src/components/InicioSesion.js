@@ -8,6 +8,7 @@ import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
+import { propsToClassKey } from '@mui/styles';
 
 //estilos
 const useStyles = makeStyles((theme) => ({
@@ -118,19 +119,21 @@ export default function InicioSesion() {
           />
           
           <Link href="#" variant="body2">
-          <NavLink to='/Recover' style={{ textDecoration: 'none'}}>Olvidé mi contraseña </NavLink>
-              </Link>
+              <NavLink to='/Recover' style={{ textDecoration: 'none'}}>Olvidé mi contraseña </NavLink>
+          </Link>
+
+                  
           <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>
-          <Button
-            className={classes.botón}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-       
-          >
-           Ingresar 
-          </Button></NavLink>
+            <Button
+              className={classes.botón}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+            >
+            Ingresar 
+            </Button>
+          </NavLink>
 
           <Grid container>
             <Grid item xs>
