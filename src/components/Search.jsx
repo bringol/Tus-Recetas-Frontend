@@ -54,7 +54,7 @@ export default function Search() {
 
       <div>
         <div className="container">
-          <input type="text" placeholder="Buscar recetas" />
+          <input type="text" placeholder="Buscar recetas" size={"30px"}/>
           <button>Buscar</button>
         </div>
       </div>
@@ -120,7 +120,7 @@ const Section = styled.section`
       border: none;
       padding: 1.5rem 16rem 1.5rem 16rem;
       font-size: 1.3 rem;
-      font-size: medium
+      font-size: large;
       &:focus {
         outline: none;
       }

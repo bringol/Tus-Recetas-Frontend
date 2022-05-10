@@ -21,15 +21,16 @@ import {Route} from "react-router-dom" //define las rutas que se muestran en el 
 import {Routes} from "react-router-dom" // <Route> debe estar dentro de <Routes> para que puede redirigir al componente. Si no existe el path, ahora muestra pantalla en blanco
 
 //Páginas
-import P_Home from "./pages/P_Home"
-import P_HomeUSR from "./pages/P_HomeUSR"
+import P_Home from "./pages/P_Home";
+import P_HomeUSR from "./pages/P_HomeUSR";
 import P_Login from "./pages/P_Login";
 import P_Registo from "./pages/P_Registro";
 import P_Recover from "./pages/P_Recover";
 import P_Perfil from "./pages/P_Perfil";
-import P_RecetaNueva from "./pages/P_RecetaNueva"
-import P_Mis_Recetas from "./pages/P_Mis_Recetas"
-import P_Receta from "./pages/P_Receta"
+import P_RecetaNueva from "./pages/P_RecetaNueva";
+import P_Mis_Recetas from "./pages/P_Mis_Recetas";
+import P_Receta from "./pages/P_Receta";
+import P_RecetaLogin from "./pages/P_RecetaLogin";
 
 export default function App() {
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function App() {
       <Routes>
       {/*incorporar navbar filtros, y los otros del homepage, dentro en una sola pagina*/}
       {/*Crear homepage similar al anterior, pero para cuando este logeado*/}   
-        <Route path="*" element={<div><h1>Error 404 Página no encontrada</h1></div>} />
+        <Route path="*" element={<div><h1>Error 404 página no encontrada</h1></div>} />
         <Route path="/Home" element={<P_Home/>} />
         <Route path="/Home/User" element={<P_HomeUSR/>} />
         <Route path="/Login" element={<P_Login/>} />
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="/User/Recetas" element={<P_Mis_Recetas/>} />
         <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
         <Route path="/Login/Receta" element={<P_Receta/>} />
+        <Route path="/Login/RecetaLogin" element={<P_RecetaLogin/>} />
 
 
 

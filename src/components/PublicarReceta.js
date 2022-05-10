@@ -6,21 +6,15 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import { NavLink } from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 import Filtros from "../components/Filtros";
-import CuadroTexto from "../components/CuadroTexto";
 import SubirFoto from './SubirFoto';
-
-const receta = {
-  id: 1, nombre: "hamburguesa", cat: "carnes", dificultad: "media"
-
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: "220px",
+    marginBottom: "10px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -34,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   botón: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: "220px",
+    marginBottom: "120px",
     backgroundColor: "#834e6d",
   },
 }));
@@ -66,38 +60,42 @@ export default function PublicarReceta() {
             name="titulo"
             //autoComplete="email"
             autoFocus
-            value="mititulo"
           />
 
           <Filtros />
 
           <Box sx={{ mt: 2 }}>
-          <TextField
-          id="outlined-multiline-flexible"
-          label="Ingredientes"
-          color='secondary'
-          width='300px'
-          multiline
-          maxRows={3}
-
-         
-        />
+            <TextField style={{ width: 400 }}
+              id="outlined-multiline-flexible"
+              label="Ingredientes"
+              color='secondary'
+              multiline
+              maxRows={3}
+            />
           </Box>
 
-          <Box sx={{ mt: 2 }}>
-            <CuadroTexto label="Procedimiento" placeholder="Describir el procedimiento" color="secondary" /> {/*Pasar placeholder y label como prop */}
+          <Box sx={{ mt: 2}}>
+          <TextField style={{ width: 400 }}
+              id="outlined-multiline-flexible"
+              label="Procedimiento"
+              color='secondary'
+              multiline
+              maxRows={3}
+            />
           </Box>
 
           {/* <TextField
             name="upload-photo"
             type="file"
+            <CuadroTexto label="Procedimiento" placeholder="Describir el procedimiento" color="secondary" /> {/*Pasar placeholder y label como prop
             /> */}
+
           <Box
             sx={{
               mt: 5, display: 'flex',
               flexDirection: 'column',
               color: 'secondary',
-              alignItems: 'center'
+              alignItems: 'center'              
             }}>
 
             <SubirFoto />

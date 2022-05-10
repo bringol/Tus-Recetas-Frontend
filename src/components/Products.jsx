@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {AiFillStar} from "react-icons/ai";
+import React, { useState } from "react";
+import { AiFillStar } from "react-icons/ai";
 import { GiStoneCrafting } from "react-icons/gi";
 import styled from "styled-components";
 import product1 from "../assets/product1.jpg";
@@ -7,7 +7,7 @@ import product2 from "../assets/product2.jpg";
 import product3 from "../assets/product3.jpg";
 import product4 from "../assets/product4.jpg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default function Products() {
@@ -50,30 +50,32 @@ export default function Products() {
               <h2>{product.name}</h2>
 
               <div className="raiting">
-                {[... Array(5)].map((star, i) => { 
+                {[...Array(5)].map((star, i) => {
                   const ratingValue = i + 1;
 
                   return (
                     <label>
                       <input
-                      type="radio"
-                      name="rating"
-                      value={ratingValue}
-                      onClick={()=> setRating(ratingValue)}
-                    
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        onClick={() => setRating(ratingValue)}
+
                       />
                       <AiFillStar className="star"
-                       color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9" } 
-                       size={30}
-                       onMouseEnter={()=> setHover(ratingValue)}
-                        onMouseLeave={()=> setHover(null)}
-                       />
+                        color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                        size={30}
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(null)}
+                      />
 
-                      </label>
+                    </label>
                   );
                 })}
               </div>
-              <button>Ver más</button>
+              <button>
+                <NavLink to='/Login/RecetaLogin' style={{ textDecoration: 'none', color: 'white' }}>Ver más</NavLink>
+              </button>
             </div>
           );
         })}

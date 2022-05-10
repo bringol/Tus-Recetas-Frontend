@@ -5,10 +5,13 @@ import product2 from "../assets/product2.jpg";
 import product3 from "../assets/product3.jpg";
 import product4 from "../assets/product4.jpg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default function ProductsLogin() {
+
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
 
   const data = [
     {
