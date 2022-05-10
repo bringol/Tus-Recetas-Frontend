@@ -2,21 +2,19 @@ import React from "react";
 import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
-//import Login from "../components/InicioSesion"
-
-//
+import {Box } from '@mui/material';
 import PublicarReceta from "../components/PublicarReceta";
-// import Filtros from "../components/Filtros"
-// import CuadroTexto from "../components/CuadroTexto";
-// import Newsletter from "../components/Mis_Recetas";
 
 
-export default function P_Perfil() {
+
+export default function P_RecetaNueva() {
     return (
     <div>
         <ScrollToTop />
         <NavbarVacioUSR />
+        <Box mt={5}></Box>
         <PublicarReceta/>
+        <Box mb={5}></Box>
         <Footer />
     </div>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Autocomplete, TextField, Paper, Grid, Stack,Box } from '@mui/material';
+import { Autocomplete, TextField, Grid,Box } from '@mui/material';
 
 
 export default function Filtros() {

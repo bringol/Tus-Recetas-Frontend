@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/material';
 import SyncLockRoundedIcon from '@mui/icons-material/SyncLockRounded';
 import { NavLink } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
+import Exito from "./Exito"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,13 +40,13 @@ const validationSchema=yup.object
 ({
   contraseña: yup
   .string()
-  .required("Ingresar contraseña")
+  .required("")
   .min(8,"Contraseña contener mínimo de 8 caracteres"),
 
   repContraseña:yup
   .string()
   .oneOf([yup.ref("contraseña"),null],"Contraseñas no coinciden")
-  .required("Ingresar contraseña"),
+  .required(""),
 
 
 })
@@ -76,6 +77,10 @@ const RestablcerContraseña = () => {
 
   });
 
+  const [toggle, setToggle] = useState(false);
+
+if (toggle === false) {
+  
   return (
     <Container component="main" maxWidth="xl" >
       <CssBaseline />
@@ -127,23 +132,44 @@ const RestablcerContraseña = () => {
         {/* <Button variant="contained" size="medium" align='center'>Confirmar</Button> */}
         
         <Box sx={{ mt: 5 }}>    {/*margin top 5 pixeles https://mui.com/system/spacing/ */}
-        <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
+        {/* <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}> */}
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="secondary"
             className={classes.botón}
+            disabled={!(formik.isValid && formik.dirty)}
+            onClick={() => setToggle(!toggle)}
+
 
           >
-            Confirmar
+            Siguiente
           </Button>
-          </NavLink>
+          {/* </NavLink> */}
         </Box>
       </form>
       </div>
     </Container >
   )
+}
+else
+  return(
+    <div className={classes.paper}>
+    <Exito/>
+      <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.botón}>
+            Continuar
+          </Button>
+      </NavLink>
+    </div>
+  )
+
 }
 
 export default RestablcerContraseña

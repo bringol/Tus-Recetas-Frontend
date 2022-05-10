@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 //import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@mui/material';
 import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -9,6 +9,7 @@ import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 import { propsToClassKey } from '@mui/styles';
+import Exito from "./Exito"
 
 //estilos
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const validationSchema=yup.object  //es libreria yup
 ({
   email: yup.string().email("Ingresar una dirección de correo electrónico válida").required("Ingresar correo electrónico"),
-  contraseña: yup.string().required("Ingresar contraseña").min(15,"Mínimo de 15 caracteres para la contraseña"),
+  contraseña: yup.string().required("Ingresar contraseña").min(8,""),//es redundante que aclare en un texto de error el largo en este caso, por eso el 8,""
 })
 
 
@@ -57,10 +58,10 @@ export default function InicioSesion() {
     initialValues:
     {
       email:"homerosimpson@springfield.com",
-      contraseña:"estúpido&sensualFlanders",
+      //contraseña:"estúpido&sensualFlanders",
 
       //correo:"",
-      //contraseña:"",
+      contraseña:"",
     },
 
     onSubmit:(values)=>
@@ -71,8 +72,10 @@ export default function InicioSesion() {
     validationSchema: validationSchema,
 
   });
+  const [toggle, setToggle] = useState(false);
 
 
+if (toggle === false) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -123,17 +126,19 @@ export default function InicioSesion() {
           </Link>
 
                   
-          <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}>
+          {/* <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}> */}
             <Button
               className={classes.botón}
               type="submit"
               fullWidth
               variant="contained"
               color="secondary"
+              disabled={!(formik.isValid && formik.dirty)}
+              onClick={() => setToggle(!toggle)}
             >
             Ingresar 
             </Button>
-          </NavLink>
+          {/* </NavLink> */}
 
           <Grid container>
             <Grid item xs>
@@ -153,4 +158,21 @@ export default function InicioSesion() {
       
     </Container>
   );
+}
+else
+  return(
+    <div className={classes.paper}>
+    <Exito/>
+      <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.botón}>
+            Continuar
+          </Button>
+      </NavLink>
+    </div>
+  )
 }

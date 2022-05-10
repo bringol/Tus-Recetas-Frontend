@@ -3,8 +3,18 @@ import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/mat
 import MailLockRoundedIcon from '@mui/icons-material/MailLockRounded';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
 import RestablcerContraseña from "../components/RestablecerContraseña";
+//validacion
+import { useFormik } from 'formik';
+import * as yup from "yup" //libreria de esquemas de validacion
+
+//esquema de valiadcion yup, define los campos requeridos, mjes de error, etc, todo dentro del objeto
+const validationSchema=yup.object  //es libreria yup
+({
+  codigo: yup.string().required("Ingresar Código de Validacion").min(8,""),//lo dejo como un min de 8 caracteres por ahora
+})
+
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +51,25 @@ const OlvidoConstraseña = () => {
 
   const classes = useStyles();
 
+  const formik=useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
+  ({
+    initialValues:
+    {
+      codigo:"",
+
+      //codigo:"DB4542J8",
+      
+    },
+
+    onSubmit:(values)=>
+    {
+      console.log(JSON.stringify(values))
+    },
+
+    validationSchema: validationSchema,
+
+  });
+
   //toggle de componentes para Mostrar/Esconder el paso siguiente desp de la validacion
   const [toggle, setToggle] = useState(false)
 
@@ -62,12 +91,16 @@ const OlvidoConstraseña = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="codigo"
               label="Código de Validación"
               name="codigo"
               color='secondary'
-              //autoComplete="email"
               autoFocus
+              value={formik.values.codigo}
+              onChange={formik.handleChange}
+              error={formik.touched.codigo && Boolean(formik.errors.codigo)}
+              helperText={formik.touched.codigo && formik.errors.codigo}
+              onBlur={formik.handleBlur}
             />
           
             <Box sx={{ mt: 5 }}>
@@ -77,6 +110,7 @@ const OlvidoConstraseña = () => {
                 variant="contained"
                 color="secondary"
                 className={classes.botón}
+                disabled={!(formik.isValid && formik.dirty)}
               >
                 Siguiente
                 {/* <NavLink to='/Home/User'style={{ textDecoration: 'none' , color: 'white' }}>Siguiente</NavLink> */}

@@ -239,7 +239,8 @@ const Registrarse = () => {
 
             <Box mt={3}></Box>
 
-            <Typography className={classes.centrado}>
+            <Typography className={classes.centrado}            
+            >
               *Al seleccionar "Confirmar" usted estará aceptando nuestros términos y condiciones.
             </Typography>
             
@@ -251,17 +252,19 @@ const Registrarse = () => {
                       color="secondary"
                       className={classes.botón}
                       disabled={  ///Si no hubo errores, el boton de desbloquea
-                        ( formik.errors.nombre)
-                        ||
-                        ( formik.errors.apellido)
-                        ||
-                        ( formik.errors.telefono)
-                        ||
-                        ( formik.errors.correo)
-                        ||
-                        (formik.errors.contraseña) 
-                        ||
-                        (formik.errors.repContraseña)                   
+                        //el submit estará bloq a menos que todos los campos sean validos y los valores iniciales fueron cambiados
+                        !(formik.isValid && formik.dirty)
+                        // ( formik.errors.nombre)
+                        // ||
+                        // ( formik.errors.apellido)
+                        // ||
+                        // ( formik.errors.telefono)
+                        // ||
+                        // ( formik.errors.correo)
+                        // ||
+                        // (formik.errors.contraseña) 
+                        // ||
+                        // (formik.errors.repContraseña)                   
                       
                       }
                       

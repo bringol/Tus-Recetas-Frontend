@@ -23,14 +23,14 @@ const columns = [
 ];
 
 function createData(id, name, categoria, dificultad) {
-  const modificar = <button><MdEdit className="delete" size={20}/></button>;
+  const modificar = <NavLink to='/User/Receta/Publicar'> <button><MdEdit className="delete" size={20}/></button> </NavLink>; //super harcodeado
   const eliminar = <button><MdDelete className="delete" size={20} /></button>;
   return { id, name, categoria, dificultad, modificar, eliminar };
 }
 
 const rows = [
-  createData(1, 'Hamburguesas', 'Carnes', 'Media'),
-  createData(2, 'Pollo al Verdeo', 'Pollos', 'Baja'),
+  createData(1, 'Hamburguesas', 'Carnes', '3'),
+  createData(2, 'Pollo al Verdeo', 'Pollos', '1'),
   
 ];
 
