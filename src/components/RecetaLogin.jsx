@@ -6,7 +6,7 @@ import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { AiFillStar } from "react-icons/ai";
 
 
-export default function Receta() {
+export default function RecetaLogin() {
 
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
@@ -32,7 +32,6 @@ export default function Receta() {
                 <div className="image">
                   <img src={product1} alt="" />
                 </div>
-                {/*
                 <div className="raiting">
                   {[...Array(5)].map((star, i) => {
                     const ratingValue = i + 1;
@@ -56,7 +55,6 @@ export default function Receta() {
                     );
                   })}
                 </div>
-                 */}
               </div>
             </Grid>
             <Grid item xs={12} md={6}>

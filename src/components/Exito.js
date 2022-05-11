@@ -48,7 +48,7 @@ const Exito = () => {
           <Avatar className={classes.avatar}>
             <CheckBoxIcon />
           </Avatar>
-          <h2> Operación Realizada Exitosamente  </h2>
+          <h2> Operación Exitosa </h2>
           <h4> Seleccione Continuar </h4>
           
         </div>

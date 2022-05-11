@@ -11,8 +11,6 @@ import { MdDelete, MdEdit, MdBook} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
   { id: 'name', label: 'Nombre', minWidth: 170 },
@@ -23,7 +21,7 @@ const columns = [
 ];
 
 function createData(id, name, categoria, dificultad) {
-  const modificar = <NavLink to='/User/Receta/Publicar'> <button><MdEdit className="delete" size={20}/></button> </NavLink>; //super harcodeado
+  const modificar = <NavLink to='/Login/RecetaLogin'> <button><MdEdit className="delete" size={20}/></button> </NavLink>; //super harcodeado
   const eliminar = <button><MdDelete className="delete" size={20} /></button>;
   return { id, name, categoria, dificultad, modificar, eliminar };
 }

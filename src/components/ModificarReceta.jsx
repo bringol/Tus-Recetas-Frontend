@@ -125,7 +125,7 @@ if (toggle === false) {
         <Avatar className={classes.avatar}>
           <UploadFileIcon />
         </Avatar>
-        <h2> Nueva Receta</h2>
+        <h2> Modificar Receta</h2>
         <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
         <Box
