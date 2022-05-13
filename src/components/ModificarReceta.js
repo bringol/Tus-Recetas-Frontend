@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import { Avatar, Button, CssBaseline, TextField, Container, Box,Autocomplete, Grid } from '@mui/material';
-//import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@material-ui/core/';
-//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
-import { NavLink } from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
-//import Filtros from "../components/Filtros";
+import { makeStyles } from '@material-ui/core/styles'; 
+import { NavLink } from 'react-router-dom'; 
 import SubirFoto from './SubirFoto';
 
 //validacion
@@ -46,7 +43,6 @@ const validationSchema=yup.object
 ({
   titulo: yup
   .string()
-  //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
   .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
   .min(2,"Debe contener al menos 2 letras")
   .required(""),
@@ -72,7 +68,7 @@ const validationSchema=yup.object
 
 })
 
-export default function PublicarReceta() {
+export default function ModiciarReceta() {
   const classes = useStyles();
 
   const topCategorias = [
@@ -99,11 +95,11 @@ export default function PublicarReceta() {
   ({
     initialValues:
     {
-      titulo:"",
-      categoria:"",
-      dificultad:"",
-      ingredientes:"",
-      procedimiento:"",
+      titulo:"Hamburguesa",
+      categoria:"Carnes",
+      dificultad:"3",
+      ingredientes:"Carne Picada",
+      procedimiento:"Poner el patty entre dos panes",
     },
 
     onSubmit:(values)=>
@@ -126,7 +122,7 @@ if (toggle === false) {
         <Avatar className={classes.avatar}>
           <UploadFileIcon />
         </Avatar>
-        <h2> Nueva Receta</h2>
+        <h2> Modificar Receta</h2>
         <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
         <Box
@@ -147,9 +143,8 @@ if (toggle === false) {
             required
             fullWidth
             id="titulo"
-            label="Nombre"
+            label="Título"
             name="titulo"
-            //autoComplete="email"
             autoFocus
             value={formik.values.titulo}
             onChange={formik.handleChange}
@@ -286,7 +281,7 @@ if (toggle === false) {
               
 
             >
-              Publicar Receta 
+              Modificar 
             </Button>
             {/* </NavLink> */}
           </Box>

@@ -52,13 +52,13 @@ const validationSchema=yup.object
 ({
   nombre: yup
   .string()
-  .matches(/^[A-Za-z ]*$/, 'Ingresar nombre válido')
+  .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar nombre válido')
   .min(2,"Debe contener al menos 2 letras")
   .required("Campo Obligatorio"),
 
   apellido:yup
   .string()
-  .matches(/^[A-Za-z ]*$/, 'Ingresar nombre válido')
+  .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar apellido válido')
   .min(2,"Debe contener al menos 2 letras")
   .required("Campo Obligatorio"),
 
@@ -96,15 +96,15 @@ const Registrarse = () => {
       apellido:"Simpson",
       telefono:"54 11 1234 5678",
       correo:"homerosimpsons@springfield.com",
-      contraseña:"estúpido&sensualFlanders",
-      repContraseña:"estúpido&sensualFlanders",
+      //contraseña:"estúpido&sensualFlanders",
+      //repContraseña:"estúpido&sensualFlanders",
 
       // nombre:"",
       // apellido:"",
       // telefono:"",
       // correo:"",
-      // contraseña:"",
-      // repContraseña:"",
+       contraseña:"",
+       repContraseña:"",
 
     },
 

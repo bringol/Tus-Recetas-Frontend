@@ -41,7 +41,7 @@ const validationSchema=yup.object
 ({
   nombre: yup
   .string()
-  .matches(/^[A-Za-z ]*$/, 'Ingresar nombre válido')
+  .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
   .min(2,"Debe contener al menos 2 letras")
   .required("Campo Obligatorio"),
 

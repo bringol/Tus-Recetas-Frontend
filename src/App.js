@@ -31,6 +31,7 @@ import P_RecetaNueva from "./pages/P_RecetaNueva";
 import P_Mis_Recetas from "./pages/P_Mis_Recetas";
 import P_Receta from "./pages/P_Receta";
 import P_RecetaLogin from "./pages/P_RecetaLogin";
+import P_ModificarReceta from "./pages/P_ModificarReceta";
 
 export default function App() {
   useEffect(() => {
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="/User/Perfil" element={<P_Perfil/>} />
         <Route path="/User/Recetas" element={<P_Mis_Recetas/>} />
         <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
+        <Route path="/User/Receta/Modificar" element={<P_ModificarReceta/>} />
         <Route path="/Login/Receta" element={<P_Receta/>} />
         <Route path="/Login/RecetaLogin" element={<P_RecetaLogin/>} />
 
