@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { AiFillStar } from "react-icons/ai";
+import { GiStoneCrafting } from "react-icons/gi";
 import styled from "styled-components";
 import product1 from "../assets/product1.jpg";
 import product2 from "../assets/product2.jpg";
@@ -6,6 +8,8 @@ import product3 from "../assets/product3.jpg";
 import product4 from "../assets/product4.jpg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
+import data from "../data/recetas.json";
+
 
 
 export default function ProductsLogin() {
@@ -13,25 +17,24 @@ export default function ProductsLogin() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
-  const data = [
-    {
-      image: product1,
-      name: "Hamburguesas",
-    },
-    {
-      image: product2,
-      name: "Tostado",
-    },
-    {
-      image: product3,
-      name: "Huevos",
-    },
-    {
-      image: product4,
-      name: "Torta",
-    },
-  ];
-
+  // const data = [
+  //   {
+  //     image: product1,
+  //     name: "Hamburguesas",
+  //   },
+  //   {
+  //     image: product2,
+  //     name: "Tostado",
+  //   },
+  //   {
+  //     image: product3,
+  //     name: "Huevos",
+  //   },
+  //   {
+  //     image: product4,
+  //     name: "Torta",
+  //   },
+  // ];
   return (
     <Section id="recetas">
       <div className="title">
@@ -44,11 +47,40 @@ export default function ProductsLogin() {
           return (
             <div className="product">
               <div className="image">
-                <img src={product.image} alt="" />
+                <img src={product.img} alt="" />
               </div>
-              <h2>{product.name}</h2>
+              <h2>{product.titulo}</h2>
+              {/* <h2>{product.categoria}</h2>
+              <h2>{product.dificultad}</h2> */}
+              
+
+              <div className="raiting">
+                {[...Array(5)].map((star, i) => {
+                  const ratingValue = i + 1;
+
+                  return (
+                    <label>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        onClick={() => setRating(ratingValue)}
+                        //buscar forma de guardar rating en .json
+
+                      />
+                      <AiFillStar className="star"
+                        color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                        size={30}
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(null)}
+                      />
+
+                    </label>
+                  );
+                })}
+              </div>
               <button>
-              <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
+                <NavLink to='/Login/RecetaLogin' style={{ textDecoration: 'none', color: 'white' }}>Ver más</NavLink>
               </button>
             </div>
           );

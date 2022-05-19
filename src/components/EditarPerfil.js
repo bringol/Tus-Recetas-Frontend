@@ -56,10 +56,10 @@ const validationSchema=yup.object
   .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Ingresar número válido')
   .required("Campo Obligatorio"),
 
-  correo: yup
-  .string()
-  .email("Ingresar una dirección de correo electrónico válida")
-  .required("Campo Obligatorio"),
+  // correo: yup
+  // .string()
+  // .email("Ingresar una dirección de correo electrónico válida")
+  // .required("Campo Obligatorio"),
 
   contraseña: yup
   .string()
@@ -95,7 +95,7 @@ const EditarPerfil = () => {
       nombre:"Homero",
       apellido:"Simpson",
       telefono:"54 11 1234 5678",
-      correo:"homerosimpsons@springfield.com",
+      //correo:"homerosimpsons@springfield.com",
       contraseña:"",
       repContraseña:"",
       
@@ -182,7 +182,7 @@ const EditarPerfil = () => {
             helperText={formik.touched.telefono && formik.errors.telefono}
             onBlur={formik.handleBlur} />
 
-          <Box mt={3}></Box>
+          {/* <Box mt={3}></Box>
 
           <TextField 
             id="correo"
@@ -197,7 +197,7 @@ const EditarPerfil = () => {
             error={formik.touched.correo && Boolean(formik.errors.correo)}
             helperText={formik.touched.correo && formik.errors.correo}
             onBlur={formik.handleBlur} 
-            />
+            /> */}
 
           <Box mt={3}></Box>
           <TextField 

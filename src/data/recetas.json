@@ -1,0 +1,57 @@
+[
+  {
+    "id":1,
+	"titulo": "Empanada Salteña",
+	"categoria":"Carnes",
+    "dificultad": 3,
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+	"img":"https://source.unsplash.com/random"
+  },
+  {
+    "id":2,
+	"titulo": "Locro",
+	"categoria":"Carnes",
+    "dificultad": "4",
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+	"img":"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.cienradios.com%2Fwp-content%2Fuploads%2Fsites%2F3%2F2019%2F05%2FLocro-portada-150419-Retocada.jpg&f=1&nofb=1"
+  },
+  {
+    "id":3,
+	"titulo": "Hamburguesa",
+	"categoria":"Carnes",
+    "dificultad": "3",
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+	"img":"https://static.elcomercio.es/www/multimedia/201907/31/media/cortadas/salmon-queso-kYUG-U80888661838tJ-624x385@El%20Comercio.jpg"
+  },
+  {
+    "id":4,
+	"titulo": "Tostadas",
+	"categoria":"Carnes",
+    "dificultad": "3",
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+	"img":"https://static3.elcomercio.es/www/multimedia/201907/31/media/cortadas/mantequilla-mermelada-kYUG-U80888661838nOG-624x385@El%20Comercio.jpg"
+  },
+  {
+    "id":5,
+	"titulo": "Huevo Revuelto",
+	"categoria":"Huevos",
+    "dificultad": "1",
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+	"img":"https://static3.elcomercio.es/www/multimedia/201907/31/media/cortadas/mantequilla-mermelada-kYUG-U80888661838nOG-624x385@El%20Comercio.jpg"
+  },
+  {
+    "id":6,
+	"titulo": "Torta Frita",
+	"categoria":"Huevos",
+    "dificultad": "1",
+	"ingredientes":"Excepteur sint occaecat cup.",
+    "procedimiento":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc pariatur.",
+    "img":"https://static3.elcomercio.es/www/multimedia/201907/31/media/cortadas/mantequilla-mermelada-kYUG-U80888661838nOG-624x385@El%20Comercio.jpg"
+  }
+  
+]
