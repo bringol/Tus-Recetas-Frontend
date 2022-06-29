@@ -70,17 +70,17 @@ export default function App() {
       {/*incorporar navbar filtros, y los otros del homepage, dentro en una sola pagina*/}
       {/*Crear homepage similar al anterior, pero para cuando este logeado*/}   
         <Route path="*" element={<div><h1>Error 404 página no encontrada</h1></div>} />
-        <Route path="/Home" element={<P_Home/>} />
-        <Route path="/Home/User" element={<P_HomeUSR/>} />
-        <Route path="/Login" element={<P_Login/>} />
-        <Route path="/Registro" element={<P_Registo/>} />
-        <Route path="/Recover" element={<P_Recover/>} />
-        <Route path="/User/Perfil" element={<P_Perfil/>} />
-        <Route path="/User/Recetas" element={<P_Mis_Recetas/>} />
-        <Route path="/User/Receta/Publicar" element={<P_RecetaNueva/>} />
-        <Route path="/User/Receta/Modificar" element={<P_ModificarReceta/>} />
-        <Route path="/Login/Receta" element={<P_Receta/>} />
-        <Route path="/Login/RecetaLogin" element={<P_RecetaLogin/>} />
+        <Route path="/home" element={<P_Home/>} />
+        <Route path="/home/user" element={<P_HomeUSR/>} />
+        <Route path="/login" element={<P_Login/>} />
+        <Route path="/registro" element={<P_Registo/>} />
+        <Route path="/recover" element={<P_Recover/>} />
+        <Route path="/user/perfil" element={<P_Perfil/>} />
+        <Route path="/user/recetas" element={<P_Mis_Recetas/>} />
+        <Route path="/user/receta/publicar" element={<P_RecetaNueva/>} />
+        <Route path="/user/receta/modificar" element={<P_ModificarReceta/>} />
+        <Route path="/login/receta" element={<P_Receta/>} />
+        <Route path="/login/RecetaLogin" element={<P_RecetaLogin/>} />
 
 
 

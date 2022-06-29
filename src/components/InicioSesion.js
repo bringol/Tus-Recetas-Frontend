@@ -11,6 +11,13 @@ import * as yup from "yup" //libreria de esquemas de validacion
 import { propsToClassKey } from '@mui/styles';
 import Exito from "./Exito"
 
+//comunicacion con el back
+import {login} from "../controllers/loginController"
+
+
+
+
+
 //estilos
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,22 +64,43 @@ export default function InicioSesion() {
   ({
     initialValues:
     {
-      email:"homerosimpson@springfield.com",
-      //contraseña:"estúpido&sensualFlanders",
-
-      //correo:"",
+      email:"",
       contraseña:"",
     },
 
     onSubmit:(values)=>
     {
-      console.log(JSON.stringify(values))
+      //console.log(JSON.stringify(values))
     },
 
     validationSchema: validationSchema,
 
   });
   const [toggle, setToggle] = useState(false);
+
+  //La validacion de campos esta hecho por formik
+  const validarLogin= async function()
+  {
+      let datos = {
+        email: formik.values.email,
+        password: formik.values.contraseña
+      }
+      let getLogin = await login(datos);
+      if (getLogin.rdo===0 )
+      {
+        //setUsuarioValido(true);
+        setToggle(!toggle)
+        console.log("rdo es cero")
+      }
+      if (getLogin.rdo===1)
+      {
+        alert(getLogin.mensaje)
+      }
+      // else{
+      //   alert("error")
+      // }
+      
+  }
 
 
 if (toggle === false) {
@@ -134,7 +162,8 @@ if (toggle === false) {
               variant="contained"
               color="secondary"
               disabled={!(formik.isValid && formik.dirty)}
-              onClick={() => setToggle(!toggle)}
+              //onClick={() => setToggle(!toggle)}
+              onClick={validarLogin}
             >
             Ingresar 
             </Button>

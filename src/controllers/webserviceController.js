@@ -5,11 +5,11 @@ console.log("url",urlApi);
 const urlWebServices = {
 
     //users
-    loginUser:urlApi +"api/users/login",
+    login:urlApi +"api/users/login",
     createUser:urlApi +"api/users/",    
     getUserByToken:urlApi +"api/users/me",
     getUserByEmail:urlApi +"api/users/email",
-    updateUser:urlApi +"api/users/update",
+    //updateUser:urlApi +"api/users/update",
 
 
 

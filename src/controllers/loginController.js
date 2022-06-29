@@ -1,4 +1,4 @@
-import urlWebServices from '../controller/webserviceController.js';
+import urlWebServices from './webserviceController';
 
 export const login= async function(login)
 {
@@ -41,16 +41,20 @@ export const login= async function(login)
                     
                     return ({rdo:0,mensaje:"Ok"});//correcto
                 }
-                case 202:
-                {
-                    //error mail
-                    return ({rdo:1,mensaje:"El mail ingresado no existe en nuestra base."});
-                }
-                case 203:
-                {
-                    //error password
-                    return ({rdo:1,mensaje:"La contraseña no es correcta."});
-                }
+                // case 202:
+                // {
+                //     //error mail
+                //     return ({rdo:1,mensaje:"El mail ingresado no existe en nuestra base."});
+                // }
+                // case 203:
+                // {
+                //     //error password
+                //     return ({rdo:1,mensaje:"La contraseña no es correcta."});
+                // }
+                case 400:
+                    {
+                        return({rdo:1, mensaje:data.message})
+                    }
                 default:
                 {
                     //otro error
@@ -64,6 +68,9 @@ export const login= async function(login)
     };
 }
 
+
+
+//parte imagenes
 export const guardarImgUser = async function(message)
 {
     //url webservices
@@ -101,8 +108,6 @@ export const guardarImgUser = async function(message)
         return false;
     };
 }
-
-//parte imagenes
 
 export const uploadFileImg= async function(files,nombres)
 {
