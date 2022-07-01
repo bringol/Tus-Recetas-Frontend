@@ -78,7 +78,7 @@ export default function InicioSesion() {
   });
   const [toggle, setToggle] = useState(false);
 
-  //La validacion de campos esta hecho por formik
+  //La validacion sintactica de campos esta hecho por formik
   const validarLogin= async function()
   {
       let datos = {

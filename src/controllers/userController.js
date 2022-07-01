@@ -1,8 +1,8 @@
 import urlWebServices from './webserviceController';
 
 
-export const createUsuario = async function(usuario){
-    let url = urlWebServices.createUsuario;
+export const createUser = async function(usuario){
+    let url = urlWebServices.createUser;
     const formData = new URLSearchParams();
     formData.append('nombre', usuario.nombre);
     formData.append('apellido', usuario.apellido);
@@ -30,11 +30,11 @@ export const createUsuario = async function(usuario){
                 {                    
                     return ({rdo:0,mensaje:"Ok"});
                 }
-                case 202:
-                {
-                    //error mail
-                    return ({rdo:1,mensaje:"El mail ingresado ya existe en nuestra base."});
-                }
+                // case 202:
+                // {
+                //     //error mail
+                //     return ({rdo:1,mensaje:"El mail ingresado ya existe en nuestra base."});
+                // }
                 case 400:
                     {
                         return({rdo:1, mensaje:data.message})

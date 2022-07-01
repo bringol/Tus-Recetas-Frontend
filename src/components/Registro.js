@@ -10,6 +10,10 @@ import * as yup from "yup" //libreria de esquemas de validacion
 
 import { NavLink } from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
 
+//back
+import {createUser} from "../controllers/userController"
+
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -92,19 +96,19 @@ const Registrarse = () => {
   ({
     initialValues:
     {
-      nombre:"Homero",
-      apellido:"Simpson",
-      telefono:"54 11 1234 5678",
-      correo:"homerosimpsons@springfield.com",
+      // nombre:"Homero",
+      // apellido:"Simpson",
+      // telefono:"54 11 1234 5678",
+      // correo:"homerosimpsons@springfield.com",
       //contraseña:"estúpido&sensualFlanders",
       //repContraseña:"estúpido&sensualFlanders",
 
-      // nombre:"",
-      // apellido:"",
-      // telefono:"",
-      // correo:"",
-       contraseña:"",
-       repContraseña:"",
+      nombre:"",
+      apellido:"",
+      telefono:"",
+      correo:"",
+      contraseña:"",
+      repContraseña:"",
 
     },
 
@@ -125,6 +129,31 @@ const Registrarse = () => {
 
   //const [count, setCount] = useState(0);
   const [toggle, setToggle] = useState(false);
+
+  //la validación sintáctica fue hecha por formik
+  const validarRegistro= async function()
+  {
+      let datos = {
+        nombre: formik.values.nombre,
+        apellido: formik.values.apellido,
+        telefono: formik.values.telefono,
+        email: formik.values.correo,
+        password: formik.values.contraseña
+      }
+      let getRegistro = await createUser(datos);
+      if (getRegistro.rdo===0 )
+      {
+        //setUsuarioValido(true);
+        setToggle(!toggle)
+        console.log("rdo es cero")
+      }
+      if (getRegistro.rdo===1)
+      {
+        alert(getRegistro.mensaje)
+      }
+     
+      
+  }
 
   if (toggle === false) {
     return (
@@ -269,7 +298,8 @@ const Registrarse = () => {
                       }
                       
                       //onClick={() => setCount(count + 1)} //cuando le click (ya esta desbloqueado, suma 1) 
-                      onClick={() => setToggle(!toggle)}
+                      //onClick={() => setToggle(!toggle)}
+                      onClick={validarRegistro}
                   >
               Confirmar 
             </Button>
