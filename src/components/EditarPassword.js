@@ -39,44 +39,23 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema=yup.object
 ({
-  nombre: yup
+  
+  contraseña: yup
   .string()
-  .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
-  .min(2,"Debe contener al menos 2 letras")
-  .required("Campo Obligatorio"),
+  .required("Ingresar contraseña")
+  .min(8,"Contraseña contener mínimo de 8 caracteres"),
 
-  apellido:yup
+  repContraseña:yup
   .string()
-  .matches(/^[A-Za-z ]*$/, 'Ingresar nombre válido')
-  .min(2,"Debe contener al menos 2 letras")
-  .required("Campo Obligatorio"),
-
-  telefono:yup
-  .string()
-  .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Ingresar número válido')
-  .required("Campo Obligatorio"),
-
-  // correo: yup
-  // .string()
-  // .email("Ingresar una dirección de correo electrónico válida")
-  // .required("Campo Obligatorio"),
-
-  // contraseña: yup
-  // .string()
-  // .required("Ingresar contraseña")
-  // .min(8,"Contraseña contener mínimo de 8 caracteres"),
-
-  // repContraseña:yup
-  // .string()
-  // .oneOf([yup.ref("contraseña"),null],"Contraseñas no coinciden")
-  // .required("Ingresar contraseña"),
+  .oneOf([yup.ref("contraseña"),null],"Contraseñas no coinciden")
+  .required("Ingresar contraseña"),
 
 
 })
 
 
 
-const EditarPerfil = () => {
+const EditarPassword = () => {
 
   const classes = useStyles();
 
@@ -84,39 +63,22 @@ const EditarPerfil = () => {
   ({
     initialValues:
     {
-      // nombre:"Homero",
-      // apellido:"Simpson",
-      // telefono:"54 11 1234 5678",
-      // contraseña:"estúpido&sensualFlanders",
-      // repContraseña:"estúpido&sensualFlanders",
       
-
-      nombre:"Homero",
-      apellido:"Simpson",
-      telefono:"54 11 1234 5678",
+      contraseña:"",
+      repContraseña:"",
       
-
-      // nombre:"",
-      // apellido:"",
-      // telefono:"",
-      // correo:"",
-      // contraseña:"",
-      // repContraseña:"",
-      
-
     },
 
-    onSubmit:(values)=>
-    {
-      console.log(JSON.stringify(values))
-    },
+    // onSubmit:(values)=>
+    // {
+    //   console.log(JSON.stringify(values))
+    // },
 
     validationSchema: validationSchema
 
   });
 
   const [toggle, setToggle] = useState(false);
-  //const [toggle2, setToggle2] = useState(true);
 
   if (toggle === false) {
 
@@ -127,80 +89,15 @@ const EditarPerfil = () => {
           <Avatar className={classes.avatar}>
             <CreateRoundedIcon />
           </Avatar>
-          <h2> Editar Perfil </h2>
+          <h2> Cambiar Contraseña </h2>
           <form className={classes.form} noValidate  onSubmit={formik.handleSubmit}>
             
-          <TextField 
-            id="nombre"
-            name="nombre" 
-            label="Modificar nombre" 
-            variant="standard" 
-            size="small" 
-            color='secondary' 
-            fullWidth
-            value={formik.values.nombre}
-            onChange={formik.handleChange}
-            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-            helperText={formik.touched.nombre && formik.errors.nombre}
-            
-            onBlur={formik.handleBlur} 
-            />
 
           <Box mt={3}></Box>
           <TextField 
-            id="apellido"
-            name="apellido"  
-            label="Modificar apellido" 
-            variant="standard" 
-            size="small" 
-            color='secondary' 
-            fullWidth 
-            value={formik.values.apellido}
-            onChange={formik.handleChange}
-            error={formik.touched.apellido && Boolean(formik.errors.apellido)}
-            helperText={formik.touched.apellido && formik.errors.apellido}
-            onBlur={formik.handleBlur}
-            //onClick={() => setToggle2(!toggle2)}
-            />
-          
-            <Box mt={3}></Box>
-
-            <TextField
-            id="telefono"
-            name="telefono"
-            label="Modificar telefono"
-            variant="standard"
-            color="secondary"
-            size="small"
-            fullWidth 
-            value={formik.values.telefono}
-            onChange={formik.handleChange}
-            error={formik.touched.telefono && Boolean(formik.errors.telefono)}
-            helperText={formik.touched.telefono && formik.errors.telefono}
-            onBlur={formik.handleBlur} />
-
-          {/* <Box mt={3}></Box>
-
-          <TextField 
-            id="correo"
-            name="correo" 
-            label="Modificar correo electrónico" 
-            variant="standard" 
-            size="small" 
-            color='secondary' 
-            fullWidth
-            value={formik.values.correo}
-            onChange={formik.handleChange}
-            error={formik.touched.correo && Boolean(formik.errors.correo)}
-            helperText={formik.touched.correo && formik.errors.correo}
-            onBlur={formik.handleBlur} 
-            /> */}
-
-          {/* <Box mt={3}></Box>
-          <TextField 
             id="contraseña"
             name="contraseña" 
-            label="Modificar contraseña" 
+            label="Nueva Contraseña" 
             variant="standard"  
             type="password" 
             size="small" color='secondary' 
@@ -216,7 +113,7 @@ const EditarPerfil = () => {
           <TextField 
             id="repContraseña" 
             name="repContraseña"
-            label="Confirmar contraseña" 
+            label="Confirmar Contraseña" 
             variant="standard"  
             type="password" 
             size="small" color='secondary' 
@@ -227,7 +124,7 @@ const EditarPerfil = () => {
             helperText={formik.touched.repContraseña && formik.errors.repContraseña}
             onBlur={formik.handleBlur} 
             
-            /> */}
+            />
 
 
             <Box sx={{ mt: 5 }}>{/*margin top 5 pixeles https://mui.com/system/spacing/ */}
@@ -261,7 +158,7 @@ const EditarPerfil = () => {
   return(
     <div className={classes.paper}>
     <Exito/>
-      <NavLink to='/home/user' style={{ textDecoration: 'none', color: 'white' }}>
+      <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
         <Button
           type="submit"
           fullWidth
@@ -276,4 +173,4 @@ const EditarPerfil = () => {
 
 }
 
-export default EditarPerfil
+export default EditarPassword

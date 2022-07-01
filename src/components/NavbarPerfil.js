@@ -3,16 +3,13 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-//import Button from '@mui/material/Button';
-import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
 
 
-export default function NavbarVacio() {
-  
+export default function NavbarPerfil() {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
-
   return (
     <>
       <Nav className="fondo">
@@ -33,33 +30,36 @@ export default function NavbarVacio() {
         </div>
         <ul className="links">
           <li>
-            <a>
-            {/* <Button variant="text">Home</Button> */}
-            <NavLink to='/Home'>Home </NavLink>
-            </a>
+            {/* <a href="#perfil">Perfil</a> */}
+            <NavLink to='/user/perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>               
           </li>
-        </ul>
-        <ul className="links">
           <li>
-            <a>
-            {/* <Button variant="text">Home</Button> */}
-            <NavLink to='/Home'>test </NavLink>
-            </a>
+            {/* <a href="#mis-recetas">Mis Recetas</a> */}
+            <NavLink to='/user/password' style={{ textDecoration: 'none' , color: 'white' }}>Contraseña</NavLink>
+          </li>
+          <li>
+            {/* <a href="#salir"> */}              
+            <NavLink to='/home/user' style={{ textDecoration: 'none' , color: 'white' }}>Home</NavLink>            
+            {/* </a> */}
           </li>
         </ul>
       </Nav>
-
-
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <ul>
           <li>
-            <a
-              //href="#home"
-              //className="active"
-              //onClick={() => setNavbarState(false)}
-            >
-             <NavLink to='/Home'>Home </NavLink>
-            </a>
+            {/* <a href="#perfil" onClick={() => setNavbarState(false)}> */}
+            <NavLink to='/user/perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>
+            {/* </a> */}
+          </li>
+          <li>
+            {/* <a href="#salir" onClick={() => setNavbarState(false)}> */}
+            <NavLink to='/user/password' style={{ textDecoration: 'none' , color: 'white' }}>Contraseña</NavLink>
+            {/* </a> */}
+          </li>
+          <li>
+            {/* <a href="#salir" onClick={() => setNavbarState(false)}> */}
+            <NavLink to='/home/user' style={{ textDecoration: 'none' , color: 'white' }}>Home</NavLink>
+            {/* </a> */}
           </li>
         </ul>
       </ResponsiveNav>
