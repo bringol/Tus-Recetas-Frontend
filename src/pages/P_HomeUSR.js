@@ -3,7 +3,7 @@ import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import Hero from "../components/Hero";
 import NavbarUSR from "../components/NavbarUSR";
 //import Registrarse from "../components/Registrarse";
-import Products from "../components/Products";
+import ProductsLogin from "../components/ProductsLogin";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
 //import Newsletter from "./components/Newsletter";
@@ -18,7 +18,7 @@ export default function P_HomeUSR() { //la pantalla que ve un usr desp del login
         <NavbarUSR />
         <Hero /> 
         <Search />
-        <Products />        
+        <ProductsLogin />        
         <Footer />
     </div>
     );

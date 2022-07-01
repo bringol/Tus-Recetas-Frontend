@@ -16,7 +16,7 @@ export default function P_Home() {
         <Navbar />
         <Hero /> 
         <Search />      
-        <ProductsLogin />
+        <Products />
         <Registrarse/>
         <Footer />
         <Products />

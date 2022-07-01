@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import styled from "styled-components";
-import product1 from "../assets/product1.jpg";
-import product2 from "../assets/product2.jpg";
-import product3 from "../assets/product3.jpg";
-import product4 from "../assets/product4.jpg";
+// import product1 from "../assets/product1.jpg";
+// import product2 from "../assets/product2.jpg";
+// import product3 from "../assets/product3.jpg";
+// import product4 from "../assets/product4.jpg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
-import data from "../data/recetas.json";
+import data2 from "../data/recetas.json";
+
+import{getRecetas} from "../controllers/recetaController"
 
 
 export default function Products() {
@@ -14,24 +16,47 @@ export default function Products() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
-  // const data = [
-  //   {
-  //     image: product1,
-  //     name: "Hamburguesas",
-  //   },
-  //   {
-  //     image: product2,
-  //     name: "Tostado",
-  //   },
-  //   {
-  //     image: product3,
-  //     name: "Huevos",
-  //   },
-  //   {
-  //     image: product4,
-  //     name: "Torta",
-  //   },
-  // ];
+  const [listado, setListado] = useState([]);
+
+  // useEffect(()=>{
+  //   loadData()
+  // },[])
+
+  // const loadData=async ()=>{
+  //   const response=await getRecetas()
+  //   const data=await response.json()
+  //   setListaProductos(data)
+  //   console.log(data)
+  // }
+  // useEffect(()=>{
+  //      await getRecetas()
+  //      .then(response=>response.json)
+  //      .then(data=>)
+  //    },[])
+
+  console.log("cargacomponente");
+  useEffect(()=>{
+    async function componentDidMount() 
+    {
+      //traer recetas
+      let rdo = await getRecetas();
+      setListado(rdo); 
+    }
+    componentDidMount();
+  },[]);
+
+
+  const getListado = async function (){
+    console.log("Voy a buscar imagenes")
+    console.log("Listado de recetas",listado)
+    let rdo = await getRecetas();
+    setListado(rdo);
+    
+    console.log("Listado de recetas",listado)
+    console.log("rdo getRecetas",rdo)
+  }
+  getListado()
+
 
   return (
     <Section id="recetas">
@@ -41,13 +66,13 @@ export default function Products() {
         </h1>
       </div>
       <div className="products">
-        {data.map((product) => {
+        {data2.map((receta) => {
           return (
             <div className="product">
               <div className="image">
-                <img src={product.img} alt="" />
+                <img src={receta.img} alt="" />
               </div>
-              <h2>{product.titulo}</h2>
+              <h2>{receta.titulo}</h2>
               <button>
               <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
               </button>

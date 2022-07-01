@@ -195,7 +195,7 @@ if (toggle === false) {
                 name="dificultad"
                 //margin="normal"
                 //size="small"
-                Dificultad
+                //Dificultad
                 options={topDificultades.map((option) => option.title)}
                 renderInput={(params) => <TextField {...params}
                  

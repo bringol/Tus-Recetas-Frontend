@@ -36,7 +36,7 @@ export default function Filtros() {
                 id="categorias"
                 //size="small"
                 //margin="normal"
-                Categorías
+                //Categorías
                 options={topCategorias.map((option) => option.title)}
                 renderInput={(params) => <TextField {...params} label="Categoria" color="secondary"/>}
                 />
@@ -48,7 +48,7 @@ export default function Filtros() {
                 id="dificultad"
                 //margin="normal"
                 //size="small"
-                Dificultad
+                //Dificultad
                 options={topDificultades.map((option) => option.title)}
                 renderInput={(params) => <TextField {...params} label="Dificultad"  color="secondary"/>}
                 />

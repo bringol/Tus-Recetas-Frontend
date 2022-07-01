@@ -65,7 +65,7 @@ export default function Search() {
             <Autocomplete
               id="categorias"
               size="small"
-              Categorías
+              //Categorías
               options={topCategorias.map((option) => option.title)}
               renderInput={(params) => <TextField {...params} label="Categorias" color="secondary" />}
             />
@@ -74,7 +74,7 @@ export default function Search() {
             <Autocomplete
               id="dificultad"
               size="small"
-              Dificultad
+              //Dificultad
               options={topDificultades.map((option) => option.title)}
               renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
             />
@@ -83,7 +83,7 @@ export default function Search() {
             <Autocomplete
               id="ingtedientes"
               size="small"
-              Ingredientes
+              //Ingredientes
               color="secondary"
               options={topIngredientes.map((option) => option.title)}
               renderInput={(params) => <TextField {...params} label="Ingredientes" color="secondary" />}
@@ -94,7 +94,7 @@ export default function Search() {
               id="calificacion"
               size="small"
               border-color="#572e57"
-              Calificación
+              //Calificación
               options={topCalificaciones.map((option) => option.title)}
               renderInput={(params) => <TextField {...params} label="Calificación" color="secondary" />}
             />
