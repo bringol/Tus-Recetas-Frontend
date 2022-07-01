@@ -35,15 +35,7 @@ export default function NavbarVacio() {
           <li>
             <a>
             {/* <Button variant="text">Home</Button> */}
-            <NavLink to='/Home'>Home </NavLink>
-            </a>
-          </li>
-        </ul>
-        <ul className="links">
-          <li>
-            <a>
-            {/* <Button variant="text">Home</Button> */}
-            <NavLink to='/Home'>test </NavLink>
+            <NavLink to='/home'>Home </NavLink>
             </a>
           </li>
         </ul>
@@ -58,7 +50,7 @@ export default function NavbarVacio() {
               //className="active"
               //onClick={() => setNavbarState(false)}
             >
-             <NavLink to='/Home'>Home </NavLink>
+             <NavLink to='/home'>Home </NavLink>
             </a>
           </li>
         </ul>

@@ -91,10 +91,13 @@ const EditarPerfil = () => {
       // repContraseña:"estúpido&sensualFlanders",
       
 
-      nombre:"Homero",
-      apellido:"Simpson",
-      telefono:"54 11 1234 5678",
+      // nombre:"Homero",
+      // apellido:"Simpson",
+      // telefono:"54 11 1234 5678",
       
+      nombre:`${localStorage.getItem("nombre")}`,
+      apellido:`${localStorage.getItem("apellido")}`,
+      telefono:`${localStorage.getItem("telefono")}`,
 
       // nombre:"",
       // apellido:"",
