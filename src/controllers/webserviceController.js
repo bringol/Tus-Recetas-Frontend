@@ -14,10 +14,10 @@ const urlWebServices = {
 
 
     //imagenes (template)
-    uploadFileImg: urlApi + "utils/uploadImg",
-    guardarImgUser: urlApi + "api/users/guardarImgUser",
-    getImgUser: urlApi + "api/users/imgUserByMail",
-    uploadFileImg: urlApi + "api/users/uploadImg",
+    // uploadFileImg: urlApi + "utils/uploadImg",
+    // guardarImgUser: urlApi + "api/users/guardarImgUser",
+    // getImgUser: urlApi + "api/users/imgUserByMail",
+    // uploadFileImg: urlApi + "api/users/uploadImg",
 
 
     //recetas

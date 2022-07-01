@@ -8,7 +8,7 @@ import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
 import data2 from "../data/recetas.json";
 
-import{getRecetas} from "../controllers/recetaController"
+import{obtenerRecetas} from "../controllers/recetaController"
 
 
 export default function Products() {
@@ -18,44 +18,58 @@ export default function Products() {
 
   const [listado, setListado] = useState([]);
 
-  // useEffect(()=>{
-  //   loadData()
-  // },[])
+  const loadData=async ()=>{
+    const data=await obtenerRecetas()
+    //const data=await response.json()
+    setListado(data)
+    console.log(listado)
+  }
 
-  // const loadData=async ()=>{
-  //   const response=await getRecetas()
-  //   const data=await response.json()
-  //   setListaProductos(data)
-  //   console.log(data)
-  // }
+  useEffect(()=>{
+    loadData()
+  },[])
+
+  
   // useEffect(()=>{
   //      await getRecetas()
   //      .then(response=>response.json)
   //      .then(data=>)
   //    },[])
 
-  console.log("cargacomponente");
-  useEffect(()=>{
-    async function componentDidMount() 
-    {
-      //traer recetas
-      let rdo = await getRecetas();
-      setListado(rdo); 
-    }
-    componentDidMount();
-  },[]);
-
-
-  const getListado = async function (){
-    console.log("Voy a buscar imagenes")
-    console.log("Listado de recetas",listado)
-    let rdo = await getRecetas();
-    setListado(rdo);
+  
+  // useEffect(()=>{
+  //   async function componentDidMount() 
+  //   {
+  //     console.log("carga componente");
+  //     //traer recetas
+  //     let rdo = await obtenerRecetas();
+  //     setListado(rdo); 
+  //     // console.log(listado)
+  //     // const getListado = async function (){
+  // //   console.log("Voy a buscar recetas")
+  // //   console.log("Listado de recetas antes",listado)
+  // //   let rdo = await obtenerRecetas();
+  // //   setListado(rdo);
     
-    console.log("Listado de recetas",listado)
-    console.log("rdo getRecetas",rdo)
-  }
-  getListado()
+  // //   console.log("Listado de recetas despues",listado)
+  // //   console.log("rdo Recetas",rdo)
+  // // }
+  // // getListado()
+  //   }
+  //   componentDidMount();
+  // },[]);
+
+
+  // const getListado = async function (){
+  //   console.log("Voy a buscar recetas")
+  //   console.log("Listado de recetas antes",listado)
+  //   let rdo = await obtenerRecetas();
+  //   setListado(rdo);
+    
+  //   console.log("Listado de recetas despues",listado)
+  //   console.log("rdo Recetas",rdo)
+  // }
+  // getListado()
 
 
   return (
