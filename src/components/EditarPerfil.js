@@ -10,6 +10,9 @@ import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 import Exito from "./Exito"
 
+//back
+import {editarUser} from "../controllers/userController"
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,21 +59,6 @@ const validationSchema=yup.object
   .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Ingresar número válido')
   .required("Campo Obligatorio"),
 
-  // correo: yup
-  // .string()
-  // .email("Ingresar una dirección de correo electrónico válida")
-  // .required("Campo Obligatorio"),
-
-  // contraseña: yup
-  // .string()
-  // .required("Ingresar contraseña")
-  // .min(8,"Contraseña contener mínimo de 8 caracteres"),
-
-  // repContraseña:yup
-  // .string()
-  // .oneOf([yup.ref("contraseña"),null],"Contraseñas no coinciden")
-  // .required("Ingresar contraseña"),
-
 
 })
 
@@ -87,13 +75,6 @@ const EditarPerfil = () => {
       // nombre:"Homero",
       // apellido:"Simpson",
       // telefono:"54 11 1234 5678",
-      // contraseña:"estúpido&sensualFlanders",
-      // repContraseña:"estúpido&sensualFlanders",
-      
-
-      // nombre:"Homero",
-      // apellido:"Simpson",
-      // telefono:"54 11 1234 5678",
       
       nombre:`${localStorage.getItem("nombre")}`,
       apellido:`${localStorage.getItem("apellido")}`,
@@ -101,11 +82,7 @@ const EditarPerfil = () => {
 
       // nombre:"",
       // apellido:"",
-      // telefono:"",
-      // correo:"",
-      // contraseña:"",
-      // repContraseña:"",
-      
+      // telefono:"",      
 
     },
 
@@ -119,7 +96,29 @@ const EditarPerfil = () => {
   });
 
   const [toggle, setToggle] = useState(false);
-  //const [toggle2, setToggle2] = useState(true);
+  
+//La validacion sintactica de campos esta hecho por formik
+const validarDatos= async function()
+{
+    let datos = {
+      nombre: formik.values.nombre,
+      apellido: formik.values.apellido,
+      telefono: formik.values.telefono,
+    }
+    let nuevoDato = await editarUser(datos);
+    if (nuevoDato.rdo===0 )
+    {
+      //setUsuarioValido(true);
+      setToggle(!toggle)
+      console.log("Perfil actualizado")
+    }
+    if (nuevoDato.rdo===1)
+    {
+      alert(nuevoDato.mensaje)
+    }
+    
+}
+
 
   if (toggle === false) {
 
@@ -145,7 +144,6 @@ const EditarPerfil = () => {
             onChange={formik.handleChange}
             error={formik.touched.nombre && Boolean(formik.errors.nombre)}
             helperText={formik.touched.nombre && formik.errors.nombre}
-            
             onBlur={formik.handleBlur} 
             />
 
@@ -163,7 +161,6 @@ const EditarPerfil = () => {
             error={formik.touched.apellido && Boolean(formik.errors.apellido)}
             helperText={formik.touched.apellido && formik.errors.apellido}
             onBlur={formik.handleBlur}
-            //onClick={() => setToggle2(!toggle2)}
             />
           
             <Box mt={3}></Box>
@@ -182,55 +179,6 @@ const EditarPerfil = () => {
             helperText={formik.touched.telefono && formik.errors.telefono}
             onBlur={formik.handleBlur} />
 
-          {/* <Box mt={3}></Box>
-
-          <TextField 
-            id="correo"
-            name="correo" 
-            label="Modificar correo electrónico" 
-            variant="standard" 
-            size="small" 
-            color='secondary' 
-            fullWidth
-            value={formik.values.correo}
-            onChange={formik.handleChange}
-            error={formik.touched.correo && Boolean(formik.errors.correo)}
-            helperText={formik.touched.correo && formik.errors.correo}
-            onBlur={formik.handleBlur} 
-            /> */}
-
-          {/* <Box mt={3}></Box>
-          <TextField 
-            id="contraseña"
-            name="contraseña" 
-            label="Modificar contraseña" 
-            variant="standard"  
-            type="password" 
-            size="small" color='secondary' 
-            fullWidth 
-            value={formik.values.contraseña}
-            onChange={formik.handleChange}
-            error={formik.touched.contraseña && Boolean(formik.errors.contraseña)}
-            helperText={formik.touched.contraseña && formik.errors.contraseña}
-            onBlur={formik.handleBlur}
-            />
-            
-            
-          <TextField 
-            id="repContraseña" 
-            name="repContraseña"
-            label="Confirmar contraseña" 
-            variant="standard"  
-            type="password" 
-            size="small" color='secondary' 
-            fullWidth
-            value={formik.values.repContraseña}
-            onChange={formik.handleChange}
-            error={(formik.touched.repContraseña && Boolean(formik.errors.repContraseña))}
-            helperText={formik.touched.repContraseña && formik.errors.repContraseña}
-            onBlur={formik.handleBlur} 
-            
-            /> */}
 
 
             <Box sx={{ mt: 5 }}>{/*margin top 5 pixeles https://mui.com/system/spacing/ */}
@@ -248,7 +196,8 @@ const EditarPerfil = () => {
                           
                 
                 }
-                onClick={() => setToggle(!toggle)}
+                //onClick={() => setToggle(!toggle)}
+                onClick={validarDatos}
 
               >
               Guardar cambios

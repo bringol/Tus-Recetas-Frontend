@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 import Exito from "./Exito"
+//comunicacion con el back
+import {editarPassword} from "../controllers/userController"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,6 +82,26 @@ const EditarPassword = () => {
 
   const [toggle, setToggle] = useState(false);
 
+  //La validacion sintactica de campos esta hecho por formik
+  const validarPassword= async function()
+  {
+      let datos = {
+        password: formik.values.contraseña
+      }
+      let nuevaPass = await editarPassword(datos);
+      if (nuevaPass.rdo===0 )
+      {
+        //setUsuarioValido(true);
+        setToggle(!toggle)
+        console.log("Contraseña actualizada")
+      }
+      if (nuevaPass.rdo===1)
+      {
+        alert(nuevaPass.mensaje)
+      }
+      
+  }
+
   if (toggle === false) {
 
     return (
@@ -142,7 +164,8 @@ const EditarPassword = () => {
                           
                 
                 }
-                onClick={() => setToggle(!toggle)}
+                //onClick={() => setToggle(!toggle)}
+                onClick={validarPassword}
 
               >
               Guardar cambios

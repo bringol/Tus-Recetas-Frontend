@@ -9,6 +9,9 @@ const urlWebServices = {
     createUser:urlApi +"api/users/",    
     getUserByToken:urlApi +"api/users/me",
     getUserByEmail:urlApi +"api/users/email",
+    editarUser:urlApi +"api/users/editar/perfil",
+    editarPassword:urlApi +"api/users/editar/password",
+    
     //updateUser:urlApi +"api/users/update",
 
 
