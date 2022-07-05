@@ -12,7 +12,7 @@ import OlvidoConstraseña from "../components/OlvidoContraseña";
 
 
 
-export default function P_Login() {
+export default function P_Olvido() {
     return (
     <div>
         <ScrollToTop />

@@ -9,7 +9,8 @@ import P_Home from "./pages/P_Home";
 import P_HomeUSR from "./pages/P_HomeUSR";
 import P_Login from "./pages/P_Login";
 import P_Registo from "./pages/P_Registro";
-import P_Recover from "./pages/P_Recover";
+import P_Olvido from "./pages/P_Olvido";
+import P_Reinicio from "./pages/P_Reinicio";
 import P_Password from "./pages/P_Password";
 import P_Perfil from "./pages/P_Perfil";
 import P_RecetaNueva from "./pages/P_RecetaNueva";
@@ -59,7 +60,8 @@ export default function App() {
         <Route path="/home/user" element={<P_HomeUSR/>} />
         <Route path="/login" element={<P_Login/>} />
         <Route path="/registro" element={<P_Registo/>} />
-        <Route path="/recover" element={<P_Recover/>} />
+        <Route path="/olvido" element={<P_Olvido/>} />
+        <Route path="/reinicio/:token" element={<P_Reinicio/>} />
         <Route path="/user/perfil" element={<P_Perfil/>} />
         <Route path="/user/password" element={<P_Password/>} />
         <Route path="/user/recetas" element={<P_Mis_Recetas/>} />
