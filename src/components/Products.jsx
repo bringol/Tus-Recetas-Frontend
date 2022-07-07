@@ -56,7 +56,7 @@ export default function Products() {
   // // }
   // // getListado()
   //   }
-  //   componentDidMount();
+  //  componentDidMount();
   // },[]);
 
 
@@ -82,15 +82,17 @@ export default function Products() {
       <div className="products">
         {data2.map((receta) => {
           return (
-            <div className="product">
-              <div className="image">
-                <img src={receta.img} alt="" />
+            <div className="id" key={receta.id}>
+              <div className="product">
+                <div className="image">
+                  <img src={receta.img} alt="" />
+                </div>
+                <h2>{receta.titulo}</h2>
+                <button>
+                <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
+                </button>
               </div>
-              <h2>{receta.titulo}</h2>
-              <button>
-              <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
-              </button>
-            </div>
+              </div>
           );
         })}
       </div>

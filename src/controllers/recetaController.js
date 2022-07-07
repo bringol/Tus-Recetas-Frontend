@@ -1,7 +1,7 @@
 import urlWebServices from './webserviceController';
 
-export const obtenerRecetas = async function () {
-    let url = urlWebServices.obtenerRecetas;
+export const obtenerRecetas = async function (pag) {
+    let url = urlWebServices.obtenerRecetas+`?page=${pag}`;
     try {
         let response = await fetch(url, {
             method: 'GET',
@@ -13,7 +13,8 @@ export const obtenerRecetas = async function () {
         });
         if (response.status === 200) {
             let data = await response.json();
-            let listaRecetas = data.data.docs;
+            //let listaRecetas = data.data.docs;
+            let listaRecetas = data
             return listaRecetas;
         }
         else {

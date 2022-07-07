@@ -7,6 +7,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
 import ProductsLogin from "../components/ProductsLogin";
 import ProductosAux from "../components/ProductosAux";
+import { Box } from '@mui/material';
 //import Products from "../components/Products";
 //import Mis_Recetas from "../components/Mis_Recetas";
 //import Newsletter from "../components/Mis_Recetas";
@@ -28,9 +29,11 @@ export default function P_Home() {
     <div>
         <Navbar />
         <Hero /> 
-        <Search />      
-        <ProductosAux />
         <Registrarse/>
+        <Search />
+        <Box mt={15}></Box>      
+        <ProductosAux />
+        <Box mb={150}></Box>   
         <Footer />
         <ScrollToTop />  
     </div>
