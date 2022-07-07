@@ -101,7 +101,8 @@ const RestablcerContraseña = () => {
       }
       if (reinicio.rdo===1)
       {
-        alert(reinicio.mensaje)
+        //alert(reinicio.mensaje)
+        alert("Error: Enlace expirado, vuelva a pedir el cambio de contraseña")
       }
       // else{
       //   alert("error")
