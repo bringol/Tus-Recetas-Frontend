@@ -6,11 +6,11 @@ const urlWebServices = {
 
     //users
     login:urlApi +"api/users/login",
-    createUser:urlApi +"api/users/",    
-    getUserByToken:urlApi +"api/users/me",
-    getUserByEmail:urlApi +"api/users/email",
+    createUser:urlApi +"api/users/",
     editarUser:urlApi +"api/users/editar/perfil",
     editarPassword:urlApi +"api/users/editar/password",
+    olvidoPassword:urlApi +"api/users/olvido",
+    reinicioPassword:urlApi +"api/users/reinicio",
     
     //updateUser:urlApi +"api/users/update",
 

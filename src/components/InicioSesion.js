@@ -150,7 +150,7 @@ if (toggle === false) {
           />
           
           <Link href="#" variant="body2">
-              <NavLink to='/Recover' style={{ textDecoration: 'none'}}>Olvidé mi contraseña </NavLink>
+              <NavLink to='/olvido' style={{ textDecoration: 'none'}}>Olvidé mi contraseña </NavLink>
           </Link>
 
                   

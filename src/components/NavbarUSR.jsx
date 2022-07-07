@@ -9,6 +9,8 @@ import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textD
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
+
+
   html.addEventListener("click", () => setNavbarState(false));
   return (
     <>
@@ -50,7 +52,6 @@ export default function Navbar() {
           </li>
           <li>
             {/* <a href="#salir"> */}
-              
             <NavLink to='/Home' style={{ textDecoration: 'none' , color: 'white' }}>Salir</NavLink>
             
             {/* </a> */}

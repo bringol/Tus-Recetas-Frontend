@@ -145,6 +145,92 @@ export const editarUser= async function(usuario){
 }
 
 
+export const olvidoPassword = async function(usuario){
+    let url = urlWebServices.olvidoPassword;
+    const formData = new URLSearchParams();
+    formData.append('email', usuario.email);
+    try
+    {
+        let response = await fetch(url,{
+            method: 'POST',
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData,
+            
+        });
+        
+        let rdo = response.status;
+        let data = await response.json();
+            switch(rdo)
+            {
+                case 200:
+                {                    
+                    return ({rdo:0,mensaje:"Ok"});
+                }
+                case 400:
+                    {
+                        return({rdo:1, mensaje:data.message})
+                    }
+                default:
+                {
+                    //otro error
+                    return ({rdo:1,mensaje:"Ha ocurrido un error"});                
+                }
+            }
+    }
+    catch(error)
+    {
+        console.log("Error",error);
+    };
+}
+
+export const reinicioPassword = async function(usuario){
+    let url = urlWebServices.reinicioPassword;
+    const formData = new URLSearchParams();
+    formData.append('token', usuario.token);
+    formData.append('password', usuario.password);
+    try
+    {
+        let response = await fetch(url,{
+            method: 'POST',
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData,
+            
+        });
+        
+        let rdo = response.status;
+        let data = await response.json();
+            switch(rdo)
+            {
+                case 200:
+                {                    
+                    return ({rdo:0,mensaje:"Ok"});
+                }
+                case 400:
+                    {
+                        return({rdo:1, mensaje:data.message})
+                    }
+                default:
+                {
+                    //otro error
+                    return ({rdo:1,mensaje:"Ha ocurrido un error"});                
+                }
+            }
+    }
+    catch(error)
+    {
+        console.log("Error",error);
+    };
+}
+
+
 
 // export const updatePassword = async function(usuario){
 //     let url = urlWebServices.createUser;

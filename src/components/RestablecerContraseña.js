@@ -1,13 +1,16 @@
 import React,{useState} from 'react';
 import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/material';
 import SyncLockRoundedIcon from '@mui/icons-material/SyncLockRounded';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 import Exito from "./Exito"
+
+//back
+import {reinicioPassword} from "../controllers/userController"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,6 +55,7 @@ const validationSchema=yup.object
 })
 
 
+
 const RestablcerContraseña = () => {
 
   const classes = useStyles();
@@ -78,6 +82,33 @@ const RestablcerContraseña = () => {
   });
 
   const [toggle, setToggle] = useState(false);
+  const {token} = useParams()
+  //console.log(token)
+  
+
+  const validarReinicio= async function()
+  {
+      let datos = {
+        token: token,
+        password: formik.values.contraseña
+      }
+      let reinicio = await reinicioPassword(datos);
+      if (reinicio.rdo===0 )
+      {
+        //setUsuarioValido(true);
+        setToggle(!toggle)
+        console.log("contraseña cambiada")
+      }
+      if (reinicio.rdo===1)
+      {
+        //alert(reinicio.mensaje)
+        alert("Error: Enlace expirado, vuelva a pedir el cambio de contraseña")
+      }
+      // else{
+      //   alert("error")
+      // }
+      
+  }
 
 if (toggle === false) {
   
@@ -140,9 +171,8 @@ if (toggle === false) {
             color="secondary"
             className={classes.botón}
             disabled={!(formik.isValid && formik.dirty)}
-            onClick={() => setToggle(!toggle)}
-
-
+            //onClick={() => setToggle(!toggle)}
+            onClick={validarReinicio}
           >
             Siguiente
           </Button>
@@ -157,7 +187,7 @@ else
   return(
     <div className={classes.paper}>
     <Exito/>
-      <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
+      <NavLink to='/home' style={{ textDecoration: 'none', color: 'white' }}>
         <Button
           type="submit"
           fullWidth
