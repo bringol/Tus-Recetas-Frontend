@@ -7,7 +7,7 @@ export const obtenerRecetas = async function () {
             method: 'GET',
             mode: "cors",
             headers: {
-                //'x-access-token': localStorage.getItem('x'),
+                'x-access-token': localStorage.getItem('x'),
                 'Origin': 'http://localhost:3000'
             }
         });
@@ -18,7 +18,9 @@ export const obtenerRecetas = async function () {
         }
         else {
             let vacio = [];
+            console.log("vacio");
             return (vacio);
+         
         }
     }
     catch (error) {
@@ -26,9 +28,62 @@ export const obtenerRecetas = async function () {
     };
 }
 
+export const crearReceta = async function(receta){ //creo la receta
+    let url = urlWebServices.crearReceta;
+    //console.log("url",url);
+    //console.log("token",WebToken.webToken);
+    const formData = FormData();
+    formData.append('name', receta.nombre);
+    formData.append('categoria', receta.categoria);
+    formData.append('dificultad', receta.dificultad);
+    formData.append('ingredientes', receta.ingredientes); 
+    formData.append('procedimiento', receta.procedimiento);
+    formData.append('nombreImagen', receta.imagen);
 
+    try{
+        let response = await fetch(url,{
+            method: 'POST', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                //'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body:formData
+        });
 
-
+        let data = await response.json();
+        switch (response.status) {
+            case 201:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" });
+                }
+            case 202:
+                {
+                    //error mail
+                    return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
+                }
+            case 203:
+                {
+                    //error password
+                    return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
+                }
+            case 400:
+                {
+                    return ({ rdo: 1, mensaje: data.message })
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
 
 export const eliminarReceta = async function (id) {
     let url = urlWebServices.deleteReceta + "/" + id;

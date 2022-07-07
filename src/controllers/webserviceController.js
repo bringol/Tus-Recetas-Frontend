@@ -14,18 +14,9 @@ const urlWebServices = {
     
     //updateUser:urlApi +"api/users/update",
 
-
-
-    //imagenes (template)
-    // uploadFileImg: urlApi + "utils/uploadImg",
-    // guardarImgUser: urlApi + "api/users/guardarImgUser",
-    // getImgUser: urlApi + "api/users/imgUserByMail",
-    // uploadFileImg: urlApi + "api/users/uploadImg",
-
-
     //recetas
     obtenerRecetas:urlApi +"api/recetas/",
-    crearReceta:urlApi +"api/recetas/crear-receta/",
+    crearReceta:urlApi +"api/recetas/crear-receta/", //guardo imagen en cloudinary y creo la receta
     editarReceta:urlApi +"api/recetas/editar-receta/",
     eliminarReceta:urlApi +"api/recetas/eliminar-receta/",
     buscarReceta:urlApi +"api/recetas/buscar/",
