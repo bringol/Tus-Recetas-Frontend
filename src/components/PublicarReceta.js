@@ -10,7 +10,7 @@ import SubirFoto from './SubirFoto';
 
 //validacion
 import { useFormik } from 'formik';
-import * as yup from "yup" //libreria de esquemas de validacion
+import * as yup from "yup"; //libreria de esquemas de validacion
 import Exito from "./Exito"
 
 const useStyles = makeStyles((theme) => ({
@@ -200,7 +200,7 @@ if (toggle === false) {
                 name="dificultad"
                 //margin="normal"
                 //size="small"
-                //Dificultad
+                Dificultad
                 options={topDificultades.map((option) => option.title)}
                 renderInput={(params) => <TextField {...params}
                  

@@ -5,7 +5,8 @@ import Registrarse from "../components/Registrarse";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
 import ProductsLogin from "../components/ProductsLogin";
-import Products from "../components/Products";
+import ProductosAux from "../components/ProductosAux";
+//import Products from "../components/Products";
 //import Mis_Recetas from "../components/Mis_Recetas";
 //import Newsletter from "../components/Mis_Recetas";
 //import scrollreveal from "scrollreveal";
@@ -16,10 +17,9 @@ export default function P_Home() {
         <Navbar />
         <Hero /> 
         <Search />      
-        <Products />
+        <ProductosAux />
         <Registrarse/>
         <Footer />
-        <Products />
         <ScrollToTop />  
     </div>
     );
