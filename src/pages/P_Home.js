@@ -33,7 +33,7 @@ export default function P_Home() {
         <Search />
         <Box mt={15}></Box>      
         <ProductosAux />
-        <Box mb={150}></Box>   
+        <Box mb={50}></Box> 
         <Footer />
         <ScrollToTop />  
     </div>
