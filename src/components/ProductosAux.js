@@ -2,15 +2,12 @@ import React, {useState,useEffect,useRef } from "react";
 import styled from "styled-components";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
-// import Pagination from '@mui/material/Pagination';
-// import Stack from '@mui/material/Stack';
-// import Paginacion from "./Paginacion";
 import { makeStyles } from '@mui/styles';
 import { Button,Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-//import Pagination from '@mui/material/Pagination';
+import Rating from '@mui/material/Rating';
 
 
 
@@ -48,7 +45,8 @@ export default function Recetas(){
       //console.log(listaRecetas)
       setpageCount(rdo.data.pages);
       executeScroll()
-      //console.log(listaRecetas);
+      console.log(listaRecetas);
+      //console.log("dato",rdo.data.docs);
     }
     componentDidMount();
   }, [page]);
@@ -89,10 +87,18 @@ export default function Recetas(){
                 <div className="image">
                   <img src={receta.nombreImagen} alt="" />
                 </div>
-                <h2>{receta.name}</h2>
-                <button>
-                <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
-                </button>
+                {/* <>{receta._id}</> */}
+                <Typography
+                 sx={{ textAlign: "center", fontWeight: 'bold' }}
+                 variant="overline"
+                 >
+                  {receta.nombre}
+                </Typography>
+                <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 50 }}  />                               
+                <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none' , color: 'white' }}>
+                  <button>Ver más</button>
+                </NavLink>
+                
               </div>
               </div>
           );
@@ -122,6 +128,7 @@ export default function Recetas(){
              <ArrowForwardIosIcon/> 
           </Button>        
       </div>
+
 
       </Section>
     

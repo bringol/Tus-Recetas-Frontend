@@ -1,98 +1,136 @@
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useRef } from "react";
 import styled from "styled-components";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
-import data2 from "../data/recetas.json";
-
-import{obtenerRecetas} from "../controllers/recetaController"
-
-
-export default function Products() {
-
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-
-  const [listado, setListado] = useState([]);
-
-  const loadData=async ()=>{
-    const data=await obtenerRecetas()
-    //const data=await response.json()
-    setListado(data)
-    console.log(listado)
-  }
-
-  useEffect(()=>{
-    loadData()
-  },[])
-
-  
-  // useEffect(()=>{
-  //      await getRecetas()
-  //      .then(response=>response.json)
-  //      .then(data=>)
-  //    },[])
-
-  
-  // useEffect(()=>{
-  //   async function componentDidMount() 
-  //   {
-  //     console.log("carga componente");
-  //     //traer recetas
-  //     let rdo = await obtenerRecetas();
-  //     setListado(rdo); 
-  //     // console.log(listado)
-  //     // const getListado = async function (){
-  // //   console.log("Voy a buscar recetas")
-  // //   console.log("Listado de recetas antes",listado)
-  // //   let rdo = await obtenerRecetas();
-  // //   setListado(rdo);
-    
-  // //   console.log("Listado de recetas despues",listado)
-  // //   console.log("rdo Recetas",rdo)
-  // // }
-  // // getListado()
-  //   }
-  //  componentDidMount();
-  // },[]);
+import { makeStyles } from '@mui/styles';
+import { Button,Box, Typography } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Rating from '@mui/material/Rating';
 
 
-  // const getListado = async function (){
-  //   console.log("Voy a buscar recetas")
-  //   console.log("Listado de recetas antes",listado)
-  //   let rdo = await obtenerRecetas();
-  //   setListado(rdo);
-    
-  //   console.log("Listado de recetas despues",listado)
-  //   console.log("rdo Recetas",rdo)
-  // }
-  // getListado()
+
+import{obtenerRecetas} from "../controllers/recetaController";
+
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+
+const useStyles = makeStyles(theme => ({
+  container: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      color: "#7c496acc",
+      padding: "10px 80px",
+  },
+}));
+
+
+export default function Recetas(){
+
+  const classes = useStyles();
+  const [listaRecetas, setListaRecetas] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCount, setpageCount] = useState(0);
+  const myRef = useRef(null)
+  const executeScroll = () => scrollToRef(myRef)
+
+
+  useEffect(() => {
+    async function componentDidMount() {
+      let rdo = await obtenerRecetas(page);
+      //console.log("numberOfPagesANTES", numberOfPages);
+      setListaRecetas(rdo.data.docs);
+      //console.log("total paginas",rdo.data.pages);
+      //console.log(listaRecetas)
+      setpageCount(rdo.data.pages);
+      executeScroll()
+      console.log(listaRecetas);
+      //console.log("dato",rdo.data.docs);
+    }
+    componentDidMount();
+  }, [page]);
+
+    function handleAnterior(){
+      setPage((p)=>{
+        if(p===1)
+          return p
+        
+        else
+          return p-1
+      })
+    }
+
+    function handleSiguiente(){
+      setPage((p)=>{
+        if(p===pageCount)
+          return p
+       else{
+        return (p+1)        
+      }
+      })
+    }
 
 
   return (
     <Section id="recetas">
-      <div className="title">
+      <div className="title" ref={myRef}>
         <h1>
           <span>Recetas</span>
         </h1>
       </div>
       <div className="products">
-        {data2.map((receta) => {
+        {listaRecetas.map((receta) => {
           return (
-            <div className="id" key={receta.id}>
+            <div className="id" key={receta._id}>
               <div className="product">
                 <div className="image">
-                  <img src={receta.img} alt="" />
+                  <img src={receta.nombreImagen} alt="" />
                 </div>
-                <h2>{receta.titulo}</h2>
-                <button>
-                <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
-                </button>
+                {/* <>{receta._id}</> */}
+                <Typography
+                 sx={{ textAlign: "center", fontWeight: 'bold' }}
+                 variant="overline"
+                 >
+                  {receta.nombre}
+                </Typography>
+                <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 50 }}  />                               
+                <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none' , color: 'white' }}>
+                  <button>Ver más</button>
+                </NavLink>
+                
               </div>
               </div>
           );
         })}
       </div>
-    </Section>
+       
+      <Box mt={15}></Box>
+       <div className={classes.container}>        
+          <Button
+           disabled={page === 1} 
+           onClick={handleAnterior}
+           sx={{ fontSize: 50 }}
+           >
+             <ArrowBackIosIcon/>
+           </Button>
+             
+          <Typography sx={{ fontSize: 50 }}>
+            {page}<MoreHorizIcon/>{pageCount}
+          </Typography>
+             
+          <Button
+           disabled={page === pageCount} 
+           onClick={handleSiguiente}
+           //onClick={executeScroll}
+           sx={{ fontSize: 50 }}
+           >            
+             <ArrowForwardIosIcon/> 
+          </Button>        
+      </div>
+
+
+      </Section>
     
   );
 }
@@ -138,6 +176,10 @@ const Section = styled.section`
           background: linear-gradient(to right, #572e57, #834e6d, #572e57);
         }
       }
+      paginacion{
+
+      }
+      
     }
   }
 
