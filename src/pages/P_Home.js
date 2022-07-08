@@ -29,11 +29,12 @@ export default function P_Home() {
     <div>
         <Navbar />
         <Hero /> 
-        <Registrarse/>
+        
         <Search />
         <Box mt={15}></Box>      
         <ProductosAux />
         <Box mb={50}></Box> 
+        <Registrarse/>
         <Footer />
         <ScrollToTop />  
     </div>

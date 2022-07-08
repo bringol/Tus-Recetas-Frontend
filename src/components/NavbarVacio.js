@@ -64,6 +64,8 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 4vw;
+  position: sticky;
+  top: 0;
   .brand {
     img {
       margin-top: 0rem;
