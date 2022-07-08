@@ -29,6 +29,41 @@ export const obtenerRecetas = async function (pag) {
     };
 }
 
+export const obtenerRecetaID = async function (id) {
+    let url = urlWebServices.obtenerRecetaID+`${id}`;
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'x-access-token': localStorage.getItem('x'),
+                'Origin': 'http://localhost:3000'
+            }
+        });
+        if (response.status === 200) {
+            let data = await response.json();
+            let listaRecetas = data.data.docs;
+            //let listaRecetas = data
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+         
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+
+
+
+
+
+
+
 export const crearReceta = async function(receta){ //creo la receta
     let url = urlWebServices.crearReceta;
     //console.log("url",url);

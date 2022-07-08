@@ -1,15 +1,46 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import product1 from "../assets/product1.jpg";
 import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { AiFillStar } from "react-icons/ai";
+import { useParams } from 'react-router-dom';
+import{obtenerRecetaID} from "../controllers/recetaController";
+import Rating from '@mui/material/Rating';
+import CalificionRating from "./CalificacionRating"
 
 
 export default function Receta() {
 
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+
+  const {id} = useParams()
+  console.log("El ID: ",id)
+
+
+  const [receta, setReceta] = useState([]);
+  //const [page, setPage] = useState(1);
+  //const [pageCount, setpageCount] = useState(0);
+  //const myRef = useRef(null)
+  //const executeScroll = () => scrollToRef(myRef)
+
+
+  useEffect(() => {
+    async function componentDidMount() {
+      let rdo = await obtenerRecetaID(id);
+      console.log("rdo",rdo[0].categoria)
+      setReceta(rdo);
+      //console.log("total paginas",rdo.data.pages);
+      //console.log(listaRecetas)
+      //setpageCount(rdo.data.pages);
+      //executeScroll()
+      console.log("Receta",receta);
+      console.log("DESP setreceta", receta)
+      //console.log("dato",rdo.data.docs);
+    }
+    componentDidMount();
+  }, []);
 
   return (
 
@@ -18,7 +49,7 @@ export default function Receta() {
       <div className="container">
         <div className="title">
           <h1>
-            <span>Hamburguesas</span>
+            <span>{receta[0].nombre}</span>
           </h1>
         </div>
 
@@ -30,42 +61,23 @@ export default function Receta() {
             <Grid item xs={12} md={6}>
               <div className="receta">
                 <div className="image">
-                  <img src={product1} alt="" />
-                </div>
-                {/*
-                <div className="raiting">
-                  {[...Array(5)].map((star, i) => {
-                    const ratingValue = i + 1;
+                  <img src={receta[0].nombreImagen} alt="" />
 
-                    return (
-                      <label>
-                        <input
-                          type="radio"
-                          name="rating"
-                          value={ratingValue}
-                          onClick={() => setRating(ratingValue)}
-
-                        />
-                        <AiFillStar className="star"
-                          color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-                          size={30}
-                          onMouseEnter={() => setHover(ratingValue)}
-                          onMouseLeave={() => setHover(null)}
-                        />
-                      </label>
-                    );
-                  })}
-                </div>
-                 */}
+                </div>          
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
               <h3>Dificultad</h3>
-              <a>3</a>
+              {/* <a>{receta[0].dificultad}</a> */}
+              <CalificionRating calificacion={receta[0].dificultad}/>
+
               <h3>Categoria</h3>
               <a>Carnes</a>
               <h3>Ingredientes</h3>
-              <ul className="links">
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
+                ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
+                quae vero eligendi reiciendis cum.</p>
+              {/* <ul className="links">
                   <a>Carne picada</a>
                   <br/>
                   <a>Cebolla</a>
@@ -75,13 +87,14 @@ export default function Receta() {
                   <a>Pimienta</a>
                   <br/>
                   <a>Nuez Moscada</a>
-              </ul>
+              </ul> */}
               <h3>Descripcion</h3>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
-                ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
-                quae vero eligendi reiciendis cum.
+                {receta[0].procedimiento}
               </p>
+              <br/>
+              <h3>Calificacion</h3>
+              <Rating defaultValue={receta[0].calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 30 }}  />
             </Grid>
           </div>
         </Grid>
