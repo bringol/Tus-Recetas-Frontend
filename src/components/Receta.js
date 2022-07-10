@@ -31,7 +31,7 @@ export default function Receta() {
     useEffect(() => {
         async function componentDidMount() {
             let rdo = await obtenerRecetaID(id);
-            console.log("dentro de rdo",rdo)
+            //console.log("dentro de rdo",rdo)
             if (rdo.length > 0) {
                 setCat(rdo[0].categoria);
                 //setImagen(rdo[0].nombreImagen);
@@ -78,13 +78,13 @@ return (
               </Grid>
               <Grid item xs={12} md={6}>
                 <h3>Dificultad</h3>
-                <a>{dificultad}</a>
+                {/* <a>{dificultad}</a> */}
                 <CalificionRating calificacion={parseInt(dificultad)}/>
 
                 <h3>Calificación</h3>
                 <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  />
 
-                <h3>Categoria</h3>
+                <h3>Categoría</h3>
                 <a>{cat}</a>
 
                 <h3>Ingredientes</h3>
