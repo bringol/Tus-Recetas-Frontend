@@ -26,7 +26,7 @@ export default function CalificionRating(props) {
       {/* <Typography component="legend">Custom icon and color</Typography> */}
       <StyledRating
         //name="customized-color"
-        defaultValue={props.calificacion}
+        value={props.calificacion}
         getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
         precision={1}
         readOnly

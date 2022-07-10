@@ -79,10 +79,10 @@ return (
               <Grid item xs={12} md={6}>
                 <h3>Dificultad</h3>
                 <a>{dificultad}</a>
-                <CalificionRating calificacion={dificultad}/>
+                <CalificionRating calificacion={parseInt(dificultad)}/>
 
                 <h3>Calificación</h3>
-                <Rating defaultValue={calificacionProm} precision={1} readOnly  sx={{ fontSize: 30 }}  />
+                <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  />
 
                 <h3>Categoria</h3>
                 <a>{cat}</a>
