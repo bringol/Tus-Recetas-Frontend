@@ -1,6 +1,6 @@
 import React,{Suspense} from "react"
 import Footer from "../components/Footer"
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavbarVacio";
 import ScrollToTop from "../components/ScrollToTop";
 
 
@@ -14,8 +14,7 @@ export default function P_Receta() {
             <Navbar />
             <Suspense fallback={<br/>}>
                 <Receta />
-            </Suspense>
-            
+            </Suspense>            
             <Footer />
             <ScrollToTop />
         </div>
