@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,Suspense } from "react";
 import styled from "styled-components";
 import product1 from "../assets/product1.jpg";
 import { Grid } from "@mui/material";
@@ -12,94 +12,136 @@ import CalificionRating from "./CalificacionRating"
 
 export default function Receta() {
 
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-
+  
   const {id} = useParams()
-  console.log("El ID: ",id)
-
-
+  //console.log("El ID: ",id)
   const [receta, setReceta] = useState([]);
-  //const [page, setPage] = useState(1);
-  //const [pageCount, setpageCount] = useState(0);
-  //const myRef = useRef(null)
-  //const executeScroll = () => scrollToRef(myRef)
-
+  const [isBusy, setBusy] = useState(true)
 
   useEffect(() => {
     async function componentDidMount() {
-      let rdo = await obtenerRecetaID(id);
-      console.log("rdo",rdo[0].categoria)
+      const rdo = await obtenerRecetaID(id);
+      //console.log("rdo ",rdo[0].categoria)
+      console.log("respuesta rdo",rdo)
+      console.log("Receta ANTES",receta);
       setReceta(rdo);
-      //console.log("total paginas",rdo.data.pages);
-      //console.log(listaRecetas)
-      //setpageCount(rdo.data.pages);
-      //executeScroll()
-      console.log("Receta",receta);
       console.log("DESP setreceta", receta)
       //console.log("dato",rdo.data.docs);
     }
     componentDidMount();
-  }, []);
-
-  return (
-
-    <Section id="recetas">
-
-      <div className="container">
-        <div className="title">
-          <h1>
-            <span>{receta[0].nombre}</span>
-          </h1>
-        </div>
-
-        <Grid container direction="row">
-
-          <div className="recetas">
+  }, [obtenerRecetaID,id]);
 
 
-            <Grid item xs={12} md={6}>
-              <div className="receta">
-                <div className="image">
-                  <img src={receta[0].nombreImagen} alt="" />
+  // const loadData=async ()=>{
+  //   const rdo=await obtenerRecetaID(id)
+  //   //const data=await response.json()
+    
+  //   setListaReceta(rdo)
+  //   console.log("rdo",rdo)
+  //   console.log("DESP set lista receta",listaRecetas)
+  // }
+  // useEffect(()=>{
+  //   loadData()
+  // },[])
 
-                </div>          
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <h3>Dificultad</h3>
-              {/* <a>{receta[0].dificultad}</a> */}
-              <CalificionRating calificacion={receta[0].dificultad}/>
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      const rdo=await obtenerRecetaID(id);
+      //setReceta(rdo);
+      console.log("rdo",rdo)
+      //console.log("DESP set lista receta",receta)
+    };
 
-              <h3>Categoria</h3>
-              <a>Carnes</a>
-              <h3>Ingredientes</h3>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
-                ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
-                quae vero eligendi reiciendis cum.</p>
-              {/* <ul className="links">
-                  <a>Carne picada</a>
-                  <br/>
-                  <a>Cebolla</a>
-                  <br/>
-                  <a>Sal</a>
-                  <br/>
-                  <a>Pimienta</a>
-                  <br/>
-                  <a>Nuez Moscada</a>
-              </ul> */}
-              <h3>Descripcion</h3>
-              <p>
-                {receta[0].procedimiento}
-              </p>
-              <br/>
-              <h3>Calificacion</h3>
-              <Rating defaultValue={receta[0].calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 30 }}  />
-            </Grid>
+    fetchData();
+  },[id,obtenerRecetaID]);
+
+
+  // useEffect(() => {
+  //   const fetchData = async (id) => {
+  //     try { // <-- (3) use try/catch to handle rejected Promise or other exceptions
+  //       const rdo=await obtenerRecetaID(id);
+  
+  //       if (rdo) { // <-- (4) only update state if defined response value
+  //         setReceta(rdo);
+  //         setBusy(!isBusy)
+  //       }
+  //     } catch(e) {
+  //       console.log(e)
+  //     }
+  
+  //     console.log("DESP set lista receta",receta)
+  //     console.log("Ocupado? ",isBusy)
+  //   };
+  
+  //   if (id) { // <-- (2) only fetch if `id` is truthy
+  //     fetchData(id);
+  //   }
+  // }, [id]); // <-- (1) add `id` as dependency
+
+// if(isBusy === true){
+//   return <h1>Loading profile...</h1>
+// }
+return (
+
+    // <Suspense fallback={<h1>Loading profile...</h1>}>
+
+      <Section id="recetas">
+
+        <div className="container">
+          <div className="title">
+            <h1>
+              <span>{receta[0].nombre}</span>
+            </h1>
           </div>
-        </Grid>
-      </div>
-    </Section>
+
+          <Grid container direction="row">
+
+            <div className="recetas">
+
+
+              <Grid item xs={12} md={6}>
+                <div className="receta">
+                  <div className="image">
+                    <img src={receta[0].nombreImagen} alt="" />
+
+                  </div>          
+                </div>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <h3>Dificultad</h3>
+                {/* <a>{receta[0].dificultad}</a> */}
+                <CalificionRating calificacion={receta[0].dificultad}/>
+
+                <h3>Categoria</h3>
+                <a>Carnes</a>
+                <h3>Ingredientes</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
+                  ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
+                  quae vero eligendi reiciendis cum.</p>
+                {/* <ul className="links">
+                    <a>Carne picada</a>
+                    <br/>
+                    <a>Cebolla</a>
+                    <br/>
+                    <a>Sal</a>
+                    <br/>
+                    <a>Pimienta</a>
+                    <br/>
+                    <a>Nuez Moscada</a>
+                </ul> */}
+                <h3>Descripcion</h3>
+                <p>
+                  {receta[0].procedimiento}
+                </p>
+                <br/>
+                <h3>Calificacion</h3>
+                <Rating defaultValue={receta[0].calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 30 }}  />
+              </Grid>
+            </div>
+          </Grid>
+        </div>
+      </Section>
+  //  </Suspense>
   );
 }
 

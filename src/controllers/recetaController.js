@@ -34,16 +34,26 @@ export const obtenerRecetaID = async function (id) {
     try {
         let response = await fetch(url, {
             method: 'GET',
+            //method: 'POST',
             mode: "cors",
             headers: {
-                'x-access-token': localStorage.getItem('x'),
+                //'x-access-token': localStorage.getItem('x'),
                 'Origin': 'http://localhost:3000'
             }
         });
         if (response.status === 200) {
-            let data = await response.json();
-            let listaRecetas = data.data.docs;
-            //let listaRecetas = data
+            let respuesta = await response.json();
+            //let listaRecetas = data.data.docs;
+            let listaRecetas = respuesta.data.docs
+            console.log("respuesta webservice",respuesta.data.docs)
+            localStorage.removeItem("receta");
+            localStorage.setItem("receta",JSON.stringify(respuesta.data.docs));
+            //sessionStorage.setItem("receta",JSON.stringify(respuesta));
+            console.log("respuesta webservice localStorage receta")
+            console.log(localStorage.getItem("receta"))
+            console.log("respuesta webservice sessionStorage receta")
+            console.log(sessionStorage.getItem("receta"))
+            // console.log("webservice listaRecetas",data)
             return listaRecetas;
         }
         else {

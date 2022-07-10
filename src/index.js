@@ -8,4 +8,9 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById("root")
+
+
+//enable concurrent mode
+// ReactDOM.createRoot(document.getElementById("root").render(<App />)
+
 );
