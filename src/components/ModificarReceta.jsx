@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema=yup.object
 ({
-  titulo: yup
+  nombre: yup
   .string()
   .matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
   .min(2,"Debe contener al menos 2 letras")
@@ -98,7 +98,7 @@ export default function PublicarReceta() {
   ({
     initialValues:
     {
-      titulo:"",
+      nombre:"",
       categoria:"",
       dificultad:"",
       ingredientes:"",
@@ -145,15 +145,15 @@ if (toggle === false) {
             color='secondary'
             required
             fullWidth
-            id="titulo"
+            id="nombre"
             label="Nombre"
-            name="titulo"
+            name="nombre"
             //autoComplete="email"
             autoFocus
-            value={formik.values.titulo}
+            value={formik.values.nombre}
             onChange={formik.handleChange}
-            error={formik.touched.titulo && Boolean(formik.errors.titulo)}
-            helperText={formik.touched.titulo && formik.errors.titulo}
+            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+            helperText={formik.touched.nombre && formik.errors.nombre}
             onBlur={formik.handleBlur}
           />
           
@@ -165,7 +165,7 @@ if (toggle === false) {
           <Box sx={{ mt: 1 }}>
                 <Autocomplete
                 //id="categoria"
-                //name="categoria"
+                //="categoria"
                 //
                 //size="small"
                 //margin="normal"
@@ -276,7 +276,7 @@ if (toggle === false) {
               onClick={() => setToggle(!toggle)}
               disabled={
                 !(formik.isValid && formik.dirty)
-                // (formik.errors.titulo)            
+                // (formik.errors.nombre)            
                 // ||
                 // ( formik.errors.ingredientes)
                 // ||

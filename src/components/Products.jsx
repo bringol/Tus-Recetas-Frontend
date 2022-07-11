@@ -86,7 +86,7 @@ export default function Products() {
               <div className="image">
                 <img src={receta.img} alt="" />
               </div>
-              <h2>{receta.titulo}</h2>
+              <h2>{receta.nombre}</h2>
               <button>
               <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
               </button>

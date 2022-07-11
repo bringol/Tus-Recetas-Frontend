@@ -1,3 +1,5 @@
+import { uploadImg } from "./recetaController";
+
 const urlApi = "http://localhost:4000/";
 //const urlApi = "https://api-viernes.herokuapp.com/";
 console.log("url",urlApi);
@@ -20,7 +22,8 @@ const urlWebServices = {
     editarReceta:urlApi +"api/recetas/editar-receta/",
     eliminarReceta:urlApi +"api/recetas/eliminar-receta/",
     buscarReceta:urlApi +"api/recetas/buscar/",
-    calificarReceta:urlApi +"api/recetas/calificar-receta/"
+    calificarReceta:urlApi +"api/recetas/calificar-receta/",
+    uploadImg:urlApi +"api/recetas/uploadImg/"
 }
 
 export default urlWebServices;

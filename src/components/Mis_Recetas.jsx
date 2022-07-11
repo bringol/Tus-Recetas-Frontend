@@ -13,17 +13,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
-  { id: 'name', label: 'Nombre', minWidth: 170 },
+  { id: 'nombre', label: 'Nombre', minWidth: 170 },
   { id: 'categoria', label: 'Categoria', minWidth: 170, align: 'center'},
   { id: 'dificultad', label: 'Dificultad', minWidth: 170, align: 'center' },
   { id: 'modificar', label: 'Modificar', minWidth: 170, align: 'center' },
   { id: 'eliminar', label: 'Eliminar', minWidth: 170, align: 'center' },
 ];
 
-function createData(id, name, categoria, dificultad) {
+function createData(id, nombre, categoria, dificultad) {
   const modificar = <NavLink to='/User/Receta/Modificar'> <button><MdEdit className="delete" size={20}/></button> </NavLink>; //super harcodeado
   const eliminar = <button><MdDelete className="delete" size={20} /></button>;
-  return { id, name, categoria, dificultad, modificar, eliminar };
+  return { id, nombre, categoria, dificultad, modificar, eliminar };
 }
 
 const rows = [

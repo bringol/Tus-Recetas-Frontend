@@ -20,7 +20,7 @@ export const obtenerRecetas = async function () {
             let vacio = [];
             console.log("vacio");
             return (vacio);
-         
+
         }
     }
     catch (error) {
@@ -28,29 +28,31 @@ export const obtenerRecetas = async function () {
     };
 }
 
-export const crearReceta = async function(receta){ //creo la receta
+export const crearReceta = async function (receta) { //creo la receta
     let url = urlWebServices.crearReceta;
+    console.log("llega ACA")
     //console.log("url",url);
-    //console.log("token",WebToken.webToken);
     const formData = FormData();
-    formData.append('name', receta.nombre);
+    console.log("llega ACA");
+    console.log("URL", receta.nombreImagen);
+    formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);
-    formData.append('ingredientes', receta.ingredientes); 
+    formData.append('ingredientes', receta.ingredientes);
     formData.append('procedimiento', receta.procedimiento);
-    formData.append('nombreImagen', receta.imagen);
+    formData.append('nombreImagen', receta.nombreImagen);
 
-    try{
-        let response = await fetch(url,{
+    try {
+        let response = await fetch(url, {
             method: 'POST', // or 'PUT'
             mode: "cors",
-            headers:{
-                'Accept':'application/x-www-form-urlencoded',
+            headers: {
+                'Accept': 'application/x-www-form-urlencoded',
                 'x-access-token': localStorage.getItem('x'),
-                'Origin':'http://localhost:3000',
-                //'Content-Type': 'application/x-www-form-urlencoded'
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body:formData
+            body: formData
         });
 
         let data = await response.json();
@@ -84,6 +86,44 @@ export const crearReceta = async function(receta){ //creo la receta
         console.log("Error", error);
     };
 }
+
+export const uploadImg= async function(files, nombres) //subir receta a cloudinary
+{
+     //url webservices
+     let url = urlWebServices.uploadImg;
+  
+    console.log('files', files)
+    console.log('nombres',nombres)
+    const formData = new FormData();
+    //agrego archivos para subir
+    for (let i = 0; i < files.length; i++)
+    {
+        formData.append('files', files[i], nombres[i])
+    }
+   
+    try
+    {
+        let response = await fetch(url,{
+            method: 'POST', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/form-data',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                //'Content-Type': 'application/form-data'
+            },
+            body:formData
+        });
+    
+        let archivos = await response.json()
+        console.log('respuestaUpload', archivos);
+        return archivos;
+    } catch (err) {
+        alert('Error uploading the files')
+        console.log('Error uploading the files', err)
+    }
+}
+
 
 export const eliminarReceta = async function (id) {
     let url = urlWebServices.deleteReceta + "/" + id;

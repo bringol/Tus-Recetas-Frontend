@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema=yup.object
 ({
-  titulo: yup
+  nombre: yup
   .string()
   .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
   .min(2,"Debe contener al menos 2 letras")
@@ -95,7 +95,7 @@ export default function ModiciarReceta() {
   ({
     initialValues:
     {
-      titulo:"Hamburguesa",
+      nombre:"Hamburguesa",
       categoria:"Carnes",
       dificultad:"3",
       ingredientes:"Carne Picada",
@@ -142,14 +142,14 @@ if (toggle === false) {
             color='secondary'
             required
             fullWidth
-            id="titulo"
-            label="Título"
-            name="titulo"
+            id="nombre"
+            label="Nombre"
+            name="nombre"
             autoFocus
-            value={formik.values.titulo}
+            value={formik.values.nombre}
             onChange={formik.handleChange}
-            error={formik.touched.titulo && Boolean(formik.errors.titulo)}
-            helperText={formik.touched.titulo && formik.errors.titulo}
+            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+            helperText={formik.touched.nombre && formik.errors.nombre}
             onBlur={formik.handleBlur}
           />
           
@@ -272,7 +272,7 @@ if (toggle === false) {
               onClick={() => setToggle(!toggle)}
               disabled={
                 !(formik.isValid && formik.dirty)
-                // (formik.errors.titulo)            
+                // (formik.errors.nombre)            
                 // ||
                 // ( formik.errors.ingredientes)
                 // ||

@@ -14,6 +14,7 @@ export default function SubirFoto() {
             id="upload-photo"
             name="upload-photo"
             type="file"
+            placeholder="Sube tu imagen"
           />
           <Fab
             color="secondary"

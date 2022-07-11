@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
 //import Filtros from "../components/Filtros";
 import SubirFoto from './SubirFoto';
 
+
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup"; //libreria de esquemas de validacion
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema=yup.object
 ({
-  titulo: yup
+  nombre: yup
   .string()
   //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
   .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
@@ -99,7 +100,7 @@ export default function PublicarReceta() {
   ({
     initialValues:
     {
-      titulo:"",
+      nombre:"",
       categoria:"",
       dificultad:"",
       ingredientes:"",
@@ -146,15 +147,15 @@ if (toggle === false) {
             color='secondary'
             required
             fullWidth
-            id="titulo"
+            id="nombre"
             label="Nombre"
-            name="titulo"
+            name="nombre"
             //autoComplete="email"
             autoFocus
-            value={formik.values.titulo}
+            value={formik.values.nombre}
             onChange={formik.handleChange}
-            error={formik.touched.titulo && Boolean(formik.errors.titulo)}
-            helperText={formik.touched.titulo && formik.errors.titulo}
+            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+            helperText={formik.touched.nombre && formik.errors.nombre}
             onBlur={formik.handleBlur}
           />
           
@@ -277,7 +278,7 @@ if (toggle === false) {
               onClick={() => setToggle(!toggle)}
               disabled={
                 !(formik.isValid && formik.dirty)
-                // (formik.errors.titulo)            
+                // (formik.errors.nombre)            
                 // ||
                 // ( formik.errors.ingredientes)
                 // ||

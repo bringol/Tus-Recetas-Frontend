@@ -1,7 +1,7 @@
 [
   {
     "id":1,
-	"titulo": "Empanada Salteña",
+	"nombre": "Empanada Salteña",
 	"categoria":"Carnes",
     "dificultad": 3,
 	"ingredientes":"Excepteur sint occaecat cup.",
@@ -10,7 +10,7 @@
   },
   {
     "id":2,
-	"titulo": "Locro",
+	"nombre": "Locro",
 	"categoria":"Carnes",
     "dificultad": "4",
 	"ingredientes":"Excepteur sint occaecat cup.",
@@ -19,7 +19,7 @@
   },
   {
     "id":3,
-	"titulo": "Hamburguesa",
+	"nombre": "Hamburguesa",
 	"categoria":"Carnes",
     "dificultad": "3",
 	"ingredientes":"Excepteur sint occaecat cup.",
@@ -28,7 +28,7 @@
   },
   {
     "id":4,
-	"titulo": "Tostadas",
+	"nombre": "Tostadas",
 	"categoria":"Carnes",
     "dificultad": "3",
 	"ingredientes":"Excepteur sint occaecat cup.",
@@ -37,7 +37,7 @@
   },
   {
     "id":5,
-	"titulo": "Huevo Revuelto",
+	"nombre": "Huevo Revuelto",
 	"categoria":"Huevos",
     "dificultad": "1",
 	"ingredientes":"Excepteur sint occaecat cup.",
@@ -46,7 +46,7 @@
   },
   {
     "id":6,
-	"titulo": "Torta Frita",
+	"nombre": "Torta Frita",
 	"categoria":"Huevos",
     "dificultad": "1",
 	"ingredientes":"Excepteur sint occaecat cup.",

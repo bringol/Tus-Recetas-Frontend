@@ -20,19 +20,19 @@ export default function ProductsLogin() {
   // const data = [
   //   {
   //     image: product1,
-  //     name: "Hamburguesas",
+  //     nombre: "Hamburguesas",
   //   },
   //   {
   //     image: product2,
-  //     name: "Tostado",
+  //     nombre: "Tostado",
   //   },
   //   {
   //     image: product3,
-  //     name: "Huevos",
+  //     nombre: "Huevos",
   //   },
   //   {
   //     image: product4,
-  //     name: "Torta",
+  //     nombre: "Torta",
   //   },
   // ];
   return (
@@ -49,7 +49,7 @@ export default function ProductsLogin() {
               <div className="image">
                 <img src={product.img} alt="" />
               </div>
-              <h2>{product.titulo}</h2>
+              <h2>{product.nombre}</h2>
               {/* <h2>{product.categoria}</h2>
               <h2>{product.dificultad}</h2> */}
               
