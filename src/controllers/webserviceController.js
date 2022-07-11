@@ -17,6 +17,7 @@ const urlWebServices = {
     //recetas
     obtenerRecetas:urlApi +"api/recetas/",
     obtenerRecetaID:urlApi +"api/recetas/",//:id?
+    obtenerRecetaIDUSR:urlApi +"api/recetas/auth/",
     crearReceta:urlApi +"api/recetas/crear-receta/", //guardo imagen en cloudinary y creo la receta
     editarReceta:urlApi +"api/recetas/editar-receta/",
     eliminarReceta:urlApi +"api/recetas/eliminar-receta/",
