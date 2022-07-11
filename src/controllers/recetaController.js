@@ -32,15 +32,20 @@ export const crearReceta = async function (receta) { //creo la receta
     let url = urlWebServices.crearReceta;
     console.log("llega ACA")
     //console.log("url",url);
-    const formData = FormData();
+    const formData = new FormData();
     console.log("llega ACA");
     console.log("URL", receta.nombreImagen);
+    console.log("leyo");
+    
     formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);
     formData.append('ingredientes', receta.ingredientes);
     formData.append('procedimiento', receta.procedimiento);
+    formData.append('autor', receta.autor);
     formData.append('nombreImagen', receta.nombreImagen);
+    console.log("receta NOMBRE", receta.dificultad);
+
 
     try {
         let response = await fetch(url, {
@@ -52,7 +57,7 @@ export const crearReceta = async function (receta) { //creo la receta
                 'Origin': 'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: formData
+            body: formData,
         });
 
         let data = await response.json();

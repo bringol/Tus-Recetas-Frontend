@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid } from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid, cardMediaClasses } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import classNames from "classnames";
 import { NavLink } from 'react-router-dom';
@@ -119,14 +119,17 @@ const PublicarRecetaConImagen = (props) => {
   const [nombreI, setNombreI] = React.useState('');
 
   const validarReceta = async function () {
+    console.log("nombreI", nombreI);
     let datos = {
       nombre: formik.values.nombre,
-      categoria: formik.values.categoria,
-      dificultad: formik.values.dificultad,
+      categoria: "carnes",
+      dificultad: "2",
       ingredientes: formik.values.ingredientes,
       procedimiento: formik.values.procedimiento,
       nombreImagen: nombreI,
+      autor: "camila",
     }
+    console.log("datos", datos);
     let getReceta = await crearReceta(datos);
     if (getReceta.rdo === 0) {
       //setUsuarioValido(true);
@@ -134,7 +137,7 @@ const PublicarRecetaConImagen = (props) => {
       console.log("rdo es cero")
     }
     if (getReceta.rdo === 1) {
-      alert(getReceta.mensaje)
+      alert("alerta", getReceta.mensaje)
     }
   }
 
@@ -279,6 +282,11 @@ const PublicarRecetaConImagen = (props) => {
               <Button 
                 color="primary"
                 onClick= {()=>{guardarImagen()}}
+                value={formik.values.nombreImagen}
+                onChange={formik.handleChange}
+                error={formik.touched.nombreImagen && Boolean(formik.errors.nombreImagen)}
+                helperText={formik.touched.nombreImagen && formik.errors.nombreImagen}
+                onBlur={formik.handleBlur}
                 >
                 Subir imagen
               </Button>
@@ -353,11 +361,11 @@ const PublicarRecetaConImagen = (props) => {
 
                       label="Dificultad"
                       color="secondary"
-                      value={formik.values.dificultad}
-                      onChange={formik.handleChange}
-                      error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
-                      helperText={formik.touched.dificultad && formik.errors.dificultad}
-                      onBlur={formik.handleBlur}
+                      //value={formik.values.dificultad}
+                      //onChange={formik.handleChange}
+                      //error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
+                      //helperText={formik.touched.dificultad && formik.errors.dificultad}
+                      //onBlur={formik.handleBlur}
 
 
                     />}
