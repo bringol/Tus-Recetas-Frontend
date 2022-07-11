@@ -1,7 +1,7 @@
 import React,{Suspense} from "react"
 import Footer from "../components/Footer"//sin el ../ no lo encuentra
 //import RecetaLogin from "../components/RecetaLogin";
-import NavbarUSR from "../components/NavbarUSR";
+import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
 
 const RecetaLogin = React.lazy(()=> {
@@ -12,7 +12,7 @@ const RecetaLogin = React.lazy(()=> {
 export default function P_RecetaLogin() {
     return (
         <div>
-            <NavbarUSR />
+            <NavbarVacioUSR />
             <Suspense fallback={<br/>}>
                 <RecetaLogin />
             </Suspense>            

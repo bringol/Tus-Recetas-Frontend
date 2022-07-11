@@ -1,90 +1,107 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,Suspense } from "react";
 import styled from "styled-components";
-import product1 from "../assets/product1.jpg";
 import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
-import { AiFillStar } from "react-icons/ai";
+import { useParams } from 'react-router-dom';
+import{obtenerRecetaIDUSR} from "../controllers/recetaController";
+import Rating from '@mui/material/Rating';
+import CalificionRating from "./CalificacionRating"
+import {Navigate } from "react-router-dom"
 
 
-export default function RecetaLogin() {
+export default function Receta() {
 
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+    const {id} = useParams();
+    const [cat, setCat] = useState('');
+    const [dificultad, setDificultad] = useState('');
+    //const [ingredientes, setIngredientes] = useState('');
+    const [procedimiento, setProcedimiento] = useState('');
+    const [calificacionProm, setcalificacionProm] = useState('');
+    const [calificacionTotal, setcalificacionTotal] = useState('');
+    const [usrTotales, setusrTotales] = useState('');
+    //const [imagen, setImagen] = useState('');
+    const [autor,setAutor] = useState('') ;
+    const [nombre, setNombre] = useState('');
+    
+    
+    
 
-  return (
+//RECORDAR QUE NO TODAS LAS RECETAS TIENEN TODOS LOS DATOS
+//HACER LA CORRECCION EN EL BACKEND PARA EL TEST COMPLETO
+    useEffect(() => {
+        async function componentDidMount() {
+            let rdo = await obtenerRecetaIDUSR(id);
+            if (rdo.length > 0) {
+                setCat(rdo[0].categoria);
+                //setImagen(rdo[0].nombreImagen);
+                setDificultad(rdo[0].dificultad);
+                //setIngredientes(rdo[0].ingredientes);
+                setProcedimiento(rdo[0].procedimiento);
+                setcalificacionProm(rdo[0].calificacionPromedio);
+                setcalificacionTotal(rdo[0].calificacionTotal);
+                setusrTotales(rdo[0].usuariosTotales);
+                setAutor(rdo[0].autor);
+                setNombre(rdo[0].nombre);
+            }
+        }
+        componentDidMount();
+    }, [id]);
+ 
+   
 
-    <Section id="recetas">
 
-      <div className="container">
-        <div className="title">
-          <h1>
-            <span>Hamburguesas</span>
-          </h1>
-        </div>
+return (
 
-        <Grid container direction="row">
+      <Section id="recetas">
 
-          <div className="recetas">
-
-
-            <Grid item xs={12} md={6}>
-              <div className="receta">
-                <div className="image">
-                  <img src={product1} alt="" />
-                </div>
-                <div className="raiting">
-                  {[...Array(5)].map((star, i) => {
-                    const ratingValue = i + 1;
-
-                    return (
-                      <label>
-                        <input
-                          type="radio"
-                          name="rating"
-                          value={ratingValue}
-                          onClick={() => setRating(ratingValue)}
-
-                        />
-                        <AiFillStar className="star"
-                          color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-                          size={30}
-                          onMouseEnter={() => setHover(ratingValue)}
-                          onMouseLeave={() => setHover(null)}
-                        />
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <h3>Dificultad</h3>
-              <a>3</a>
-              <h3>Categoria</h3>
-              <a>Carnes</a>
-              <h3>Ingredientes</h3>
-              <ul className="links">
-                  <a>Carne picada</a>
-                  <br/>
-                  <a>Cebolla</a>
-                  <br/>
-                  <a>Sal</a>
-                  <br/>
-                  <a>Pimienta</a>
-                  <br/>
-                  <a>Nuez Moscada</a>
-              </ul>
-              <h3>Descripcion</h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi tempore recusandae
-                ab officiis rem voluptate nam possimus, dolore iste porro neque nisi, sint suscipit esse
-                quae vero eligendi reiciendis cum.
-              </p>
-            </Grid>
+        <div className="container">
+          <div className="title">
+            <h1>
+              <span>{nombre}</span>
+            </h1>
           </div>
-        </Grid>
-      </div>
-    </Section>
+
+          <Grid container direction="row">
+
+            <div className="recetas">
+
+
+              <Grid item xs={12} md={6}>
+                <div className="receta">
+                  <div className="image">
+                    PLACEHOLDER
+                    {/* <img src={imagen} alt="" /> */}
+
+                  </div>          
+                </div>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <h3>Dificultad</h3>
+                {/* <a>{dificultad}</a> */}
+                <CalificionRating calificacion={parseInt(dificultad)}/>
+
+                <h3>Calificación </h3>
+                <Rating value={parseInt(calificacionProm)}  precision={1} sx={{ fontSize: 30 }}  />
+                <>{usrTotales} votos</>
+
+                <h3>Categoría</h3>
+                <a>{cat}</a>
+
+                <h3>Ingredientes</h3>
+                <p>PLACEHOLDER</p>
+                {/* <p>{ingredientes}</p> */}
+    
+                <h3>Descripción</h3>
+                <p>
+                  {procedimiento}
+                </p>
+                <br/>
+                
+              </Grid>
+            </div>
+          </Grid>
+        </div>
+      </Section>
   );
 }
 

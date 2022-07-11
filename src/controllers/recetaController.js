@@ -67,6 +67,37 @@ export const obtenerRecetaID = async function (id) {
     };
 }
 
+export const obtenerRecetaIDUSR = async function (id) {
+    let url = urlWebServices.obtenerRecetaID+`${id}`;
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            //method: 'POST',
+            mode: "cors",
+            headers: {
+            //    'x-access-token': localStorage.getItem('x'),
+                'Authorization': `Bearer ${localStorage.getItem('x')}`,
+                'Origin': 'http://localhost:3000'
+            }
+        });
+        
+        if (response.status === 200) {
+            let respuesta = await response.json();
+            let listaRecetas = respuesta.data.docs
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+         
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+
 
 
 

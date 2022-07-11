@@ -95,7 +95,7 @@ export default function RecetasListadoLogin(){
                   {receta.nombre}
                 </Typography>
                 <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 50 }}  />                               
-                <NavLink to={`login/receta/${receta._id}`} style={{ textDecoration: 'none' , color: 'white' }}>
+                <NavLink to={`/login/receta/${receta._id}`} style={{ textDecoration: 'none' , color: 'white' }}>
                   <button>Ver más</button>
                 </NavLink>
                 
