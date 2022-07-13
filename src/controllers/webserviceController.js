@@ -25,7 +25,8 @@ const urlWebServices = {
     eliminarReceta:urlApi +"api/recetas/eliminar-receta/",
     buscarReceta:urlApi +"api/recetas/buscar/",
     calificarReceta:urlApi +"api/recetas/calificar-receta/",
-    uploadImg:urlApi +"api/recetas/uploadImg/"
+    uploadImg:urlApi +"api/recetas/uploadImg/",
+    obtenerRecetaMail:urlApi+"api/recetas/user/misrecetas/",
 }
 
 export default urlWebServices;

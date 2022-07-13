@@ -99,11 +99,6 @@ export const obtenerRecetaIDUSR = async function (id) {
 }
 
 
-
-
-
-
-
 export const crearReceta = async function(receta){ //creo la receta
     let url = urlWebServices.crearReceta;
     const formData = new URLSearchParams();
@@ -235,3 +230,42 @@ export const eliminarReceta = async function (id) {
         console.log("Error", error);
     };
 }
+
+export const obtenerRecetaMail = async function(){
+    let url = urlWebServices.obtenerRecetaMail;
+    const formData = new URLSearchParams();
+    formData.append('email', localStorage.getItem("email"));
+    try
+    {
+        let response = await fetch(url,{
+            method: 'POST',
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                //'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData,
+            
+        });
+        
+        if (response.status === 200) {
+            let respuesta = await response.json();
+            let listaRecetas = respuesta.data.docs;
+            //let listaRecetas = data
+            console.log("dentro recetas mail", listaRecetas)
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect } from "react";
 import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container, Box,TextareaAutosize, Fab} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import { MdDelete, MdEdit, MdBook} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+
+import{obtenerRecetaMail} from "../controllers/recetaController";
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -29,7 +31,20 @@ function createData(id, nombre, categoria, dificultad) {
 const rows = [
   createData(1, 'Hamburguesas', 'Carnes', '3'),
   createData(2, 'Pollo al Verdeo', 'Pollos', '1'),
-  
+  createData(3, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(5, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(6, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(7, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(8, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(9, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(10, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(11, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(12, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(13, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(14, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(15, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(16, 'Pollo al Verdeo', 'Pollos', '1'),
+  createData(17, 'Pollo al Verdeo', 'Pollos', '1'),  
 ];
 
 
@@ -64,6 +79,7 @@ export default function Mis_Recetas() {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [listado,setListado]=useState([])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -73,6 +89,44 @@ export default function Mis_Recetas() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+//   useEffect(() => {
+//     async function componentDidMount() {
+//         let rdo = await obtenerRecetaMail();
+//         let data= await rdo.json()
+//         console.log("dentro de rdo",rdo)
+//         //console.log("dentro de data",data)
+//         console.log("longitud rdo",rdo.length)
+//         //setListado(rdo)
+//         //console.log("dentro de Listado",listado)
+//         // if (rdo.length > 0) {
+//         //     setCat(rdo[0].categoria);
+//         //     setImagen(rdo[0].nombreImagen);
+//         //     setDificultad(rdo[0].dificultad);
+//         //     setIngredientes(rdo[0].ingredientes);
+//         //     setProcedimiento(rdo[0].procedimiento);
+//         //     setcalificacionProm(rdo[0].calificacionPromedio);
+//         //     setcalificacionTotal(rdo[0].calificacionTotal);
+//         //     setusrTotales(rdo[0].usuariosTotales);
+//         //     setAutor(rdo[0].autor);
+//         //     setNombre(rdo[0].nombre);
+//         // }
+//     }
+//     componentDidMount();
+// }, []);
+  
+  useEffect(() => {
+    getRecetas();
+  }, []);
+
+  const getRecetas = async () => {
+    const response = await obtenerRecetaMail();
+    const data = await response.json();
+    setListado(data); //Setting the response into state
+    console.log("dentro de Listado",listado);
+
+  };
+
 
   return (
 
