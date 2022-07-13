@@ -31,6 +31,7 @@ export default function Receta() {
     useEffect(() => {
         async function componentDidMount() {
             let rdo = await obtenerRecetaIDUSR(id);
+            console.log("receta",rdo)
             if (rdo.length > 0) {
                 setCat(rdo[0].categoria);
                 //setImagen(rdo[0].nombreImagen);

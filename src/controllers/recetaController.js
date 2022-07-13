@@ -68,7 +68,7 @@ export const obtenerRecetaID = async function (id) {
 }
 
 export const obtenerRecetaIDUSR = async function (id) {
-    let url = urlWebServices.obtenerRecetaID+`${id}`;
+    let url = urlWebServices.obtenerRecetaIDUSR+`${id}`;
     try {
         let response = await fetch(url, {
             method: 'GET',
@@ -106,15 +106,17 @@ export const obtenerRecetaIDUSR = async function (id) {
 
 export const crearReceta = async function(receta){ //creo la receta
     let url = urlWebServices.crearReceta;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
-    const formData = FormData();
-    formData.append('name', receta.nombre);
+    const formData = new URLSearchParams();
+    formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);
     formData.append('ingredientes', receta.ingredientes); 
     formData.append('procedimiento', receta.procedimiento);
-    formData.append('nombreImagen', receta.imagen);
+    formData.append('email', receta.email);
+    formData.append('autor', receta.autor);
+    //formData.append('email', localStorage.getItem("email"));
+    //formData.append('autor', `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`);
+    formData.append('nombreImagen', "https://vectorified.com/images/image-placeholder-icon-15.png");
 
     try{
         let response = await fetch(url,{
@@ -122,9 +124,10 @@ export const crearReceta = async function(receta){ //creo la receta
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'x-access-token': localStorage.getItem('x'),
                 'Origin':'http://localhost:3000',
-                //'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             body:formData
         });
