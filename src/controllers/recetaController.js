@@ -81,7 +81,7 @@ export const obtenerRecetaIDUSR = async function (id) {
             }
         });
         
-        if (response.status === 200) {
+        if (response.status === 201) {
             let respuesta = await response.json();
             let listaRecetas = respuesta.data.docs
             return listaRecetas;

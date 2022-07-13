@@ -1,4 +1,4 @@
-import React, { useState,useEffect,Suspense } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
@@ -8,41 +8,42 @@ import Rating from '@mui/material/Rating';
 import CalificionRating from "./CalificacionRating"
 import {Navigate } from "react-router-dom"
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+
 
 export default function Receta() {
 
     const {id} = useParams();
     const [cat, setCat] = useState('');
     const [dificultad, setDificultad] = useState('');
-    //const [ingredientes, setIngredientes] = useState('');
+    const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
     const [calificacionProm, setcalificacionProm] = useState('');
     const [calificacionTotal, setcalificacionTotal] = useState('');
     const [usrTotales, setusrTotales] = useState('');
-    //const [imagen, setImagen] = useState('');
+    const [imagen, setImagen] = useState('');
     const [autor,setAutor] = useState('') ;
     const [nombre, setNombre] = useState('');
+    const myRef = useRef(null)
+    const executeScroll = () => scrollToRef(myRef)
     
     
-    
-
-//RECORDAR QUE NO TODAS LAS RECETAS TIENEN TODOS LOS DATOS
-//HACER LA CORRECCION EN EL BACKEND PARA EL TEST COMPLETO
     useEffect(() => {
         async function componentDidMount() {
             let rdo = await obtenerRecetaIDUSR(id);
-            console.log("receta",rdo)
+           // console.log("receta",rdo)
             if (rdo.length > 0) {
                 setCat(rdo[0].categoria);
-                //setImagen(rdo[0].nombreImagen);
+                setImagen(rdo[0].nombreImagen);
                 setDificultad(rdo[0].dificultad);
-                //setIngredientes(rdo[0].ingredientes);
+                setIngredientes(rdo[0].ingredientes);
                 setProcedimiento(rdo[0].procedimiento);
                 setcalificacionProm(rdo[0].calificacionPromedio);
                 setcalificacionTotal(rdo[0].calificacionTotal);
                 setusrTotales(rdo[0].usuariosTotales);
                 setAutor(rdo[0].autor);
                 setNombre(rdo[0].nombre);
+                executeScroll()
             }
         }
         componentDidMount();
@@ -55,14 +56,14 @@ return (
 
       <Section id="recetas">
 
-        <div className="container">
-          <div className="title">
+        <div className="container" >
+          <div className="title" ref={myRef}>
             <h1>
               <span>{nombre}</span>
             </h1>
           </div>
 
-          <Grid container direction="row">
+          <Grid container direction="row" justifyContent="center">
 
             <div className="recetas">
 
@@ -70,13 +71,13 @@ return (
               <Grid item xs={12} md={6}>
                 <div className="receta">
                   <div className="image">
-                    PLACEHOLDER
-                    {/* <img src={imagen} alt="" /> */}
-
+                    {/* Imagen */}
+                    <img src={imagen} alt="" />
                   </div>          
                 </div>
               </Grid>
               <Grid item xs={12} md={6}>
+              <h3>Autor: {autor}</h3>
                 <h3>Dificultad</h3>
                 {/* <a>{dificultad}</a> */}
                 <CalificionRating calificacion={parseInt(dificultad)}/>
@@ -86,11 +87,11 @@ return (
                 <>{usrTotales} votos</>
 
                 <h3>Categoría</h3>
-                <a>{cat}</a>
+                <p>{cat}</p>
 
                 <h3>Ingredientes</h3>
-                <p>PLACEHOLDER</p>
-                {/* <p>{ingredientes}</p> */}
+                {/* <p>PLACEHOLDER</p> */}
+                <p>{ingredientes}</p>
     
                 <h3>Descripción</h3>
                 <p>

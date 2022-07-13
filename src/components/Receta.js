@@ -80,7 +80,7 @@ return (
 
                 <h3>Calificación</h3>
                 <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  />
-                <>{usrTotales}</>
+                <>{usrTotales} votos</>
 
                 <h3>Categoría</h3>
                 <a>{cat}</a>
