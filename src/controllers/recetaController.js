@@ -41,7 +41,7 @@ export const obtenerRecetaID = async function (id) {
                 'Origin': 'http://localhost:3000'
             }
         });
-        if (response.status === 201) {
+        if (response.status === 200) {
             let respuesta = await response.json();
             let listaRecetas = respuesta.data.docs
             // console.log("respuesta webservice",respuesta.data.docs)
@@ -81,7 +81,7 @@ export const obtenerRecetaIDUSR = async function (id) {
             }
         });
         
-        if (response.status === 201) {
+        if (response.status === 200) {
             let respuesta = await response.json();
             let listaRecetas = respuesta.data.docs
             return listaRecetas;
