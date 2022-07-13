@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona po
 import { NavLink } from 'react-router-dom';
 import SubirFoto from './SubirFoto';
 
-
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup"; //libreria de esquemas de validacion
@@ -49,20 +48,20 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema=yup.object
 ({
-  nombre: yup
+  titulo: yup
   .string()
   //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
   .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
   .min(2,"Debe contener al menos 2 letras")
   .required(""),
 
-  // categoria:yup
-  // .string()
-  // .required("obligatorio"),
+  categoria:yup
+  .string()
+  .required("obligatorio"),
 
-  // dificultad:yup
-  // .string()
-  // .required("obligatorio"),
+  dificultad:yup
+  .string()
+  .required("obligatorio"),
 
   ingredientes:yup
   .string()
@@ -87,8 +86,8 @@ export default function PublicarReceta() {
     initialValues:
     {
       titulo:"",
-      categoria:"Postres",
-      dificultad:"1",
+      categoria:"",
+      dificultad:"",
       ingredientes:"",
       procedimiento:"",
     },
@@ -179,6 +178,8 @@ if (toggle === false) {
                       label='dificultad'
                       name="dificultad"
                       onChange={formik.handleChange}
+                      error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
+                      helperText={formik.touched.dificultad && formik.errors.dificultad}
                       onBlur={formik.handleBlur}
                     >
                       <MenuItem value={1}>1</MenuItem>
@@ -205,6 +206,8 @@ if (toggle === false) {
                       name="categoria"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      error={formik.touched.categoria && Boolean(formik.errors.categoria)}
+                      helperText={formik.touched.categoria && formik.errors.categoria}
                     >
                       <MenuItem value={"Postres"}>Postres</MenuItem>
                       <MenuItem value={"Carnes"}>Carnes</MenuItem>
