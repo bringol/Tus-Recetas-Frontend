@@ -90,6 +90,8 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
   padding: 0 4vw;
   .brand {
     img {
@@ -139,6 +141,7 @@ const Nav = styled.nav`
 `;
 const ResponsiveNav = styled.div`
   position: fixed;
+  top: 0;
   right: -100vw;
   top: 0;
   z-index: 10;

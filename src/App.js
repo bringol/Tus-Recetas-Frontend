@@ -67,8 +67,8 @@ export default function App() {
         <Route path="/user/recetas" element={<P_Mis_Recetas/>} />
         <Route path="/user/receta/publicar" element={<P_RecetaNueva/>} />
         <Route path="/user/receta/modificar" element={<P_ModificarReceta/>} />
-        <Route path="/login/receta" element={<P_Receta/>} />
-        <Route path="/login/RecetaLogin" element={<P_RecetaLogin/>} />
+        <Route path="/receta/:id" element={<P_Receta/>} />
+        <Route path="/login/receta/:id" element={<P_RecetaLogin/>} />
       </Routes>
 
     </BrowserRouter> 

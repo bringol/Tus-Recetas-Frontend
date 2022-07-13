@@ -1,56 +1,80 @@
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useRef } from "react";
 import styled from "styled-components";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { NavLink } from 'react-router-dom';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import Paginacion from "./Paginacion";
+import { makeStyles } from '@mui/styles';
+import { Button,Box, Typography } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Rating from '@mui/material/Rating';
+
+
 
 import{obtenerRecetas} from "../controllers/recetaController";
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+
+const useStyles = makeStyles(theme => ({
+  container: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      color: "#7c496acc",
+      padding: "10px 80px",
+  },
+}));
+
+
 export default function Recetas(){
 
+  const classes = useStyles();
   const [listaRecetas, setListaRecetas] = useState([]);
   const [page, setPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState('');
+  const [pageCount, setpageCount] = useState(0);
+  const myRef = useRef(null)
+  const executeScroll = () => scrollToRef(myRef)
 
-  function sumar() {
-    setValues({
-      ...values,
-      num: values.num + 1,
-    });
-  }
-
-
-  function restar() {
-    setValues({
-      ...values,
-      num: values.num > 0 ? values.num - 1 : 0,
-      missingAmount: values.num - 1 <= 0 ? true : false,
-    });
-  }
-
-  const [values, setValues] = useState({
-    num: 15,
-    missingAmount: false,
-  });
 
   useEffect(() => {
     async function componentDidMount() {
-      let rdo = await obtenerRecetas();
-      console.log("numberOfPagesANTES", numberOfPages);
-      setListaRecetas(rdo);
-      console.log(rdo);
-      setNumberOfPages(rdo.lenght); //
-      console.log("numberOfPagesDESPUES", numberOfPages);
+      let rdo = await obtenerRecetas(page);
+      //console.log("numberOfPagesANTES", numberOfPages);
+      setListaRecetas(rdo.data.docs);
+      //console.log("total paginas",rdo.data.pages);
+      //console.log(listaRecetas)
+      setpageCount(rdo.data.pages);
+      executeScroll()
       console.log(listaRecetas);
+      //console.log("dato",rdo.data.docs);
     }
     componentDidMount();
   }, [page]);
 
+    function handleAnterior(){
+      setPage((p)=>{
+        if(p===1)
+          return p
+        
+        else
+          return p-1
+      })
+    }
+
+    function handleSiguiente(){
+      setPage((p)=>{
+        if(p===pageCount)
+          return p
+       else{
+        return (p+1)        
+      }
+      })
+    }
+
+
   return (
     <Section id="recetas">
-      <div className="title">
+      <div className="title" ref={myRef}>
         <h1>
           <span>Recetas</span>
         </h1>
@@ -58,22 +82,56 @@ export default function Recetas(){
       <div className="products">
         {listaRecetas.map((receta) => {
           return (
-            <div className="product">
-              <div className="image">
-                <img src={receta.nombreImagen} alt="" />
+            <div className="id" key={receta._id}>
+              <div className="product">
+                <div className="image">
+                  <img src={receta.nombreImagen} alt="" />
+                </div>
+                {/* <>{receta._id}</> */}
+                <Typography
+                 sx={{ textAlign: "center", fontWeight: 'bold' }}
+                 variant="overline"
+                 >
+                  {receta.nombre}
+                </Typography>
+                <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly  sx={{ fontSize: 50 }}  />                               
+                <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none' , color: 'white' }}>
+                  <button>Ver más</button>
+                </NavLink>
+                
               </div>
-              <h2>{receta.nombre}</h2>
-              <button>
-              <NavLink to='/Login/Receta' style={{ textDecoration: 'none' , color: 'white' }}>Ver más</NavLink>
-              </button>
-            </div>
+              </div>
           );
         })}
       </div>
+       
+      <Box mt={15}></Box>
+       <div className={classes.container}>        
+          <Button
+           disabled={page === 1} 
+           onClick={handleAnterior}
+           sx={{ fontSize: 50 }}
+           >
+             <ArrowBackIosIcon/>
+           </Button>
+             
+          <Typography sx={{ fontSize: 50 }}>
+            {page}<MoreHorizIcon/>{pageCount}
+          </Typography>
+             
+          <Button
+           disabled={page === pageCount} 
+           onClick={handleSiguiente}
+           //onClick={executeScroll}
+           sx={{ fontSize: 50 }}
+           >            
+             <ArrowForwardIosIcon/> 
+          </Button>        
+      </div>
 
-      <Paginacion setPage={setPage} pageNumber={numberOfPages}/>
 
-    </Section>
+      </Section>
+    
   );
 }
 

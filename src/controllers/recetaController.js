@@ -1,7 +1,7 @@
 import urlWebServices from './webserviceController';
 
-export const obtenerRecetas = async function () {
-    let url = urlWebServices.obtenerRecetas;
+export const obtenerRecetas = async function (pag) {
+    let url = urlWebServices.obtenerRecetas+`?page=${pag}`;
     try {
         let response = await fetch(url, {
             method: 'GET',
@@ -13,7 +13,8 @@ export const obtenerRecetas = async function () {
         });
         if (response.status === 200) {
             let data = await response.json();
-            let listaRecetas = data.data.docs;
+            //let listaRecetas = data.data.docs;
+            let listaRecetas = data
             return listaRecetas;
         }
         else {
@@ -28,28 +29,104 @@ export const obtenerRecetas = async function () {
     };
 }
 
-export const crearReceta = async function (receta) { //creo la receta
+export const obtenerRecetaID = async function (id) {
+    let url = urlWebServices.obtenerRecetaID+`${id}`;
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            //method: 'POST',
+            mode: "cors",
+            headers: {
+                //'x-access-token': localStorage.getItem('x'),
+                'Origin': 'http://localhost:3000'
+            }
+        });
+        if (response.status === 201) {
+            let respuesta = await response.json();
+            let listaRecetas = respuesta.data.docs
+            // console.log("respuesta webservice",respuesta.data.docs)
+            // localStorage.removeItem("receta");
+            // localStorage.setItem("receta",JSON.stringify(respuesta.data.docs));
+            // //sessionStorage.setItem("receta",JSON.stringify(respuesta));
+            // console.log("respuesta webservice localStorage receta")
+            // console.log(localStorage.getItem("receta"))
+            // console.log("respuesta webservice sessionStorage receta")
+            // console.log(sessionStorage.getItem("receta"))
+            // console.log("webservice listaRecetas",data)
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+         
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+
+export const obtenerRecetaIDUSR = async function (id) {
+    let url = urlWebServices.obtenerRecetaIDUSR+`${id}`;
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            //method: 'POST',
+            mode: "cors",
+            headers: {
+            //    'x-access-token': localStorage.getItem('x'),
+                'Authorization': `Bearer ${localStorage.getItem('x')}`,
+                'Origin': 'http://localhost:3000'
+            }
+        });
+        
+        if (response.status === 201) {
+            let respuesta = await response.json();
+            let listaRecetas = respuesta.data.docs
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+         
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+
+
+
+
+
+
+
+export const crearReceta = async function(receta){ //creo la receta
     let url = urlWebServices.crearReceta;
-    console.log("llega ACA")
-    //console.log("url",url);
-    const formData = FormData();
-    console.log("llega ACA");
-    console.log("URL", receta.nombreImagen);
+    const formData = new URLSearchParams();
     formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);
     formData.append('ingredientes', receta.ingredientes);
     formData.append('procedimiento', receta.procedimiento);
-    formData.append('nombreImagen', receta.nombreImagen);
+    formData.append('email', receta.email);
+    formData.append('autor', receta.autor);
+    //formData.append('email', localStorage.getItem("email"));
+    //formData.append('autor', `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`);
+    formData.append('nombreImagen', "https://vectorified.com/images/image-placeholder-icon-15.png");
 
     try {
         let response = await fetch(url, {
             method: 'POST', // or 'PUT'
             mode: "cors",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000',
+                'Origin':'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData

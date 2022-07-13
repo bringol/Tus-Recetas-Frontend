@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import Footer from "../components/Footer"//sin el ../ no lo encuentra
+import Footer from "../components/Footer"
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Registrarse from "../components/Registrarse";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
-import ProductsLogin from "../components/ProductsLogin";
-import ProductosAux from "../components/ProductosAux";
+import RecetasListado from "../components/RecetasListado";
+import { Box } from '@mui/material';
 
 export default function P_Home() {
 
@@ -23,9 +23,11 @@ export default function P_Home() {
     return (
     <div>
         <Navbar />
-        <Hero /> 
-        <Search />      
-        <ProductosAux />
+        <Hero />        
+        <Search />
+        <Box mt={15}></Box>      
+        <RecetasListado />
+        <Box mb={50}></Box> 
         <Registrarse/>
         <Footer />
         <ScrollToTop />  

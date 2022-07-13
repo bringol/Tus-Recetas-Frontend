@@ -1,14 +1,20 @@
-import Footer from "../components/Footer"//sin el ../ no lo encuentra
-import Receta from "../components/Receta";
-import Navbar from "../components/Navbar";
+import React,{Suspense} from "react"
+import Footer from "../components/Footer"
+import Navbar from "../components/NavbarVacio";
 import ScrollToTop from "../components/ScrollToTop";
 
+
+const Receta = React.lazy(()=> {
+     return import("../components/Receta")
+});
 
 export default function P_Receta() {
     return (
         <div>
             <Navbar />
-            <Receta />
+            <Suspense fallback={<br/>}>
+                <Receta />
+            </Suspense>            
             <Footer />
             <ScrollToTop />
         </div>

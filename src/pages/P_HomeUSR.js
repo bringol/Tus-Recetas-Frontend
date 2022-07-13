@@ -1,14 +1,10 @@
 import React from "react";
-import Footer from "../components/Footer"//sin el ../ no lo encuentra
+import Footer from "../components/Footer"
 import Hero from "../components/Hero";
 import NavbarUSR from "../components/NavbarUSR";
-//import Registrarse from "../components/Registrarse";
-import ProductsLogin from "../components/ProductsLogin";
+import RecetasListadoLogin from "../components/RecetasListadoLogin";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
-//import Newsletter from "./components/Newsletter";
-//import Testimonials from "./components/Testimonials";
-//import scrollreveal from "scrollreveal";
 
 
 export default function P_HomeUSR() { //la pantalla que ve un usr desp del login exitoso
@@ -18,7 +14,7 @@ export default function P_HomeUSR() { //la pantalla que ve un usr desp del login
         <NavbarUSR />
         <Hero /> 
         <Search />
-        <ProductsLogin />        
+        <RecetasListadoLogin />        
         <Footer />
     </div>
     );
