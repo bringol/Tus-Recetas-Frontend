@@ -3,6 +3,7 @@ import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
 import {Box } from '@mui/material';
+//import PublicarRecetaConImagen from "../components/PublicarRecetaConImagen";
 import PublicarReceta from "../components/PublicarReceta";
 
 
