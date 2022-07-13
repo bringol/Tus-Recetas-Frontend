@@ -90,42 +90,42 @@ export default function Mis_Recetas() {
     setPage(0);
   };
 
-//   useEffect(() => {
-//     async function componentDidMount() {
-//         let rdo = await obtenerRecetaMail();
-//         let data= await rdo.json()
-//         console.log("dentro de rdo",rdo)
-//         //console.log("dentro de data",data)
-//         console.log("longitud rdo",rdo.length)
-//         //setListado(rdo)
-//         //console.log("dentro de Listado",listado)
-//         // if (rdo.length > 0) {
-//         //     setCat(rdo[0].categoria);
-//         //     setImagen(rdo[0].nombreImagen);
-//         //     setDificultad(rdo[0].dificultad);
-//         //     setIngredientes(rdo[0].ingredientes);
-//         //     setProcedimiento(rdo[0].procedimiento);
-//         //     setcalificacionProm(rdo[0].calificacionPromedio);
-//         //     setcalificacionTotal(rdo[0].calificacionTotal);
-//         //     setusrTotales(rdo[0].usuariosTotales);
-//         //     setAutor(rdo[0].autor);
-//         //     setNombre(rdo[0].nombre);
-//         // }
-//     }
-//     componentDidMount();
-// }, []);
-  
   useEffect(() => {
-    getRecetas();
-  }, []);
+    async function componentDidMount() {
+        let rdo = await obtenerRecetaMail();
+        //let data= await rdo.json()
+        console.log("dentro de rdo",rdo)
+        //console.log("dentro de data",data)
+        console.log("longitud rdo",rdo.length)
+        setListado(rdo)
+        //console.log("dentro de Listado",listado)
+        // if (rdo.length > 0) {
+        //     setCat(rdo[0].categoria);
+        //     setImagen(rdo[0].nombreImagen);
+        //     setDificultad(rdo[0].dificultad);
+        //     setIngredientes(rdo[0].ingredientes);
+        //     setProcedimiento(rdo[0].procedimiento);
+        //     setcalificacionProm(rdo[0].calificacionPromedio);
+        //     setcalificacionTotal(rdo[0].calificacionTotal);
+        //     setusrTotales(rdo[0].usuariosTotales);
+        //     setAutor(rdo[0].autor);
+        //     setNombre(rdo[0].nombre);
+        // }
+    }
+    componentDidMount();
+}, []);
+  
+  // useEffect(() => {
+  //   getRecetas();
+  // }, []);
 
-  const getRecetas = async () => {
-    const response = await obtenerRecetaMail();
-    const data = await response.json();
-    setListado(data); //Setting the response into state
-    console.log("dentro de Listado",listado);
+  // const getRecetas = async () => {
+  //   const response = await obtenerRecetaMail();
+  //   const data = await response.json();
+  //   setListado(data); //Setting the response into state
+  //   console.log("dentro de Listado",listado);
 
-  };
+  // };
 
 
   return (
