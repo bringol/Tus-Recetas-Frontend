@@ -274,7 +274,7 @@ if (toggle === false) {
                 color="secondary"
                 className={classes.botón}
                 //onClick={() => setToggle(!toggle)}
-                //onClick={validarReceta}
+                onClick={validarReceta}
                 disabled={
                   !(formik.isValid && formik.dirty)
                   // (formik.errors.titulo)            

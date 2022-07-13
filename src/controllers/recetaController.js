@@ -41,7 +41,7 @@ export const obtenerRecetaID = async function (id) {
                 'Origin': 'http://localhost:3000'
             }
         });
-        if (response.status === 200) {
+        if (response.status === 201) {
             let respuesta = await response.json();
             let listaRecetas = respuesta.data.docs
             // console.log("respuesta webservice",respuesta.data.docs)
