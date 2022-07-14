@@ -18,6 +18,7 @@ export default function Search() {
     { title: 'Pizzas' },
     { title: 'Panes' },
     { title: 'Vegetarianas' },
+    { title: 'Otros' },
   ];
 
   const topDificultades = [

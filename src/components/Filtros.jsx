@@ -14,6 +14,7 @@ export default function Filtros() {
     { title: 'Pizzas' },
     { title: 'Panes' },
     { title: 'Vegetarianas' },
+    { title: 'Otros' },
   ];
 
   const topDificultades = [

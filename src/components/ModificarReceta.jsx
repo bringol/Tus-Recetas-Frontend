@@ -84,6 +84,7 @@ export default function PublicarReceta() {
     { title: 'Pizzas' },
     { title: 'Panes' },
     { title: 'Vegetarianas' },
+    { title: 'Otros' },
   ];
 
   const topDificultades = [

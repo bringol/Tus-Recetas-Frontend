@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
@@ -83,6 +83,10 @@ const PublicarReceta = (props) => {
 
   const classes = useStyles();
 
+  const [toggle, setToggle] = useState(false);
+  const [imgAux, setImgAux] = React.useState('');
+
+
   const formik = useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
     ({
       initialValues:
@@ -92,6 +96,7 @@ const PublicarReceta = (props) => {
         dificultad: "",
         ingredientes: "",
         procedimiento: "",
+        nombreImagen: "",
       },
 
       onSubmit: (values) => {
@@ -102,11 +107,8 @@ const PublicarReceta = (props) => {
 
     });
 
-  const [toggle, setToggle] = useState(false);
-  const [imgAux, setImgAux] = React.useState('');
-  const [nombreI, setNombreI] = React.useState('');
-
-  const validarReceta = async function () {
+  
+  const validarReceta = async function (nombreI) {
 
     let datos = {
       nombre: formik.values.titulo,
@@ -156,15 +158,14 @@ const PublicarReceta = (props) => {
       let extension = archivoOrig.substring(posExt, archivoOrig.length);
       let aleatorio = Math.random().toString().substring(2, 15);
       nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
+    
 
-      //subir archivo a servidor
-      console.log(files);
-      console.log(nombres);
+    //subir archivo a servidor
+    console.log(files);
+    console.log(nombres);
 
-      setNombreI(nombres); //seteo la URL
-      console.log("nombreI", nombreI);
-      archivoImagen = await uploadImg(files, nombres);
-      validarReceta()
+    archivoImagen = await uploadImg(files, nombres);
+    validarReceta(nombres);
     }
   }
 
@@ -300,6 +301,7 @@ const PublicarReceta = (props) => {
                       <MenuItem value={"Pizzas"}>Pizzas</MenuItem>
                       <MenuItem value={"Panes"}>Panes</MenuItem>
                       <MenuItem value={"Vegetarianas"}>Vegetarianas</MenuItem>
+                      <MenuItem value={"Otros"}>Otros</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>

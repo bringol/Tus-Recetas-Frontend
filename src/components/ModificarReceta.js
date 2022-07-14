@@ -81,6 +81,7 @@ export default function ModiciarReceta() {
     { title: 'Pizzas' },
     { title: 'Panes' },
     { title: 'Vegetarianas' },
+    { title: 'Otros' },
   ];
 
   const topDificultades = [
