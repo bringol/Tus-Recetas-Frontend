@@ -138,9 +138,9 @@ const PublicarRecetaConImagen = (props) => {
     }
   }
 
- 
+
   //const [listaImagenes,setListaImagenes]=React.useState([]);
-  
+
 
 
   const { ...rest } = props; //VER Q ES
@@ -152,15 +152,15 @@ const PublicarRecetaConImagen = (props) => {
 
   //console.log("cargacomponente");
   //PARA TRAER COMPONENTES DEL BACKEND
- /* useEffect(()=>{ 
-    async function componentDidMount() 
-    {
-      //traer imagenes de User
-      //let rdo = await getImagenesByUser();
-      //setListaImagenes(rdo); 
-    }
-    componentDidMount();
-  },[]);*/
+  /* useEffect(()=>{ 
+     async function componentDidMount() 
+     {
+       //traer imagenes de User
+       //let rdo = await getImagenesByUser();
+       //setListaImagenes(rdo); 
+     }
+     componentDidMount();
+   },[]);*/
 
   /*const getImagenes = async function (){
     console.log("Voy a buscar imagenes")
@@ -197,271 +197,271 @@ const PublicarRecetaConImagen = (props) => {
 
       setNombreI(nombres); //seteo la URL
 
-     // archivoImagen = await uploadImg(files, nombres);
+      archivoImagen = await uploadImg(files, nombres);
       //Si la imagen se subio bien la guardo en la BD
       //if (archivoImagen.ok) {
-        //validarReceta();
-/*
-        let rdo = await crearReceta(receta, nombres)
-        console.log("receta", rdo)
-
-        if (rdo) {
-          alert("Tu imagen se ha almacenado correctamente.")
-          //getImagenes();
-        }
-
-        else {
-          alert("Ocurrio un error al subir tu imagen al servidor. Intenta mas tarde.")
-        }*/
+      //validarReceta();
+      /*
+              let rdo = await crearReceta(receta, nombres)
+              console.log("receta", rdo)
+      
+              if (rdo) {
+                alert("Tu imagen se ha almacenado correctamente.")
+                //getImagenes();
+              }
+      
+              else {
+                alert("Ocurrio un error al subir tu imagen al servidor. Intenta mas tarde.")
+              }*/
     }
   }
-    
 
-    const mostrarImagen = () => {
-      //console.log("ListaImagenesMostrarImg:",listaImagenes);
-      if (imgAux === "") {
-        return (
-          <Grid item xs={12} sm={12} md={12}>
-            <div className={classes.profile}>
 
-              <div className={classes.name}>
-                <h3 className={classes.title}> Aun no has subido tus imagenes</h3>
-              </div>
-            </div>
-          </Grid>
-        )
-      }
-    }
-
-    if (toggle === false) {
-
+  const mostrarImagen = () => {
+    //console.log("ListaImagenesMostrarImg:",listaImagenes);
+    if (imgAux === "") {
       return (
-        <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <UploadFileIcon />
-            </Avatar>
-            <h2> Nueva Receta</h2>
-            <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
+        <Grid item xs={12} sm={12} md={12}>
+          <div className={classes.profile}>
 
-              <Box
-                sx={{
-                  mt: 5, display: 'flex',
-                  flexDirection: 'column',
-                  color: 'secondary',
-                  alignItems: 'center'
-                }}>
+            <div className={classes.name}>
+              <h3 className={classes.title}> Aun no has subido tus imagenes</h3>
+            </div>
+          </div>
+        </Grid>
+      )
+    }
+  }
 
-                <CustomFileInput
-                  className={classes.footerButtons}
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  getImagen={(i) => setImgAux(i)}
-                  inputProps={{
-                    placeholder: "Selecciona la imagen a subir. Recorda que el tamaño maximo de la imagen es 3MB."
+  if (toggle === false) {
 
-                  }}
-                  endButton={{
-                    buttonProps: {
-                      round: true,
-                      color: "primary",
-                      justIcon: true,
-                      fileButton: true
-                    },
-                    icon: <AddAPhotoIcon />
-                  }}
-                />
-              </Box>
+    return (
+      <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <UploadFileIcon />
+          </Avatar>
+          <h2> Nueva Receta</h2>
+          <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
-              <Grid item xs={12} sm={12} md={12}>
-              <Button 
+            <Box
+              sx={{
+                mt: 5, display: 'flex',
+                flexDirection: 'column',
+                color: 'secondary',
+                alignItems: 'center'
+              }}>
+
+              <CustomFileInput
+                className={classes.footerButtons}
+                formControlProps={{
+                  fullWidth: true
+                }}
+                getImagen={(i) => setImgAux(i)}
+                inputProps={{
+                  placeholder: "Selecciona la imagen a subir. Recorda que el tamaño maximo de la imagen es 3MB."
+
+                }}
+                endButton={{
+                  buttonProps: {
+                    round: true,
+                    color: "primary",
+                    justIcon: true,
+                    fileButton: true
+                  },
+                  icon: <AddAPhotoIcon />
+                }}
+              />
+            </Box>
+
+            <Grid item xs={12} sm={12} md={12}>
+              <Button
                 color="primary"
-                onClick= {()=>{guardarImagen()}}
-                >
+                onClick={() => { guardarImagen() }}
+              >
                 Subir imagen
               </Button>
-              </Grid>
-            
-
-              <TextField
-                variant="outlined"
-                margin="normal"
-                color='secondary'
-                required
-                fullWidth
-                id="nombre"
-                label="Nombre"
-                name="nombre"
-                //autoComplete="email"
-                autoFocus
-                value={formik.values.nombre}
-                onChange={formik.handleChange}
-                error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-                helperText={formik.touched.nombre && formik.errors.nombre}
-                onBlur={formik.handleBlur}
-              />
+            </Grid>
 
 
-
-              {/* <Filtros /> */}
-              <Grid container direction="row">
-                <Grid xs={12} md={12}>
-                  <Box sx={{ mt: 2 }}>
-                    <Autocomplete
-                      //id="categoria"
-                      //name="categoria"
-                      //
-                      //size="small"
-                      //margin="normal"
-                      //Categoria
-                      options={topCategorias.map((option) => option.title)}
-                      renderInput={(params) => <TextField {...params}
-
-                        id="categoria"
-                        name="categoria"
-                        label="Categoría"
-                        color='secondary'
-                      // value={formik.values.categoria}
-                      // onChange={formik.handleChange}
-                      // error={formik.touched.categoria && Boolean(formik.errors.categoria)}
-                      // helperText={formik.touched.categoria && formik.errors.categoria}
-                      // onBlur={formik.handleBlur}             
+            <TextField
+              variant="outlined"
+              margin="normal"
+              color='secondary'
+              required
+              fullWidth
+              id="nombre"
+              label="Nombre"
+              name="nombre"
+              //autoComplete="email"
+              autoFocus
+              value={formik.values.nombre}
+              onChange={formik.handleChange}
+              error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+              helperText={formik.touched.nombre && formik.errors.nombre}
+              onBlur={formik.handleBlur}
+            />
 
 
-                      />}
 
-                    //name="categoria"
-
-
-                    />
-                  </Box>
-                </Grid>
-
-              </Grid>
+            {/* <Filtros /> */}
+            <Grid container direction="row">
               <Grid xs={12} md={12}>
                 <Box sx={{ mt: 2 }}>
                   <Autocomplete
-                    id="dificultad"
-                    name="dificultad"
-                    //margin="normal"
+                    //id="categoria"
+                    //name="categoria"
+                    //
                     //size="small"
-                    Dificultad
-                    options={topDificultades.map((option) => option.title)}
+                    //margin="normal"
+                    //Categoria
+                    options={topCategorias.map((option) => option.title)}
                     renderInput={(params) => <TextField {...params}
 
-                      label="Dificultad"
-                      color="secondary"
-                      value={formik.values.dificultad}
-                      onChange={formik.handleChange}
-                      error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
-                      helperText={formik.touched.dificultad && formik.errors.dificultad}
-                      onBlur={formik.handleBlur}
+                      id="categoria"
+                      name="categoria"
+                      label="Categoría"
+                      color='secondary'
+                    // value={formik.values.categoria}
+                    // onChange={formik.handleChange}
+                    // error={formik.touched.categoria && Boolean(formik.errors.categoria)}
+                    // helperText={formik.touched.categoria && formik.errors.categoria}
+                    // onBlur={formik.handleBlur}             
 
 
                     />}
+
+                  //name="categoria"
+
+
                   />
                 </Box>
               </Grid>
 
-
+            </Grid>
+            <Grid xs={12} md={12}>
               <Box sx={{ mt: 2 }}>
-                <TextField
-                  id="ingredientes"
-                  name="ingredientes"
-                  label="Ingredientes"
-                  color='secondary'
-                  value={formik.values.ingredientes}
-                  onChange={formik.handleChange}
-                  error={formik.touched.ingredientes && Boolean(formik.errors.ingredientes)}
-                  helperText={formik.touched.ingredientes && formik.errors.ingredientes}
-                  onBlur={formik.handleBlur}
-                  fullWidth
-                  multiline
-                  maxRows={12}
+                <Autocomplete
+                  id="dificultad"
+                  name="dificultad"
+                  //margin="normal"
+                  //size="small"
+                  Dificultad
+                  options={topDificultades.map((option) => option.title)}
+                  renderInput={(params) => <TextField {...params}
+
+                    label="Dificultad"
+                    color="secondary"
+                    value={formik.values.dificultad}
+                    onChange={formik.handleChange}
+                    error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
+                    helperText={formik.touched.dificultad && formik.errors.dificultad}
+                    onBlur={formik.handleBlur}
+
+
+                  />}
                 />
               </Box>
-
-              <Box sx={{ mt: 2 }}>
-                <TextField
-                  id="procedimiento"
-                  name="procedimiento"
-                  label="Procedimiento"
-                  color='secondary'
-                  multiline
-                  fullWidth
-                  maxRows={12}
-                  value={formik.values.procedimiento}
-                  onChange={formik.handleChange}
-                  error={formik.touched.procedimiento && Boolean(formik.errors.procedimiento)}
-                  helperText={formik.touched.procedimiento && formik.errors.procedimiento}
-                  onBlur={formik.handleBlur}
-                />
-              </Box>
+            </Grid>
 
 
-              <Box
-                sx={{
-                  mt: 5, display: 'flex',
-                  flexDirection: 'column',
-                  color: 'secondary',
-                  alignItems: 'center'
-                }}>
+            <Box sx={{ mt: 2 }}>
+              <TextField
+                id="ingredientes"
+                name="ingredientes"
+                label="Ingredientes"
+                color='secondary'
+                value={formik.values.ingredientes}
+                onChange={formik.handleChange}
+                error={formik.touched.ingredientes && Boolean(formik.errors.ingredientes)}
+                helperText={formik.touched.ingredientes && formik.errors.ingredientes}
+                onBlur={formik.handleBlur}
+                fullWidth
+                multiline
+                maxRows={12}
+              />
+            </Box>
+
+            <Box sx={{ mt: 2 }}>
+              <TextField
+                id="procedimiento"
+                name="procedimiento"
+                label="Procedimiento"
+                color='secondary'
+                multiline
+                fullWidth
+                maxRows={12}
+                value={formik.values.procedimiento}
+                onChange={formik.handleChange}
+                error={formik.touched.procedimiento && Boolean(formik.errors.procedimiento)}
+                helperText={formik.touched.procedimiento && formik.errors.procedimiento}
+                onBlur={formik.handleBlur}
+              />
+            </Box>
 
 
-              </Box>
-
-              <Box sx={{ mt: 5 }}>
-                {/* <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}> */}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  className={classes.botón}
-                 // onClick={() => setToggle(!toggle)}
-                  disabled={
-                    !(formik.isValid && formik.dirty)
-                    // (formik.errors.nombre)            
-                    // ||
-                    // ( formik.errors.ingredientes)
-                    // ||
-                    // (formik.errors.procedimiento) onClick= {()=>{guardarImagen()}}
-                  }
-                  onClick={validarReceta}
-                  
-
-                >
-                  Publicar Receta
-                </Button>
-                {/* </NavLink> */}
-              </Box>
+            <Box
+              sx={{
+                mt: 5, display: 'flex',
+                flexDirection: 'column',
+                color: 'secondary',
+                alignItems: 'center'
+              }}>
 
 
+            </Box>
 
-            </form>
-          </div >
+            <Box sx={{ mt: 5 }}>
+              {/* <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.botón}
+                // onClick={() => setToggle(!toggle)}
+                disabled={
+                  !(formik.isValid && formik.dirty)
+                  // (formik.errors.nombre)            
+                  // ||
+                  // ( formik.errors.ingredientes)
+                  // ||
+                  // (formik.errors.procedimiento) onClick= {()=>{guardarImagen()}}
+                }
+                onClick={validarReceta}
 
-        </Container >
-      )
-    }
-    else return (
-        <div className={classes.paper}>
-          <Exito />
-          <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.botón}>
-              Continuar
-            </Button>
-          </NavLink>
-        </div>
-      )
+
+              >
+                Publicar Receta
+              </Button>
+              {/* </NavLink> */}
+            </Box>
+
+
+
+          </form>
+        </div >
+
+      </Container >
+    )
   }
+  else return (
+    <div className={classes.paper}>
+      <Exito />
+      <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.botón}>
+          Continuar
+        </Button>
+      </NavLink>
+    </div>
+  )
+}
 
 
 export default PublicarRecetaConImagen
