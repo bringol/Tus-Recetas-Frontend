@@ -87,7 +87,7 @@ return (
                 <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  
                 onChange={rate => console.log(rate)}
                 />
-                <>{usrTotales} votosSS</>
+                <>{usrTotales} votos</>
 
                 <h3>Categoría</h3>
                 <a>{cat}</a>

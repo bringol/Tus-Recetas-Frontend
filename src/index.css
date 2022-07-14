@@ -15,6 +15,10 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+h5{
+  text-align: center;
+}
+
 .icono {
   size: 40px;
 }
@@ -68,5 +72,10 @@ section {
 
 .fondo{
   background-color: #834e6d;
+}
+
+::selection {
+  background-color: #834e6d;
+  color: rgba(0,0,0,.87);
 }
 

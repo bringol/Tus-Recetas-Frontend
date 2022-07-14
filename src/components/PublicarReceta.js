@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
-import { Avatar, Button, CssBaseline, TextField, Container, Box,Autocomplete, Grid } from '@mui/material';
-import {FormControl, InputLabel, Select, MenuItem} from '@mui/material';
+import React, { useState } from 'react';
+import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import { NavLink } from 'react-router-dom';
+import CustomFileInput from "./CustomFileInput.js";
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import classNames from "classnames";
 import SubirFoto from './SubirFoto';
 
 //validacion
@@ -15,7 +18,7 @@ import { Formik, Field, FieldProps } from "formik";
 import "semantic-ui-css/semantic.min.css";
 import { Dropdown } from "semantic-ui-react";
 
-import {crearReceta} from "../controllers/recetaController"
+import { crearReceta, uploadImg } from "../controllers/recetaController"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,108 +49,185 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const validationSchema=yup.object
-({
-  titulo: yup
-  .string()
-  //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
-  .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
-  .min(2,"Debe contener al menos 2 letras")
-  .required(""),
+const validationSchema = yup.object
+  ({
+    titulo: yup
+      .string()
+      //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
+      .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
+      .min(2, "Debe contener al menos 2 letras")
+      .required(""),
 
-  categoria:yup
-  .string()
-  .required("obligatorio"),
+    categoria: yup
+      .string()
+      .required("Obligatorio"),
 
-  dificultad:yup
-  .string()
-  .required("obligatorio"),
+    dificultad: yup
+      .string()
+      .required("Obligatorio"),
 
-  ingredientes:yup
-  .string()
-  .min(2,"Debe contener al menos 2 letras")
-  .required("Obligatorio"),
+    ingredientes: yup
+      .string()
+      .min(2, "Debe contener al menos 2 letras")
+      .required("Obligatorio"),
 
-  procedimiento:yup
-  .string()
-  .min(2,"Debe contener al menos 2 letras")
-  .required("Obligatorio"),
+    procedimiento: yup
+      .string()
+      .min(2, "Debe contener al menos 2 letras")
+      .required("Obligatorio"),
 
 
-})
+  })
 
-export default function PublicarReceta() {
+const PublicarReceta = (props) => {
+
   const classes = useStyles();
 
-  
+  const formik = useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
+    ({
+      initialValues:
+      {
+        titulo: "",
+        categoria: "",
+        dificultad: "",
+        ingredientes: "",
+        procedimiento: "",
+      },
 
-  const formik=useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
-  ({
-    initialValues:
-    {
-      titulo:"",
-      categoria:"",
-      dificultad:"",
-      ingredientes:"",
-      procedimiento:"",
-    },
+      onSubmit: (values) => {
+        console.log(JSON.stringify(values))
+      },
 
-    onSubmit:(values)=>
-    {
-      console.log(JSON.stringify(values))
-    },
+      validationSchema: validationSchema
 
-    validationSchema: validationSchema
-
-  });
+    });
 
   const [toggle, setToggle] = useState(false);
-  const validarReceta= async function()
-  {
-      let datos = {
-        nombre: formik.values.titulo,
-        categoria: formik.values.categoria,
-        dificultad: formik.values.dificultad,
-        ingredientes: formik.values.ingredientes,
-        procedimiento: formik.values.procedimiento,
-        email: `${localStorage.getItem("email")}`,
-        autor: `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`
-      }
-      let getCrear = await crearReceta(datos);
-      if (getCrear.rdo===0 )
-      {
-        //setUsuarioValido(true);
-        setToggle(!toggle)
-        console.log("los datos enviados",datos)
-      }
-      if (getCrear.rdo===1)
-      {
-        alert(getCrear.mensaje)
-      }
-     
-      
+  const [imgAux, setImgAux] = React.useState('');
+  const [nombreI, setNombreI] = React.useState('');
+
+  const validarReceta = async function () {
+
+    let datos = {
+      nombre: formik.values.titulo,
+      categoria: formik.values.categoria,
+      dificultad: formik.values.dificultad,
+      ingredientes: formik.values.ingredientes,
+      procedimiento: formik.values.procedimiento,
+      nombreImagen: nombreI,
+      email: `${localStorage.getItem("email")}`,
+      autor: `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`,
+    }
+    let getCrear = await crearReceta(datos);
+    if (getCrear.rdo === 0) {
+      //setUsuarioValido(true);
+      setToggle(!toggle)
+      console.log("los datos enviados", datos)
+    }
+    if (getCrear.rdo === 1) {
+      alert(getCrear.mensaje)
+    }
   }
 
-if (toggle === false) {
+  const { ...rest } = props;
 
-  return (
-    <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <UploadFileIcon />
-        </Avatar>
-        <h2> Nueva Receta</h2>
-        <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
-          <Box
+  const imageClasses = classNames(
+    classes.imgRaised,
+    classes.imgRoundedCircle,
+    classes.imgFluid
+  );
+
+  const guardarImagen = () => {
+    subirImagen();
+  }
+
+  const subirImagen = async function (receta) {
+    let files = [];
+    let nombres = [];
+    let archivoImagen = '';
+
+    if (imgAux !== '') {
+      console.log("imgAux", imgAux);
+      files.push(imgAux);
+
+      //buscar extension archivo
+      let archivoOrig = imgAux.name;
+      let posExt = archivoOrig.indexOf('.');
+      let extension = archivoOrig.substring(posExt, archivoOrig.length);
+      let aleatorio = Math.random().toString().substring(2, 15);
+      nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
+
+      //subir archivo a servidor
+      console.log(files);
+      console.log(nombres);
+
+      setNombreI(nombres); //seteo la URL
+      console.log("nombreI", nombreI);
+      archivoImagen = await uploadImg(files, nombres);
+      validarReceta()
+    }
+  }
+
+  const mostrarImagen = () => {
+    if (imgAux === "") {
+      return (
+        <Grid item xs={12} sm={12} md={12}>
+          <div className={classes.profile}>
+
+            <div className={classes.name}>
+              <h3 className={classes.title}> Aun no has subido tus imagenes</h3>
+            </div>
+          </div>
+        </Grid>
+      )
+    }
+  }
+
+  if (toggle === false) {
+
+    return (
+      <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <UploadFileIcon />
+          </Avatar>
+          <h2> Nueva Receta</h2>
+          <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
+
+
+            <Box
               sx={{
                 mt: 5, display: 'flex',
                 flexDirection: 'column',
                 color: 'secondary',
-                alignItems: 'center'              
+                alignItems: 'center'
               }}>
-              <SubirFoto />
+
+              <CustomFileInput
+                className={classes.footerButtons}
+                color="secondary"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                getImagen={(i) => setImgAux(i)}
+                inputProps={{
+                  placeholder: "Selecciona una imagen"
+                }}
+                endButton={{
+                  buttonProps: {
+                    round: true,
+                    color: "secondary",
+                    justIcon: true,
+                    fileButton: true
+                  },
+                  icon: <AddAPhotoIcon />
+                }}
+
+              />
             </Box>
+            <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5>
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -170,13 +250,14 @@ if (toggle === false) {
               <Grid item xs={12} md={12}>
                 <Box sx={{ mt: 1 }}>
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Dificultad</InputLabel>
+                    <InputLabel id="demo-simple-select-label" color='secondary'>Dificultad</InputLabel>
                     <Select
                       labelId="dificultad"
                       id="dificultad"
                       value={formik.values.dificultad}
                       label='dificultad'
                       name="dificultad"
+                      color='secondary'
                       onChange={formik.handleChange}
                       error={formik.touched.dificultad && Boolean(formik.errors.dificultad)}
                       helperText={formik.touched.dificultad && formik.errors.dificultad}
@@ -188,22 +269,23 @@ if (toggle === false) {
                       <MenuItem value={4}>4</MenuItem>
                       <MenuItem value={5}>5</MenuItem>
                     </Select>
-                  </FormControl>      
-                  </Box>
-              </Grid>            
-          </Grid >
+                  </FormControl>
+                </Box>
+              </Grid>
+            </Grid >
 
-          <Grid container direction="row">
+            <Grid container direction="row">
               <Grid item xs={12} md={12}>
                 <Box sx={{ mt: 1 }}>
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+                    <InputLabel id="demo-simple-select-label" color='secondary'>Categoria</InputLabel>
                     <Select
                       labelId="Categoria"
                       id="categoria"
                       value={formik.values.categoria}
                       label='categoria'
                       name="categoria"
+                      color='secondary'
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       error={formik.touched.categoria && Boolean(formik.errors.categoria)}
@@ -219,13 +301,13 @@ if (toggle === false) {
                       <MenuItem value={"Panes"}>Panes</MenuItem>
                       <MenuItem value={"Vegetarianas"}>Vegetarianas</MenuItem>
                     </Select>
-                  </FormControl>      
-                  </Box>
-              </Grid>            
-          </Grid >
+                  </FormControl>
+                </Box>
+              </Grid>
+            </Grid >
 
             <Box sx={{ mt: 2 }}>
-              <TextField 
+              <TextField
                 id="ingredientes"
                 name="ingredientes"
                 label="Ingredientes"
@@ -234,15 +316,15 @@ if (toggle === false) {
                 onChange={formik.handleChange}
                 error={formik.touched.ingredientes && Boolean(formik.errors.ingredientes)}
                 helperText={formik.touched.ingredientes && formik.errors.ingredientes}
-                onBlur={formik.handleBlur}  
+                onBlur={formik.handleBlur}
                 fullWidth
                 multiline
                 maxRows={12}
               />
             </Box>
 
-            <Box sx={{ mt: 2}}>
-            <TextField
+            <Box sx={{ mt: 2 }}>
+              <TextField
                 id="procedimiento"
                 name="procedimiento"
                 label="Procedimiento"
@@ -254,20 +336,20 @@ if (toggle === false) {
                 onChange={formik.handleChange}
                 error={formik.touched.procedimiento && Boolean(formik.errors.procedimiento)}
                 helperText={formik.touched.procedimiento && formik.errors.procedimiento}
-                onBlur={formik.handleBlur}  
+                onBlur={formik.handleBlur}
               />
             </Box>
 
-            
+
             <Box
               sx={{
                 mt: 5, display: 'flex',
                 flexDirection: 'column',
                 color: 'secondary',
-                alignItems: 'center'              
+                alignItems: 'center'
               }}>
 
-              
+
             </Box>
 
             <Box sx={{ mt: 5 }}>
@@ -278,7 +360,7 @@ if (toggle === false) {
                 color="secondary"
                 className={classes.botón}
                 //onClick={() => setToggle(!toggle)}
-                onClick={validarReceta}
+
                 disabled={
                   !(formik.isValid && formik.dirty)
                   // (formik.errors.titulo)            
@@ -286,32 +368,35 @@ if (toggle === false) {
                   // ( formik.errors.ingredientes)
                   // ||
                   // (formik.errors.procedimiento) 
-                  }               
-              >
-                Publicar Receta 
-              </Button>             
-            </Box>
-        </form>
-      </div>
+                }
+                onClick={() => guardarImagen()}
 
-    </Container>
-  );
-}
-else
-  return(
-    <div className={classes.paper}>
-    <Exito/>
-      <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="secondary"
-          className={classes.botón}>
+              >
+                Publicar Receta
+              </Button>
+            </Box>
+          </form>
+        </div>
+
+      </Container >
+    );
+  }
+  else
+    return (
+      <div className={classes.paper}>
+        <Exito />
+        <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.botón}>
             Continuar
           </Button>
-      </NavLink>
-    </div>
-  )
-
+        </NavLink>
+      </div>
+    )
 }
+
+export default PublicarReceta

@@ -4,7 +4,7 @@ import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
 import {Box } from '@mui/material';
 import PublicarRecetaConImagen from "../components/PublicarRecetaConImagen";
-//import PublicarReceta from "../components/PublicarReceta";
+import PublicarReceta from "../components/PublicarReceta";
 
 
 
@@ -14,7 +14,8 @@ export default function P_RecetaNueva() {
         <ScrollToTop />
         <NavbarVacioUSR />
         <Box mt={5}></Box>
-        <PublicarRecetaConImagen/>
+        <PublicarReceta/>
+       
         <Box mb={5}></Box>
         <Footer />
     </div>

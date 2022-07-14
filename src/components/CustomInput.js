@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 
-import {Input, FormControl, InputLabel} from "@mui/material";
+import { Input, FormControl, InputLabel } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   inputFile: {
@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
     left: "0",
     width: "100%",
     height: "100%",
-    zIndex: "-1"
+    zIndex: "-1",
+    color: "secondary"
   },
   inputFileWrapper: {
     "& button svg": {
-      color: "inherit"
+      color: "secondary"
     }
   }
 }));
@@ -85,9 +86,9 @@ export default function CustomInput(props) {
           input: inputClasses,
           root: marginTop,
           disabled: classes.disabled,
-          underline: underlineClasses
+          underline: underlineClasses,
         }}
-        id={"x"+id}
+        id={"x" + id}
         {...inputProps}
       />
     </FormControl>

@@ -109,9 +109,10 @@ export const crearReceta = async function(receta){ //creo la receta
     formData.append('procedimiento', receta.procedimiento);
     formData.append('email', receta.email);
     formData.append('autor', receta.autor);
+    formData.append('nombreImagen', receta.nombreImagen);
     //formData.append('email', localStorage.getItem("email"));
     //formData.append('autor', `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`);
-    formData.append('nombreImagen', "https://vectorified.com/images/image-placeholder-icon-15.png");
+    //formData.append('nombreImagen', "https://vectorified.com/images/image-placeholder-icon-15.png");
 
     try {
         let response = await fetch(url, {
