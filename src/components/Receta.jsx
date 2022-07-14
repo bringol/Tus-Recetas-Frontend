@@ -43,6 +43,11 @@ export default function Receta() {
         }
         componentDidMount();
     }, [id]);
+
+    const guardarRaiting = (rate) => {
+      console.log(rate)
+
+    }
  
    
 
@@ -79,8 +84,10 @@ return (
                 <CalificionRating calificacion={parseInt(dificultad)}/>
 
                 <h3>Calificación</h3>
-                <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  />
-                <>{usrTotales} votos</>
+                <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  
+                onChange={rate => console.log(rate)}
+                />
+                <>{usrTotales} votosSS</>
 
                 <h3>Categoría</h3>
                 <a>{cat}</a>
