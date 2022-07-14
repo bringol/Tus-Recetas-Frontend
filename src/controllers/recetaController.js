@@ -32,7 +32,7 @@ export const crearReceta = async function (receta) { //creo la receta
     let url = urlWebServices.crearReceta;
     console.log("llega ACA")
     //console.log("url",url);
-    const formData = new FormData();
+    const formData = new URLSearchParams();
     console.log("llega ACA");
     console.log("URL", receta.nombreImagen);
     console.log("leyo");

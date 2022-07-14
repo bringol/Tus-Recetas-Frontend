@@ -200,7 +200,7 @@ const PublicarRecetaConImagen = (props) => {
 
       setNombreI(nombres); //seteo la URL
 
-     // archivoImagen = await uploadImg(files, nombres);
+      archivoImagen = await uploadImg(files, nombres);
       //Si la imagen se subio bien la guardo en la BD
       //if (archivoImagen.ok) {
         //validarReceta();
