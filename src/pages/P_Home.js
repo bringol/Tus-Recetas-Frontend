@@ -29,7 +29,7 @@ export default function P_Home() {
         <RecetasListado />
         <Box mb={50}></Box> 
         <Registrarse/>
-        <Footer />
+        <Footer/>
         <ScrollToTop />  
     </div>
     );

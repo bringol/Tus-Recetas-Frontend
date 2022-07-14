@@ -98,7 +98,6 @@ export const obtenerRecetaIDUSR = async function (id) {
     };
 }
 
-
 export const crearReceta = async function(receta){ //creo la receta
     let url = urlWebServices.crearReceta;
     const formData = new URLSearchParams();
@@ -197,6 +196,64 @@ export const uploadImg= async function(files, nombres) //subir receta a cloudina
     }
 }
 
+export const calificarReceta = async function (calificacion){
+
+    console.log("llega al controller del front")
+
+    let url = urlWebServices.calificarReceta;
+
+    const formData = new URLSearchParams();
+    formData.append('idReceta', calificacion.idReceta);
+    formData.append('autor', calificacion.autor);
+    formData.append('calificacion', calificacion.calificacion);
+
+    console.log("envia formulario")
+
+    try {
+        let response = await fetch(url, {
+            method: 'POST', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        });
+
+        let data = await response.json();
+        switch (response.status) {
+            case 201:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" });
+                }
+            case 202:
+                {
+                    //error mail
+                    return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
+                }
+            case 203:
+                {
+                    //error password
+                    return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
+                }
+            case 400:
+                {
+                    return ({ rdo: 1, mensaje: data.message })
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
 
 export const eliminarReceta = async function (id) {
     let url = urlWebServices.deleteReceta + "/" + id;

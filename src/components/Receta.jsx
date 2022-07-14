@@ -1,112 +1,107 @@
-import React, { useState,useEffect,Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { useParams } from 'react-router-dom';
-import{obtenerRecetaID} from "../controllers/recetaController";
+import { obtenerRecetaID } from "../controllers/recetaController";
 import Rating from '@mui/material/Rating';
 import CalificionRating from "./CalificacionRating"
 
 
 export default function Receta() {
 
-    const {id} = useParams();
-    const [cat, setCat] = useState('');
-    const [dificultad, setDificultad] = useState('');
-    const [ingredientes, setIngredientes] = useState('');
-    const [procedimiento, setProcedimiento] = useState('');
-    const [calificacionProm, setcalificacionProm] = useState('');
-    const [calificacionTotal, setcalificacionTotal] = useState('');
-    const [usrTotales, setusrTotales] = useState('');
-    const [imagen, setImagen] = useState('');
-    const [autor,setAutor] = useState('') ;
-    const [nombre, setNombre] = useState('');
-    
-    
-    
-    useEffect(() => {
-        async function componentDidMount() {
-            let rdo = await obtenerRecetaID(id);
-            console.log("dentro de rdo",rdo)
-            if (rdo.length > 0) {
-                setCat(rdo[0].categoria);
-                setImagen(rdo[0].nombreImagen);
-                setDificultad(rdo[0].dificultad);
-                setIngredientes(rdo[0].ingredientes);
-                setProcedimiento(rdo[0].procedimiento);
-                setcalificacionProm(rdo[0].calificacionPromedio);
-                setcalificacionTotal(rdo[0].calificacionTotal);
-                setusrTotales(rdo[0].usuariosTotales);
-                setAutor(rdo[0].autor);
-                setNombre(rdo[0].nombre);
-            }
-        }
-        componentDidMount();
-    }, [id]);
+  const { id } = useParams();
+  const [cat, setCat] = useState('');
+  const [dificultad, setDificultad] = useState('');
+  const [ingredientes, setIngredientes] = useState('');
+  const [procedimiento, setProcedimiento] = useState('');
+  const [calificacionProm, setcalificacionProm] = useState('');
+  const [calificacionTotal, setcalificacionTotal] = useState('');
+  const [usrTotales, setusrTotales] = useState('');
+  const [imagen, setImagen] = useState('');
+  const [autor, setAutor] = useState('');
+  const [nombre, setNombre] = useState('');
 
-    const guardarRaiting = (rate) => {
-      console.log(rate)
 
+
+  useEffect(() => {
+    async function componentDidMount() {
+      let rdo = await obtenerRecetaID(id);
+      console.log("dentro de rdo", rdo)
+      if (rdo.length > 0) {
+        setCat(rdo[0].categoria);
+        setImagen(rdo[0].nombreImagen);
+        setDificultad(rdo[0].dificultad);
+        setIngredientes(rdo[0].ingredientes);
+        setProcedimiento(rdo[0].procedimiento);
+        setcalificacionProm(rdo[0].calificacionPromedio);
+        setcalificacionTotal(rdo[0].calificacionTotal);
+        setusrTotales(rdo[0].usuariosTotales);
+        setAutor(rdo[0].autor);
+        setNombre(rdo[0].nombre);
+      }
     }
- 
-   
+    componentDidMount();
+  }, [id]);
 
 
-return (
 
-      <Section id="recetas">
+  return (
 
-        <div className="container">
-          <div className="title">
-            <h1>
-              <span>{nombre}</span>
-            </h1>
-          </div>
+    <Section id="recetas">
 
-          <Grid container direction="row" justifyContent="center">
+      <div className="container">
+        <div className="title">
+          <h1>
+            <span>{nombre}</span>
+          </h1>
+        </div>
 
-            <div className="recetas">
+        <Grid container direction="row" justifyContent="center">
+
+          <div className="recetas">
 
 
-              <Grid item xs={12} md={6}>
-                <div className="receta">
-                  <div className="image">
-                    {/* PLACEHOLDER */}
-                    <img src={imagen} alt="" />
+            <Grid item xs={12} md={6}>
+              <div className="receta">
+                <div className="image">
+                  {/* PLACEHOLDER */}
+                  <img src={imagen} alt="" />
 
-                  </div>          
                 </div>
-              </Grid>
-              <Grid item xs={12} md={6}>
+              </div>
+            </Grid>
+          
+              <Grid item xs={12} md={6}  margin={5}>
                 <h3>Autor: {autor}</h3>
                 <h3>Dificultad</h3>
                 {/* <a>{dificultad}</a> */}
-                <CalificionRating calificacion={parseInt(dificultad)}/>
+                <CalificionRating calificacion={parseInt(dificultad)} />
 
                 <h3>Calificación</h3>
-                <Rating value={parseInt(calificacionProm)} precision={1} readOnly  sx={{ fontSize: 30 }}  
-                onChange={rate => console.log(rate)}
-                />
-                <>{usrTotales} votos</>
+                <Rating value={parseInt(calificacionProm)} precision={1} readOnly sx={{ fontSize: 30 }}                />
+                <>
+                <br></br>
+                {usrTotales} votos</>
 
                 <h3>Categoría</h3>
-                <a>{cat}</a>
+                <p>{cat}</p>
 
                 <h3>Ingredientes</h3>
                 {/* <p>PLACEHOLDER</p> */}
-                <p>{ingredientes}</p>
-    
+                <p align="justify">{ingredientes}</p>
+
                 <h3>Descripción</h3>
-                <p>
+                <p align="justify">
                   {procedimiento}
                 </p>
-                <br/>
-                
+                <br />
+
               </Grid>
             </div>
-          </Grid>
-        </div>
-      </Section>
+        </Grid>
+      </div>
+    </Section>
   );
 }
 
@@ -158,7 +153,7 @@ const Section = styled.section`
           border-radius: 1rem;
           img {
             height: 20rem;
-            width: 15rem;
+            width: 20rem;
             object-fit: cover;
             align: left;
           }

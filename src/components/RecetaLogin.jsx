@@ -1,109 +1,151 @@
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { useParams } from 'react-router-dom';
-import{obtenerRecetaIDUSR} from "../controllers/recetaController";
+import { obtenerRecetaIDUSR } from "../controllers/recetaController";
 import Rating from '@mui/material/Rating';
 import CalificionRating from "./CalificacionRating"
-import {Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
+import { calificarReceta } from "../controllers/recetaController"
+import Condition from "yup/lib/Condition";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
 
 export default function Receta() {
 
-    const {id} = useParams();
-    const [cat, setCat] = useState('');
-    const [dificultad, setDificultad] = useState('');
-    const [ingredientes, setIngredientes] = useState('');
-    const [procedimiento, setProcedimiento] = useState('');
-    const [calificacionProm, setcalificacionProm] = useState('');
-    const [calificacionTotal, setcalificacionTotal] = useState('');
-    const [usrTotales, setusrTotales] = useState('');
-    const [imagen, setImagen] = useState('');
-    const [autor,setAutor] = useState('') ;
-    const [nombre, setNombre] = useState('');
-    const myRef = useRef(null)
-    const executeScroll = () => scrollToRef(myRef)
-    
-    
-    useEffect(() => {
-        async function componentDidMount() {
-            let rdo = await obtenerRecetaIDUSR(id);
-           // console.log("receta",rdo)
-            if (rdo.length > 0) {
-                setCat(rdo[0].categoria);
-                setImagen(rdo[0].nombreImagen);
-                setDificultad(rdo[0].dificultad);
-                setIngredientes(rdo[0].ingredientes);
-                setProcedimiento(rdo[0].procedimiento);
-                setcalificacionProm(rdo[0].calificacionPromedio);
-                setcalificacionTotal(rdo[0].calificacionTotal);
-                setusrTotales(rdo[0].usuariosTotales);
-                setAutor(rdo[0].autor);
-                setNombre(rdo[0].nombre);
-                executeScroll()
-            }
-        }
-        componentDidMount();
-    }, [id]);
- 
-   
+  const { id } = useParams();
+  //const { calificacionPromedio } = useParams();
+  const [cat, setCat] = useState('');
+  const [dificultad, setDificultad] = useState('');
+  const [ingredientes, setIngredientes] = useState('');
+  const [procedimiento, setProcedimiento] = useState('');
+  const [calificacionProm, setcalificacionProm] = useState('');
+  const [calificacionTotal, setcalificacionTotal] = useState('');
+  const [usrTotales, setusrTotales] = useState('');
+  const [condition, setCondition] = useState(false);
+  const [imagen, setImagen] = useState('');
+  const [autor, setAutor] = useState('');
+  const [nombre, setNombre] = useState('');
+  const myRef = useRef(null);
+  const [value, setValue] = useState('');
+  const executeScroll = () => scrollToRef(myRef);
 
 
-return (
 
-      <Section id="recetas">
+  useEffect(() => {
+    async function componentDidMount() {
+      let rdo = await obtenerRecetaIDUSR(id);
+      // console.log("receta",rdo)
+      if (rdo.length > 0) {
+        setCat(rdo[0].categoria);
+        setImagen(rdo[0].nombreImagen);
+        setDificultad(rdo[0].dificultad);
+        setIngredientes(rdo[0].ingredientes);
+        setProcedimiento(rdo[0].procedimiento);
+        setcalificacionProm(rdo[0].calificacionPromedio);
+        setcalificacionTotal(rdo[0].calificacionTotal);
+        setusrTotales(rdo[0].usuariosTotales);
+        setAutor(rdo[0].autor);
+        setNombre(rdo[0].nombre);
+        executeScroll()
+      }
+    }
+    componentDidMount();
+  }, [id]);
 
-        <div className="container" >
-          <div className="title" ref={myRef}>
-            <h1>
-              <span>{nombre}</span>
-            </h1>
-          </div>
 
-          <Grid container direction="row" justifyContent="center">
+  const guardarRaiting = async function (valor) {
+    console.log("value", valor)
 
-            <div className="recetas">
+    let calificacion = {
+      idReceta: id,
+      autor: `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`,
+      calificacion: valor,
+    }
+    console.log("idReceta", calificacion.idReceta);
+
+    let getCrear = await calificarReceta(calificacion);
+    if (getCrear.rdo === 0) {
+      console.log("datos enviados", calificacion)
+    }
+    if (getCrear.rdo === 1) {
+      alert(getCrear.mensaje)
+    }
+  }
 
 
-              <Grid item xs={12} md={6}>
-                <div className="receta">
-                  <div className="image">
-                    {/* Imagen */}
-                    <img src={imagen} alt="" />
-                  </div>          
-                </div>
-              </Grid>
-              <Grid item xs={12} md={6}>
-              <h3>Autor: {autor}</h3>
-                <h3>Dificultad</h3>
-                {/* <a>{dificultad}</a> */}
-                <CalificionRating calificacion={parseInt(dificultad)}/>
+  return (
 
-                <h3>Calificación </h3>
-                <Rating value={parseInt(calificacionProm)}  precision={1} sx={{ fontSize: 30 }}  />
-                <>{usrTotales} votos</>
+    <Section id="recetas">
 
-                <h3>Categoría</h3>
-                <p>{cat}</p>
-
-                <h3>Ingredientes</h3>
-                {/* <p>PLACEHOLDER</p> */}
-                <p>{ingredientes}</p>
-    
-                <h3>Descripción</h3>
-                <p>
-                  {procedimiento}
-                </p>
-                <br/>
-                
-              </Grid>
-            </div>
-          </Grid>
+      <div className="container" >
+        <div className="title" ref={myRef}>
+          <h1>
+            <span>{nombre}</span>
+          </h1>
         </div>
-      </Section>
+
+        <Grid container direction="row" justifyContent="center">
+
+          <div className="recetas">
+
+
+            <Grid item xs={12} md={6}>
+              <div className="receta">
+                <div className="image">
+                  {/* Imagen */}
+                  <img src={imagen} alt="" />
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6} margin={5}>
+              <h3>Autor: {autor}</h3>
+              <h3>Dificultad</h3>
+              {/* <a>{dificultad}</a> */}
+              <CalificionRating calificacion={parseInt(dificultad)} />
+
+
+              <h3>Calificación </h3>
+              {/* value={parseInt(calificacionProm)}  onChange={rate => console.log(rate)} */}
+
+              <Rating value={parseInt(calificacionProm)} precision={1} sx={{ fontSize: 30 }}
+                onChange={(event, newValue) => {
+                  if(condition === false && autor === `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`){
+                    setCondition(true);
+                    console.log("mismo autor");
+                    window.alert("NO puede votar una receta que usted creo");
+                  }
+                  else if (condition === false) {
+                    setValue(newValue);
+                    guardarRaiting(newValue);
+                    setCondition(true)
+                  }
+                }}
+                disabled={condition} />
+              <>
+                <br></br>
+                {usrTotales} votos</>
+
+              <h3>Categoría</h3>
+              <p>{cat}</p>
+
+              <h3>Ingredientes</h3>
+              {/* <p>PLACEHOLDER</p> */}
+              <p align="justify">{ingredientes}</p>
+
+              <h3>Descripción</h3>
+              <p align="justify">
+                {procedimiento}
+              </p>
+              <br />
+
+            </Grid>
+          </div>
+        </Grid>
+      </div>
+    </Section>
   );
 }
 
@@ -155,7 +197,7 @@ const Section = styled.section`
           border-radius: 1rem;
           img {
             height: 20rem;
-            width: 15rem;
+            width: 20rem;
             object-fit: cover;
             align: left;
           }
