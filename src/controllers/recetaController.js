@@ -244,7 +244,7 @@ export const calificarReceta = async function (calificacion) {
             default:
                 {
                     //otro error
-                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                    return ({ rdo: 1, mensaje: "Calificacion exitosa" });
                 }
         }
     }
