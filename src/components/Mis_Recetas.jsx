@@ -1,4 +1,4 @@
-import React, {useState,useEffect } from "react";
+import React, {useState,useEffect,useSetState } from "react";
 import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container, Box,TextareaAutosize, Fab} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -90,42 +90,57 @@ export default function Mis_Recetas() {
     setPage(0);
   };
 
-  useEffect(() => {
-    async function componentDidMount() {
-        let rdo = await obtenerRecetaMail();
-        //let data= await rdo.json()
-        console.log("dentro de rdo",rdo)
-        //console.log("dentro de data",data)
-        console.log("longitud rdo",rdo.length)
-        setListado(rdo)
-        //console.log("dentro de Listado",listado)
-        // if (rdo.length > 0) {
-        //     setCat(rdo[0].categoria);
-        //     setImagen(rdo[0].nombreImagen);
-        //     setDificultad(rdo[0].dificultad);
-        //     setIngredientes(rdo[0].ingredientes);
-        //     setProcedimiento(rdo[0].procedimiento);
-        //     setcalificacionProm(rdo[0].calificacionPromedio);
-        //     setcalificacionTotal(rdo[0].calificacionTotal);
-        //     setusrTotales(rdo[0].usuariosTotales);
-        //     setAutor(rdo[0].autor);
-        //     setNombre(rdo[0].nombre);
-        // }
-    }
-    componentDidMount();
-}, []);
+//   useEffect(() => {
+//     async function componentDidMount() {
+//         let rdo = await obtenerRecetaMail();
+//         this.setState({
+//           setListado(rdo)// use response to set your state.
+//         });
+
+
+
+
+//         // console.log("dentro de rdo",rdo)
+//         // //console.log("dentro de PARSE",parserdo)
+//         // console.log("longitud rdo",rdo.length)
+//         // setListado(rdo)
+//         // setListado((state) => {
+//         // //https://medium.com/ableneo/react-setstate-does-not-immediately-update-the-state-84dbd26f67d5
+//         //   console.log("dentro de Listado",state);
+//         //   //const test= JSON.parse(state)   
+//         //   return state;
+//         // });
+//         // //console.log("dentro de Listado",listado)
+//     }
+//     componentDidMount();
+// }, []);
+
+
+const getRecetas = async () => {
+  const response = await obtenerRecetaMail();
+ // setListado(JSON.stringify(response)); //Setting the response into state
+  // console.log("dentro de Listado",await listado);
+  setListado(response)
+  localStorage.removeItem("listado")
+  setListado((state) => {
+   // //https://medium.com/ableneo/react-setstate-does-not-immediately-update-the-state-84dbd26f67d5
+    console.log("dentro de Listado",state);
+    //localStorage.setItem("listado",JSON.stringify(state));
+    //const test= JSON.parse(state)   
+    return state;
+  });
+
+
+};
+
   
-  // useEffect(() => {
-  //   getRecetas();
-  // }, []);
+  useEffect(() => {
+    getRecetas();
+  }, []);
 
-  // const getRecetas = async () => {
-  //   const response = await obtenerRecetaMail();
-  //   const data = await response.json();
-  //   setListado(data); //Setting the response into state
-  //   console.log("dentro de Listado",listado);
+  const producto= JSON.parse(localStorage.getItem("listado"));
 
-  // };
+  
 
 
   return (
@@ -136,7 +151,9 @@ export default function Mis_Recetas() {
         <Avatar className={classes.avatar}>
           <MdBook />
         </Avatar>
-        <h2>Mis Recetas</h2>
+        <h2>Mis Receta</h2>
+        {/* <p> {localStorage.getItem("listado")}</p> */}
+        {/* <>{producto[0].categoria}</> */}
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
