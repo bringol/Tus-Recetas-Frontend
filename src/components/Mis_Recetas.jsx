@@ -125,7 +125,7 @@ const getRecetas = async () => {
   setListado((state) => {
    // //https://medium.com/ableneo/react-setstate-does-not-immediately-update-the-state-84dbd26f67d5
     console.log("dentro de Listado",state);
-    localStorage.setItem("listado",JSON.stringify(state));
+    //localStorage.setItem("listado",JSON.stringify(state));
     //const test= JSON.parse(state)   
     return state;
   });
@@ -153,7 +153,7 @@ const getRecetas = async () => {
         </Avatar>
         <h2>Mis Receta</h2>
         {/* <p> {localStorage.getItem("listado")}</p> */}
-        <>{producto[0].categoria}</>
+        {/* <>{producto[0].categoria}</> */}
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
