@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Autocomplete, TextField, Paper, Grid, Stack } from "@mui/material";
 import styled from "styled-components";
 import { TitleStyles } from "./ReusableStyles";
@@ -28,13 +28,13 @@ export default function Search() {
     { title: '5' },
   ];
 
-  const topIngredientes = [
+  /*const topIngredientes = [
     { title: 'Verduras' },
     { title: 'Carne' },
     { title: 'Pescado' },
     { title: 'Pollo' },
     { title: 'Frutas' },
-  ];
+  ];*/
 
   const topCalificaciones = [
     { title: '1 estrella' },
@@ -43,6 +43,19 @@ export default function Search() {
     { title: '4 estrellas' },
     { title: '5 estrellas' },
   ];
+
+  const [nombre, setNombre] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [dificultad, setDificultad] = useState('');
+  const [ingredientes, setIngredientes] = useState('');
+  const [calificacion, setCalificacion] = useState('');
+
+  const setearNombre  = e => {
+    const nombre = e.target.value;
+    console.log(nombre);
+    setNombre(nombre);
+  };
+
 
   return (
     <Section id="busqueda">
@@ -54,8 +67,15 @@ export default function Search() {
 
       <div>
         <div className="container">
-          <input type="text" placeholder="Buscar recetas" size={"30px"}/>
-          <button>Buscar</button>
+          <input 
+          type="text" 
+          placeholder="Buscar recetas" 
+          size={"30px"}
+          onChange={setearNombre}
+          />
+          <button 
+          type="button" 
+          >Buscar</button>
         </div>
       </div>
 
@@ -80,14 +100,7 @@ export default function Search() {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <Autocomplete
-              id="ingtedientes"
-              size="small"
-              Ingredientes
-              color="secondary"
-              options={topIngredientes.map((option) => option.title)}
-              renderInput={(params) => <TextField {...params} label="Ingredientes" color="secondary" />}
-            />
+          <TextField label="Ingredientes" color="secondary" size="small" fullWidth/>
           </Grid>
           <Grid item xs={12} md={3}>
             <Autocomplete

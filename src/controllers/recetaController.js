@@ -348,7 +348,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
             body: formData,
         });
         console.log(url)
-        console.log(nombre)
+        console.log("nombreControlle", nombre)
         if (response.status === 201) {
             let data = await response.json();
             let listaRecetas = data.data.docs;
