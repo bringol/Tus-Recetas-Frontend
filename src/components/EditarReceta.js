@@ -8,6 +8,7 @@ import CustomFileInput from "./CustomFileInput.js";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import classNames from "classnames";
 import SubirFoto from './SubirFoto';
+import { useParams } from 'react-router-dom';
 
 
 //validacion
@@ -19,7 +20,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Dropdown } from "semantic-ui-react";
 
 //back
-import { editarReceta, uploadImg } from "../controllers/recetaController"
+import { editarReceta, uploadImg, obtenerRecetaID } from "../controllers/recetaController"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +86,47 @@ const EditarReceta = (props) => {
 
     const classes = useStyles();
 
+    const [toggle, setToggle] = useState(false);
+    const [imgAux, setImgAux] = React.useState('');
+    const { id } = useParams();
+    const [cat, setCat] = useState('');
+    const [dificultad, setDificultad] = useState('');
+    const [ingredientes, setIngredientes] = useState('');
+    const [procedimiento, setProcedimiento] = useState('');
+    const [calificacionProm, setcalificacionProm] = useState('');
+    const [calificacionTotal, setcalificacionTotal] = useState('');
+    const [usrTotales, setusrTotales] = useState('');
+    const [imagen, setImagen] = useState('');
+    const [autor, setAutor] = useState('');
+    const [nombre, setNombre] = useState('');
+    
+
+    useEffect(() => {
+        async function componentDidUpdate() {
+            let rdo = await obtenerRecetaID(id);
+            console.log("dentro de rdo", rdo)
+            if (rdo.length > 0) {
+              setCat(rdo[0].categoria);
+              localStorage.setItem("categoria",rdo[0].categoria )
+              setImagen(rdo[0].nombreImagen);
+              setDificultad(rdo[0].dificultad);
+              localStorage.setItem("dificultad",rdo[0].dificultad )
+              setIngredientes(rdo[0].ingredientes);
+              localStorage.setItem("ingredientes",rdo[0].ingredientes )
+              setProcedimiento(rdo[0].procedimiento);
+              localStorage.setItem("procedimiento",rdo[0].procedimiento )
+              setAutor(rdo[0].autor);
+              localStorage.setItem("categoria",rdo[0].autor )
+              setNombre(rdo[0].nombre);
+              localStorage.setItem("nombre",rdo[0].nombre )
+            }
+          }
+          componentDidUpdate();
+        }, [id]);
+    
+
+
+
     const formik = useFormik({
         initialValues:
         {
@@ -93,7 +135,7 @@ const EditarReceta = (props) => {
             dificultad: `${localStorage.getItem("dificultad")}`,
             ingredientes: `${localStorage.getItem("ingredientes")}`,
             procedimiento: `${localStorage.getItem("procedimiento")}`,
-            nombreImagen: `${localStorage.getItem("nombreImagen")}`,
+            nombreImagen: ``,
         },
 
         onSubmit: (values) => {
@@ -104,9 +146,9 @@ const EditarReceta = (props) => {
 
     });
 
-    const [toggle, setToggle] = useState(false);
-    const [imgAux, setImgAux] = React.useState('');
-
+    
+    
+    
     const guardarImagen = () => {
         subirImagen();
     }
@@ -137,7 +179,15 @@ const EditarReceta = (props) => {
         }
     }
 
+
+   
+
+
+
     const validarReceta = async function () {
+        
+        
+        
         let datos = {
             _id: props.match.params.id,
             nombre: formik.values.nombre,

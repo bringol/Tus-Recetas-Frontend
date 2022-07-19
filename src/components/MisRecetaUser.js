@@ -91,7 +91,7 @@ export default function MisRecetaUser() {
                                 </Typography>
 
                                 <Grid>
-                                    <NavLink to={`/editar-receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                                    <NavLink to={`/user/receta/modificar/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
                                         <IconButton aria-label="edit">
                                             <EditIcon />
                                         </IconButton>

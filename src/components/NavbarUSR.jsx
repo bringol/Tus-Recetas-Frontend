@@ -80,9 +80,8 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#mis-recetas" onClick={() => setNavbarState(false)}>
-              Mis Recetas
-            </a>
+          <NavLink to='/User/Recetas' style={{ textDecoration: 'none' , color: 'white' }}>
+              Mis Recetas</NavLink>
           </li>
           <li>
             {/* <a href="#perfil" onClick={() => setNavbarState(false)}> */}

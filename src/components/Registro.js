@@ -333,7 +333,7 @@ const Registrarse = () => {
   return(
     <div className={classes.paper}>
     <Exito/>
-      <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
+      <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
         <Button
           type="submit"
           fullWidth
