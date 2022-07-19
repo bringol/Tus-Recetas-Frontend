@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import { Autocomplete, TextField, Paper, Grid, Stack } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Autocomplete, TextField, Paper, Grid, Stack, flex } from "@mui/material";
 import styled from "styled-components";
 import { TitleStyles } from "./ReusableStyles";
+import { buscarReceta } from "../controllers/recetaController";
 
 
 export default function Search() {
@@ -47,15 +48,41 @@ export default function Search() {
   const [nombre, setNombre] = useState('');
   const [categoria, setCategoria] = useState('');
   const [dificultad, setDificultad] = useState('');
-  const [ingredientes, setIngredientes] = useState('');
+  const [ingrediente, setIngrediente] = useState('');
   const [calificacion, setCalificacion] = useState('');
+  const [listado, setListado] = useState([])
 
-  const setearNombre  = e => {
+  /*useEffect(() => {
+    async function componentDidMount() {
+      let rdo = await buscarReceta(nombre, categoria, dificultad, ingrediente, calificacion);
+      setListado(rdo.data.docs);
+    }
+    componentDidMount();
+  });*/
+
+  const setearNombre = e => {
     const nombre = e.target.value;
-    console.log(nombre);
+    console.log("nombre seteado", nombre);
     setNombre(nombre);
   };
 
+  const setearIngrediente = e => {
+    const ingrediente = e.target.value;
+    console.log("categoria seteada", ingrediente);
+    setCategoria(ingrediente);
+  };
+
+  /*const buscarReceta = async function () {
+    let respuesta = await buscarReceta(nombre, categoria, dificultad, ingrediente, calificacion);
+
+    if (respuesta.rdo === 0) {
+      console.log("recetas:", respuesta)
+      setListado(respuesta.data.docs)
+    }
+    if (respuesta.rdo === 1) {
+      alert(respuesta.mensaje)
+    }
+  }*/
 
   return (
     <Section id="busqueda">
@@ -65,33 +92,24 @@ export default function Search() {
         </h1>
       </div>
 
-      <div>
-        <div className="container">
-          <input 
-          type="text" 
-          placeholder="Buscar recetas" 
-          size={"30px"}
-          onChange={setearNombre}
-          />
-          <button 
-          type="button" 
-          >Buscar</button>
-        </div>
-      </div>
-
       <div className="filtros">
         <Grid container direction="row">
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={2}>
+            <TextField label="Nombre" color="secondary" size="small" fullWidth onChange={setearNombre} />
+          </Grid>
+          <Grid item xs={12} md={2}>
             <Autocomplete
-              id="categorias"
+              onChange={(event, categoria) => console.log(categoria)}
+              id="categoria"
               size="small"
-              Categorías
+              Categoría
               options={topCategorias.map((option) => option.title)}
-              renderInput={(params) => <TextField {...params} label="Categorias" color="secondary" />}
+              renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
             />
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={2}>
             <Autocomplete
+              onChange={(event, dificultad) => console.log(dificultad)}
               id="dificultad"
               size="small"
               Dificultad
@@ -99,11 +117,12 @@ export default function Search() {
               renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
             />
           </Grid>
-          <Grid item xs={12} md={3}>
-          <TextField label="Ingredientes" color="secondary" size="small" fullWidth/>
+          <Grid item xs={12} md={2}>
+            <TextField label="Ingrediente" color="secondary" size="small" fullWidth onChange={setearIngrediente} />
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={2}>
             <Autocomplete
+              onChange={(event, calificacion) => console.log(calificacion)}
               id="calificacion"
               size="small"
               border-color="#572e57"
@@ -113,6 +132,14 @@ export default function Search() {
             />
           </Grid>
         </Grid >
+
+      </div>
+      <div className="container">
+        <button
+          type="button"
+          onClick={buscarReceta}>
+          Aplicar Filtros
+        </button>
       </div>
     </Section >
   );
@@ -127,6 +154,8 @@ const Section = styled.section`
   ${TitleStyles};
   .container {
     align-item: center;
+    text-align: center;
+    border-radius: 0.8rem;
     background: linear-gradient(to right, #572e57, #834e6d, #572e57);
     padding: 0.3vw;
     input {

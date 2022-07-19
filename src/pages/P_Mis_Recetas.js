@@ -9,6 +9,7 @@ import ScrollToTop from "../components/ScrollToTop";
 // import Filtros from "../components/Filtros"
 // import CuadroTexto from "../components/CuadroTexto";
 import Mis_Recetas from "../components/Mis_Recetas";
+import MisRecetaUser from "../components/MisRecetaUser";
 
 
 export default function P_Mis_Recetas() {
@@ -16,7 +17,7 @@ export default function P_Mis_Recetas() {
     <div>
         <ScrollToTop />
         <NavbarVacioUSR />
-        <Mis_Recetas />
+        <MisRecetaUser/>
         <Footer/>
 
     </div>

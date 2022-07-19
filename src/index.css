@@ -83,3 +83,7 @@ section {
   color: rgba(0,0,0,.87);
 }
 
+.css-11lq3yg-MuiGrid-root {
+  display: flex;
+  justify-content: space-around;
+}

@@ -3,9 +3,7 @@ import Footer from "../components/Footer"//sin el ../ no lo encuentra
 import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
 import {Box } from '@mui/material';
-import ModificarReceta from "../components/ModificarReceta.js"
-
-
+import EditarReceta from "../components/EditarReceta.js"
 
 export default function P_RecetaNueva() {
     return (
@@ -13,7 +11,7 @@ export default function P_RecetaNueva() {
         <ScrollToTop />
         <NavbarVacioUSR />
         <Box mt={5}></Box>
-        <ModificarReceta/>
+        <EditarReceta/>
         <Box mb={5}></Box>
         <Footer />
     </div>

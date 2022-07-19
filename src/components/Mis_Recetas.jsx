@@ -14,10 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import{obtenerRecetaMail} from "../controllers/recetaController";
 
 const columns = [
-  { id: 'id', label: 'ID', minWidth: 100 },
-  { id: 'nombre', label: 'Nombre', minWidth: 170 },
-  { id: 'categoria', label: 'Categoria', minWidth: 170, align: 'center'},
-  { id: 'dificultad', label: 'Dificultad', minWidth: 170, align: 'center' },
+  { id: 'nombre', label: 'Nombre', minWidth: 470 },
   { id: 'modificar', label: 'Modificar', minWidth: 170, align: 'center' },
   { id: 'eliminar', label: 'Eliminar', minWidth: 170, align: 'center' },
 ];
@@ -29,25 +26,7 @@ function createData(id, nombre, categoria, dificultad) {
 }
 
 const rows = [
-  createData(1, 'Hamburguesas', 'Carnes', '3'),
-  createData(2, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(3, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(5, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(6, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(7, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(8, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(9, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(10, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(11, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(12, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(13, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(14, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(15, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(16, 'Pollo al Verdeo', 'Pollos', '1'),
-  createData(17, 'Pollo al Verdeo', 'Pollos', '1'),  
 ];
-
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {

@@ -287,8 +287,8 @@ export const eliminarReceta = async function (id) {
     };
 }
 
-export const obtenerRecetaMail = async function () {
-    let url = urlWebServices.obtenerRecetaMail;
+export const obtenerRecetaMail = async function (pag) {
+    let url = urlWebServices.obtenerRecetaMail + `?page=${pag}`;
     const formData = new URLSearchParams();
     formData.append('email', localStorage.getItem("email"));
     try {
@@ -307,10 +307,9 @@ export const obtenerRecetaMail = async function () {
         });
 
         if (response.status === 200) {
-            let respuesta = await response.json();
-            let listaRecetas = respuesta.data.docs;
-            //let listaRecetas = data
-            console.log("dentro recetas mail", listaRecetas)
+            let data = await response.json();
+            //let listaRecetas = data.data.docs;
+            let listaRecetas = data
             return listaRecetas;
         }
         else {
@@ -325,18 +324,12 @@ export const obtenerRecetaMail = async function () {
     };
 }
 
-export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, calificacion) {
-    let url = urlWebServices.buscarReceta;
-    const formData = new URLSearchParams();
-    formData.append('nombre', nombre);
-    formData.append('categoria', categoria);
-    formData.append('dificultad', dificultad);
-    formData.append('ingredientes', ingredientes);
-    formData.append('calificacion', calificacion);
-
+export const buscarReceta = async function (nombre, categoria, dificultad, ingrediente, calificacion) {
+    let url = urlWebServices.buscarReceta +`${nombre}`+ `${categoria}` + `${dificultad}` + `${ingrediente}` + `${calificacion}`;
+  
     try {
         let response = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             mode: "cors",
             headers: {
                 'Accept': 'application/x-www-form-urlencoded',
@@ -345,17 +338,12 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
                 'Origin': 'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: formData,
         });
-        console.log(url)
-        console.log("nombreControlle", nombre)
-        if (response.status === 201) {
+        if (response.status === 200) {
             let data = await response.json();
-            let listaRecetas = data.data.docs;
-            //let listaRecetas = data
-            //console.log(data)
-            return listaRecetas;
-            
+            //let listaRecetas = data.data.docs;
+            let listado = data
+            return listado;
         }
         else {
             let vacio = [];
@@ -369,3 +357,57 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
     };
 }
 
+export const editarReceta = async function (receta) {
+
+    let url = urlWebServices.editarReceta+ "/" + receta._id;;
+    const formData = new URLSearchParams();
+    formData.append('nombre', receta.nombre);
+    formData.append('categoria', receta.categoria);
+    formData.append('dificultad', receta.dificultad);
+    formData.append('ingredientes', receta.ingredientes);
+    formData.append('procedimiento', receta.procedimiento);
+    formData.append('nombreImagen', receta.nombreImagen);
+
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Accept': 'application/form-data',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin': 'http://localhost:3000'
+            },
+            body: formData,
+        });
+
+        let data = await response.json();
+        switch (response.status) {
+            case 201:
+                {
+                    return ({ rdo: 0, mensaje: "Ok" });
+                }
+            case 202:
+                {
+                    //error mail
+                    return ({ rdo: 1, mensaje: "El mail ingresado no existe en nuestra base." });
+                }
+            case 203:
+                {
+                    //error password
+                    return ({ rdo: 1, mensaje: "La contraseña no es correcta." });
+                }
+            case 400:
+                {
+                    return ({ rdo: 1, mensaje: data.message })
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+                }
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
