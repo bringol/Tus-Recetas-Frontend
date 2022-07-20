@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = yup.object
     ({
-        titulo: yup
+        nombre: yup
             .string()
             //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
             .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
@@ -86,17 +86,17 @@ const EditarReceta = (props) => {
 
     const classes = useStyles();
 
-    const [toggle, setToggle] = useState(false);
+    //const [toggle, setToggle] = useState(false);
     const [imgAux, setImgAux] = React.useState('');
     const { id } = useParams();
-    const [cat, setCat] = useState('');
+    const [categoria, setCategoria] = useState('');
     const [dificultad, setDificultad] = useState('');
     const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
     const [calificacionProm, setcalificacionProm] = useState('');
     const [calificacionTotal, setcalificacionTotal] = useState('');
     const [usrTotales, setusrTotales] = useState('');
-    const [imagen, setImagen] = useState('');
+    const [nombreImagen, setNombreImagen] = useState('');
     const [autor, setAutor] = useState('');
     const [nombre, setNombre] = useState('');
     
@@ -106,17 +106,25 @@ const EditarReceta = (props) => {
             let rdo = await obtenerRecetaID(id);
             console.log("dentro de rdo", rdo)
             if (rdo.length > 0) {
-              setCat(rdo[0].categoria);
+                
+              setCategoria(rdo[0].categoria);
               localStorage.setItem("categoria",rdo[0].categoria )
-              setImagen(rdo[0].nombreImagen);
+
+              setNombreImagen(rdo[0].nombreImagen);
+              localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
+
               setDificultad(rdo[0].dificultad);
               localStorage.setItem("dificultad",rdo[0].dificultad )
+
               setIngredientes(rdo[0].ingredientes);
               localStorage.setItem("ingredientes",rdo[0].ingredientes )
+
               setProcedimiento(rdo[0].procedimiento);
               localStorage.setItem("procedimiento",rdo[0].procedimiento )
+
               setAutor(rdo[0].autor);
-              localStorage.setItem("categoria",rdo[0].autor )
+              localStorage.setItem("autor",rdo[0].autor )
+
               setNombre(rdo[0].nombre);
               localStorage.setItem("nombre",rdo[0].nombre )
             }
@@ -124,8 +132,6 @@ const EditarReceta = (props) => {
           componentDidUpdate();
         }, [id]);
     
-
-
 
     const formik = useFormik({
         initialValues:
@@ -146,8 +152,6 @@ const EditarReceta = (props) => {
 
     });
 
-    
-    
     
     const guardarImagen = () => {
         subirImagen();
@@ -179,15 +183,8 @@ const EditarReceta = (props) => {
         }
     }
 
-
-   
-
-
-
     const validarReceta = async function () {
-        
-        
-        
+           
         let datos = {
             _id: props.match.params.id,
             nombre: formik.values.nombre,
@@ -201,7 +198,7 @@ const EditarReceta = (props) => {
         console.log(datos._id);
         if (nuevoDato.rdo === 0) {
             //setUsuarioValido(true);
-            setToggle(!toggle)
+            //setToggle(!toggle)
             console.log("Receta actualizado")
         }
         if (nuevoDato.rdo === 1) {
@@ -210,7 +207,7 @@ const EditarReceta = (props) => {
 
     }
 
-    if (toggle === false) {
+    //if (toggle === false) {
 
         return (
             <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
@@ -261,15 +258,15 @@ const EditarReceta = (props) => {
                             color='secondary'
                             required
                             fullWidth
-                            id="titulo"
+                            id="nombre"
                             label="Nombre"
-                            name="titulo"
+                            name="nombre"
                             //autoComplete="email"
                             autoFocus
-                            value={formik.values.titulo}
+                            value={formik.values.nombre}
                             onChange={formik.handleChange}
-                            error={formik.touched.titulo && Boolean(formik.errors.titulo)}
-                            helperText={formik.touched.titulo && formik.errors.titulo}
+                            error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+                            helperText={formik.touched.nombre && formik.errors.nombre}
                             onBlur={formik.handleBlur}
                         />
                         {/* <Filtros /> */}
@@ -391,7 +388,7 @@ const EditarReceta = (props) => {
 
                                 disabled={
                                     !(formik.isValid && formik.dirty)
-                                    // (formik.errors.titulo)            
+                                    // (formik.errors.nombre)            
                                     // ||
                                     // ( formik.errors.ingredientes)
                                     // ||
@@ -400,7 +397,7 @@ const EditarReceta = (props) => {
                                 onClick={() => guardarImagen()}
 
                             >
-                                Publicar Receta
+                                Guardad Cambios
                             </Button>
                         </Box>
                     </form>
@@ -408,7 +405,7 @@ const EditarReceta = (props) => {
 
             </Container >
         );
-    }
+    /*}
     else
         return (
             <div className={classes.paper}>
@@ -424,7 +421,7 @@ const EditarReceta = (props) => {
                     </Button>
                 </NavLink>
             </div>
-        )
+        )*/
 }
 
 export default EditarReceta

@@ -10,16 +10,17 @@ import ScrollToTop from "../components/ScrollToTop";
 // import CuadroTexto from "../components/CuadroTexto";
 import Mis_Recetas from "../components/Mis_Recetas";
 import MisRecetaUser from "../components/MisRecetaUser";
+import PublicarReceta from "../components/PublicarReceta";
 
 
 export default function P_Mis_Recetas() {
     return (
-    <div>
-        <ScrollToTop />
-        <NavbarVacioUSR />
-        <MisRecetaUser/>
-        <Footer/>
+        <div>
+            <ScrollToTop />
+            <NavbarVacioUSR />
+            <MisRecetaUser />
+            <Footer />
 
-    </div>
+        </div>
     );
-  }
+}

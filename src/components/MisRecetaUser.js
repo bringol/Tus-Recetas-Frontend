@@ -110,27 +110,46 @@ export default function MisRecetaUser() {
             </div>
 
             <div className={classes.container}>
+                <Box mt={5}> </Box>
+
+
                 <Button
                     disabled={page === 1}
                     onClick={handleAnterior}
-                    sx={{ fontSize: 50 }}
+                    sx={{ fontSize: 20 }}
+                    color="secondary"
                 >
                     <ArrowBackIosIcon />
                 </Button>
 
-                <Typography sx={{ fontSize: 50 }}>
-                    {page}<MoreHorizIcon />{pageCount}
+                <Typography sx={{ fontSize: 20 }}>
+                    {page}<MoreHorizIcon fontSize="small" />{pageCount}
                 </Typography>
 
                 <Button
                     disabled={page === pageCount}
                     onClick={handleSiguiente}
+                    color="secondary"
                     //onClick={executeScroll}
-                    sx={{ fontSize: 50 }}
+                    sx={{ fontSize: 20 }}
                 >
                     <ArrowForwardIosIcon />
                 </Button>
             </div>
+
+
+            <Box sx={{ mt: 5, mb: 15 }}>
+                <NavLink to='/User/Receta/Publicar' style={{ textDecoration: 'none', color: 'white' }}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        className={classes.botón}
+                    >
+                        Publicar Nueva Receta
+                    </Button> </NavLink>
+            </Box>
 
 
 

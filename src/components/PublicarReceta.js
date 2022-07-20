@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = yup.object
   ({
-    titulo: yup
+    nombre: yup
       .string()
       //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
       .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
@@ -91,7 +91,7 @@ const PublicarReceta = (props) => {
     ({
       initialValues:
       {
-        titulo: "",
+        nombre: "",
         categoria: "",
         dificultad: "",
         ingredientes: "",
@@ -111,7 +111,7 @@ const PublicarReceta = (props) => {
   const validarReceta = async function (nombreI) {
 
     let datos = {
-      nombre: formik.values.titulo,
+      nombre: formik.values.nombre,
       categoria: formik.values.categoria,
       dificultad: formik.values.dificultad,
       ingredientes: formik.values.ingredientes,
@@ -169,25 +169,10 @@ const PublicarReceta = (props) => {
     }
   }
 
-  const mostrarImagen = () => {
-    if (imgAux === "") {
-      return (
-        <Grid item xs={12} sm={12} md={12}>
-          <div className={classes.profile}>
-
-            <div className={classes.name}>
-              <h3 className={classes.title}> Aun no has subido tus imagenes</h3>
-            </div>
-          </div>
-        </Grid>
-      )
-    }
-  }
-
   if (toggle === false) {
 
     return (
-      <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -195,7 +180,6 @@ const PublicarReceta = (props) => {
           </Avatar>
           <h2> Nueva Receta</h2>
           <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
-
 
             <Box
               sx={{
@@ -235,15 +219,15 @@ const PublicarReceta = (props) => {
               color='secondary'
               required
               fullWidth
-              id="titulo"
+              id="nombre"
               label="Nombre"
-              name="titulo"
+              name="nombre"
               //autoComplete="email"
               autoFocus
-              value={formik.values.titulo}
+              value={formik.values.nombre}
               onChange={formik.handleChange}
-              error={formik.touched.titulo && Boolean(formik.errors.titulo)}
-              helperText={formik.touched.titulo && formik.errors.titulo}
+              error={formik.touched.nombre && Boolean(formik.errors.nombre)}
+              helperText={formik.touched.nombre && formik.errors.nombre}
               onBlur={formik.handleBlur}
             />
             {/* <Filtros /> */}
@@ -361,15 +345,8 @@ const PublicarReceta = (props) => {
                 variant="contained"
                 color="secondary"
                 className={classes.botón}
-                //onClick={() => setToggle(!toggle)}
-
                 disabled={
                   !(formik.isValid && formik.dirty)
-                  // (formik.errors.titulo)            
-                  // ||
-                  // ( formik.errors.ingredientes)
-                  // ||
-                  // (formik.errors.procedimiento) 
                 }
                 onClick={() => guardarImagen()}
 

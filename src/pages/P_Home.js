@@ -6,11 +6,12 @@ import Registrarse from "../components/Registrarse";
 import ScrollToTop from "../components/ScrollToTop";
 import Search from "../components/Search";
 import RecetasListado from "../components/RecetasListado";
+import RecetaListadoFiltros from "../components/RecetaListadoFiltros";
 import { Box } from '@mui/material';
 
 export default function P_Home() {
 
-    const loadData=async ()=>{
+    /*const loadData=async ()=>{
         //console.log(localStorage);
         localStorage.clear();
         //console.log(localStorage);
@@ -18,16 +19,14 @@ export default function P_Home() {
     
       useEffect(()=>{
         loadData()
-      },[])
+      },[])*/
 
     return (
     <div>
-        <Navbar />
-        <Hero />        
-        <Search />
-        <Box mt={15}></Box>      
-        <RecetasListado />
-        <Box mb={50}></Box> 
+        <Navbar/>
+        <Hero/>        
+        {/*<Search/>*/}
+        <RecetaListadoFiltros/>
         <Registrarse/>
         <Footer/>
         <ScrollToTop />  

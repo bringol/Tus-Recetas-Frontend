@@ -324,12 +324,34 @@ export const obtenerRecetaMail = async function (pag) {
     };
 }
 
-export const buscarReceta = async function (nombre, categoria, dificultad, ingrediente, calificacion) {
-    let url = urlWebServices.buscarReceta +`${nombre}`+ `${categoria}` + `${dificultad}` + `${ingrediente}` + `${calificacion}`;
-  
+
+
+export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, calificacion) {
+    //let url = urlWebServices.buscarReceta +`${nombre}`+ `${categoria}` + `${dificultad}` + `${ingrediente}` + `${calificacion}`;
+    let url = urlWebServices.buscarReceta;
+    const formData = new FormData();
+    console.log(nombre);
+
+    var details = {
+        'nombre': nombre,
+        'categoria': categoria,
+        'dificultad': dificultad,
+        'ingredientes': ingredientes,
+        'calificacion': calificacion,
+    };
+   
+    var formBody = [];
+    for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+
     try {
         let response = await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             mode: "cors",
             headers: {
                 'Accept': 'application/x-www-form-urlencoded',
@@ -338,12 +360,14 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
                 'Origin': 'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
+            body: formBody,
         });
         if (response.status === 200) {
-            let data = await response.json();
-            //let listaRecetas = data.data.docs;
-            let listado = data
-            return listado;
+            let listaRecetas = await response.json();
+            //et listaRecetas = data.data.docs;
+            //let listaRecetas = data.docs
+            console.log(listaRecetas)
+            return listaRecetas;
         }
         else {
             let vacio = [];
@@ -359,7 +383,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
 
 export const editarReceta = async function (receta) {
 
-    let url = urlWebServices.editarReceta+ "/" + receta._id;;
+    let url = urlWebServices.editarReceta + "/" + receta._id;;
     const formData = new URLSearchParams();
     formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
@@ -405,6 +429,35 @@ export const editarReceta = async function (receta) {
                     //otro error
                     return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
                 }
+        }
+    }
+    catch (error) {
+        console.log("Error", error);
+    };
+}
+
+export const obtenerRecetasFiltros = async function (pag, nombre, categoria, dificultad, ingrediente, calificacion) {
+    let url = urlWebServices.obtenerRecetasFiltros + `?page=${pag}` + `${nombre}` + `${categoria}` + `${dificultad}` + `${ingrediente}` + `${calificacion}`;
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'x-access-token': localStorage.getItem('x'),
+                'Origin': 'http://localhost:3000'
+            }
+        });
+        if (response.status === 200) {
+            let data = await response.json();
+            //let listaRecetas = data.data.docs;
+            let listaRecetas = data
+            return listaRecetas;
+        }
+        else {
+            let vacio = [];
+            console.log("vacio");
+            return (vacio);
+
         }
     }
     catch (error) {

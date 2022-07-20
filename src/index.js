@@ -5,12 +5,10 @@ import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById("root")
 
-
 //enable concurrent mode
 // ReactDOM.createRoot(document.getElementById("root").render(<App />)
-
 );

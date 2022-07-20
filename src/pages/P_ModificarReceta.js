@@ -10,9 +10,7 @@ export default function P_RecetaNueva() {
     <div>
         <ScrollToTop />
         <NavbarVacioUSR />
-        <Box mt={5}></Box>
         <EditarReceta/>
-        <Box mb={5}></Box>
         <Footer />
     </div>
     );
