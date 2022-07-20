@@ -11,12 +11,8 @@ import SubirFoto from './SubirFoto';
 
 //validacion
 import { useFormik } from 'formik';
-import * as yup from "yup"; //libreria de esquemas de validacion
+import * as yup from "yup";
 import Exito from "./Exito"
-//import { fieldToTextField } from 'formik-material-ui';
-import { Formik, Field, FieldProps } from "formik";
-import "semantic-ui-css/semantic.min.css";
-import { Dropdown } from "semantic-ui-react";
 
 import { crearReceta, uploadImg } from "../controllers/recetaController"
 

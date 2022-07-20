@@ -383,13 +383,9 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
 
 export const editarReceta = async function (receta) {
 
-<<<<<<< HEAD
-    let url = urlWebServices.editarReceta + "/" + receta._id;;
-=======
     let url = urlWebServices.editarReceta;
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
     const formData = new URLSearchParams();
-    formData.append('id', receta.id);
+    formData.append('_id', receta._id);
     formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);

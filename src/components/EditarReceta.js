@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid } from '@mui/material';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid, FormControl, InputLabel, Select, MenuItem  } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import { NavLink } from 'react-router-dom';
@@ -89,67 +88,94 @@ const EditarReceta = (props) => {
     const [dificultad, setDificultad] = useState('');
     const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
-    const [calificacionProm, setcalificacionProm] = useState('');
-    const [calificacionTotal, setcalificacionTotal] = useState('');
-    const [usrTotales, setusrTotales] = useState('');
     const [nombreImagen, setNombreImagen] = useState('');
     const [autor, setAutor] = useState('');
     const [nombre, setNombre] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        async function componentDidMount() {
+    // useEffect(() => {
+    //     async function componentDidMount() {
             
-            //   localStorage.removeItem("categoria")
-            //   localStorage.removeItem("nombreImagen")
-            //   localStorage.removeItem("dificultad")
-            //   localStorage.removeItem("ingredientes")
-            //   localStorage.removeItem("procedimiento")
-            //   localStorage.removeItem("categoria")
-            //   localStorage.removeItem("nombre")
+    //             async function componentDidMount() {
+            
+        
+    //         let rdo = await obtenerRecetaID(id);
+    //         //window.location.reload();
+    //         console.log("dentro de rdo", rdo)            
+
+    //         if (rdo.length > 0) {
+              
+    //           setCategoria(rdo[0].categoria);
+    //           console.log("dentro de categoria", categoria)
+    //           localStorage.setItem("categoria",rdo[0].categoria )
+
+    //           setNombreImagen(rdo[0].nombreImagen);
+    //           localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
+
+    //           setDificultad(rdo[0].dificultad);
+    //           localStorage.setItem("dificultad",rdo[0].dificultad )
+
+    //           setIngredientes(rdo[0].ingredientes);
+    //           localStorage.setItem("ingredientes",rdo[0].ingredientes )
+
+    //           setProcedimiento(rdo[0].procedimiento);
+    //           localStorage.setItem("procedimiento",rdo[0].procedimiento )
+
+    //           setAutor(rdo[0].autor);
+    //           localStorage.setItem("autor",rdo[0].autor )
+              
+    //           setNombre(rdo[0].nombre);
+    //           localStorage.setItem("nombre",rdo[0].nombre )
+    //         }
+    //       }
+          
+            
+    //       }
+    //       componentDidMount();
+    //     }, [id]);
+
+    useEffect(() => {               
+        componentDidMount();
+        //window.location.reload()
+    }, []); 
+   
+
+     async function componentDidMount() {
+            
+        
             let rdo = await obtenerRecetaID(id);
-            //window.location.reload();
-            console.log("dentro de rdo", rdo)
+                      
+            console.log("dentro de rdo", rdo)            
+
             if (rdo.length > 0) {
-<<<<<<< HEAD
-                
+              
               setCategoria(rdo[0].categoria);
-              localStorage.setItem("categoria",rdo[0].categoria )
+              console.log("dentro de categoria", categoria)
+              //localStorage.setItem("categoria",rdo[0].categoria )
 
               setNombreImagen(rdo[0].nombreImagen);
-              localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
+              //localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
 
-=======
-              
-              setCat(rdo[0].categoria);
-              localStorage.setItem("categoria",rdo[0].categoria )
-              setImagen(rdo[0].nombreImagen);
-              localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
               setDificultad(rdo[0].dificultad);
-              localStorage.setItem("dificultad",rdo[0].dificultad )
+              //localStorage.setItem("dificultad",rdo[0].dificultad )
 
               setIngredientes(rdo[0].ingredientes);
-              localStorage.setItem("ingredientes",rdo[0].ingredientes )
+              //localStorage.setItem("ingredientes",rdo[0].ingredientes )
 
               setProcedimiento(rdo[0].procedimiento);
-              localStorage.setItem("procedimiento",rdo[0].procedimiento )
+              //localStorage.setItem("procedimiento",rdo[0].procedimiento )
 
               setAutor(rdo[0].autor);
-              localStorage.setItem("autor",rdo[0].autor )
-<<<<<<< HEAD
-
-=======
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
+              //localStorage.setItem("autor",rdo[0].autor )
+              
               setNombre(rdo[0].nombre);
-              localStorage.setItem("nombre",rdo[0].nombre )
+              //localStorage.setItem("nombre",rdo[0].nombre )
             }
           }
-          componentDidMount();
-        }, [id]);
-    
+          
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues:
         {
             // nombre: `${localStorage.getItem("nombre")}`,
@@ -160,12 +186,21 @@ const EditarReceta = (props) => {
             // nombreImagen: `${imagen}`,
 
 
-            nombre: `${localStorage.getItem("nombre")}`,
-            categoria: `${localStorage.getItem("categoria")}`,
-            dificultad: `${localStorage.getItem("dificultad")}`,
-            ingredientes: `${localStorage.getItem("ingredientes")}`,
-            procedimiento: `${localStorage.getItem("procedimiento")}`,
-            nombreImagen: `${localStorage.getItem("nombreImagen")}`,
+            // nombre: {nombre},
+            // categoria: `${localStorage.getItem("categoria")}`,
+            // dificultad: `${localStorage.getItem("dificultad")}`,
+            // ingredientes: `${localStorage.getItem("ingredientes")}`,
+            // procedimiento: `${localStorage.getItem("procedimiento")}`,
+            // nombreImagen: `${localStorage.getItem("nombreImagen")}`,
+
+
+            nombre: `${nombre}`,
+            categoria: `${categoria}`,
+            dificultad: `${dificultad}`,
+            ingredientes: `${ingredientes}`,
+            procedimiento: `${procedimiento}`,
+            nombreImagen: `${nombreImagen}`,
+
         },
 
         onSubmit: (values) => {
@@ -210,7 +245,7 @@ const EditarReceta = (props) => {
     const validarReceta = async function () {
            
         let datos = {
-            id: id,
+            _id: id,
             nombre: formik.values.nombre,
             categoria: formik.values.categoria,
             dificultad: formik.values.dificultad,
@@ -223,8 +258,6 @@ const EditarReceta = (props) => {
         if (nuevoDato.rdo === 0) {
             //setUsuarioValido(true);
             //setToggle(!toggle)
-<<<<<<< HEAD
-=======
               alert("Receta actualizada")
                
               localStorage.removeItem("categoria")
@@ -232,11 +265,9 @@ const EditarReceta = (props) => {
               localStorage.removeItem("dificultad")
               localStorage.removeItem("ingredientes")
               localStorage.removeItem("procedimiento")
-              localStorage.removeItem("categoria")
               localStorage.removeItem("nombre")
               //window.location.reload();
               navigate("/User/Recetas")
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
             console.log("Receta actualizado")
         }
         if (nuevoDato.rdo === 1) {
@@ -274,7 +305,7 @@ const EditarReceta = (props) => {
                                 }}
                                 getImagen={(i) => setImgAux(i)}
                                 inputProps={{
-                                    placeholder: `${imagen}`
+                                    placeholder: `${nombreImagen}`
                                 }}
                                 endButton={{
                                     buttonProps: {
@@ -294,18 +325,12 @@ const EditarReceta = (props) => {
                             variant="outlined"
                             margin="normal"
                             color='secondary'
-                            required
+                            required                            
                             fullWidth
                             id="nombre"
                             label="Nombre"
                             name="nombre"
-<<<<<<< HEAD
-                            //autoComplete="email"
                             autoFocus
-=======
-                            autoFocus
-                            //defaultValue={nombre}
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                             value={formik.values.nombre}
                             onChange={formik.handleChange}
                             error={formik.touched.nombre && Boolean(formik.errors.nombre)}
@@ -431,25 +456,12 @@ const EditarReceta = (props) => {
                                 //onClick={() => setToggle(!toggle)}
 
                                 disabled={
-<<<<<<< HEAD
-                                    !(formik.isValid && formik.dirty)
-                                    // (formik.errors.nombre)            
-                                    // ||
-                                    // ( formik.errors.ingredientes)
-                                    // ||
-                                    // (formik.errors.procedimiento) 
-=======
                                     !(formik.isValid && formik.dirty) 
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                                 }
                                // onClick={() => guardarImagen()}
                                onClick={() => validarReceta()}
                             >
-<<<<<<< HEAD
-                                Guardad Cambios
-=======
                                 Modificar Receta
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                             </Button>
                         </Box>
                     </form>
