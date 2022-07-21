@@ -11,7 +11,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-import { obtenerRecetaMail } from "../controllers/recetaController";
+import { obtenerRecetaMail,eliminarReceta } from "../controllers/recetaController";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -66,6 +66,24 @@ export default function MisRecetaUser() {
         })
     }
 
+    const eliminar = async function (id) {
+
+        let datos = {
+          id: id,
+        }
+        let eliminado = await eliminarReceta(datos);
+        console.log("dentro de id",datos._id);
+        if (eliminado.rdo === 0) {
+          console.log("los datos enviados", datos)
+          alert("Receta eliminada")
+          window.location.reload();
+        }
+        if (eliminado.rdo === 1) {
+          alert(eliminado.mensaje)
+        }
+      }
+    
+
 
     return (
         <Section id="recetas">
@@ -96,11 +114,15 @@ export default function MisRecetaUser() {
                                             <EditIcon />
                                         </IconButton>
                                     </NavLink>
-                                    <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
-                                        <IconButton aria-label="delete">
+                                    {/* <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}> */}
+                                        <IconButton 
+                                         aria-label="delete"
+                                         //onClick={eliminar(receta._id)}
+                                         onClick={() => eliminar(receta._id)}
+                                        >
                                             <DeleteIcon />
                                         </IconButton>
-                                    </NavLink>
+                                    {/* </NavLink> */}
                                 </Grid>
 
                             </div>

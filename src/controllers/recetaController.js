@@ -252,16 +252,22 @@ export const calificarReceta = async function (calificacion) {
     };
 }
 
-export const eliminarReceta = async function (id) {
-    let url = urlWebServices.deleteReceta + "/" + id;
+export const eliminarReceta = async function (receta) {
+    let url = urlWebServices.eliminarReceta;
+    const formData = new URLSearchParams();
+    formData.append('id', receta.id);
     try {
         let response = await fetch(url, {
             method: 'DELETE',
             mode: "cors",
             headers: {
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000'
-            }
+                'Origin': 'http://localhost:3000',
+                'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
         });
 
         let data = await response.json();
@@ -379,9 +385,13 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
 
 export const editarReceta = async function (receta) {
 
+<<<<<<< HEAD
     let url = urlWebServices.editarReceta + "/" + receta._id;;
+=======
+    let url = urlWebServices.editarReceta;
+>>>>>>> aa5684c78eb9a54f0c515cc67b0bd6af8cd72156
     const formData = new URLSearchParams();
-    formData.append('id', receta.id);
+    formData.append('_id', receta._id);
     formData.append('nombre', receta.nombre);
     formData.append('categoria', receta.categoria);
     formData.append('dificultad', receta.dificultad);

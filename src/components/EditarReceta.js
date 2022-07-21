@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid } from '@mui/material';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid, FormControl, InputLabel, Select, MenuItem  } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
 import { NavLink } from 'react-router-dom';
@@ -90,72 +89,67 @@ const EditarReceta = (props) => {
     const [imagen, setImagen] = useState('');
     const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
-    const [calificacionProm, setcalificacionProm] = useState('');
-    const [calificacionTotal, setcalificacionTotal] = useState('');
-    const [usrTotales, setusrTotales] = useState('');
     const [nombreImagen, setNombreImagen] = useState('');
     const [autor, setAutor] = useState('');
     const [nombre, setNombre] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        async function componentDidMount() {
+   
+
+    useEffect(() => {               
+        componentDidMount();
+    }, []); 
+   
+
+     async function componentDidMount() {
             
-            //   localStorage.removeItem("categoria")
-            //   localStorage.removeItem("nombreImagen")
-            //   localStorage.removeItem("dificultad")
-            //   localStorage.removeItem("ingredientes")
-            //   localStorage.removeItem("procedimiento")
-            //   localStorage.removeItem("categoria")
-            //   localStorage.removeItem("nombre")
+        
             let rdo = await obtenerRecetaID(id);
-            //window.location.reload();
-            console.log("dentro de rdo", rdo)
+                      
+            console.log("dentro de rdo", rdo)            
+
             if (rdo.length > 0) {
+<<<<<<< HEAD
                 
+=======
+              
+>>>>>>> aa5684c78eb9a54f0c515cc67b0bd6af8cd72156
               setCategoria(rdo[0].categoria);
-              localStorage.setItem("categoria",rdo[0].categoria )
+              console.log("dentro de categoria", categoria)
+              //localStorage.setItem("categoria",rdo[0].categoria )
 
               setNombreImagen(rdo[0].nombreImagen);
-              localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
+              //localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
 
               setDificultad(rdo[0].dificultad);
-              localStorage.setItem("dificultad",rdo[0].dificultad )
+              //localStorage.setItem("dificultad",rdo[0].dificultad )
 
               setIngredientes(rdo[0].ingredientes);
-              localStorage.setItem("ingredientes",rdo[0].ingredientes )
+              //localStorage.setItem("ingredientes",rdo[0].ingredientes )
 
               setProcedimiento(rdo[0].procedimiento);
-              localStorage.setItem("procedimiento",rdo[0].procedimiento )
+              //localStorage.setItem("procedimiento",rdo[0].procedimiento )
 
               setAutor(rdo[0].autor);
               localStorage.setItem("autor",rdo[0].autor )
 
               setNombre(rdo[0].nombre);
-              localStorage.setItem("nombre",rdo[0].nombre )
+              //localStorage.setItem("nombre",rdo[0].nombre )
             }
           }
-          componentDidMount();
-        }, [id]);
-    
+          
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues:
         {
-            // nombre: `${localStorage.getItem("nombre")}`,
-            // categoria: ``,
-            // dificultad: `${localStorage.getItem("dificultad")}`,
-            // ingredientes: ``,
-            // procedimiento: ``,
-            // nombreImagen: `${imagen}`,
+            nombre: `${nombre}`,
+            categoria: `${categoria}`,
+            dificultad: `${dificultad}`,
+            ingredientes: `${ingredientes}`,
+            procedimiento: `${procedimiento}`,
+            nombreImagen: `${nombreImagen}`,
 
-
-            nombre: `${localStorage.getItem("nombre")}`,
-            categoria: `${localStorage.getItem("categoria")}`,
-            dificultad: `${localStorage.getItem("dificultad")}`,
-            ingredientes: `${localStorage.getItem("ingredientes")}`,
-            procedimiento: `${localStorage.getItem("procedimiento")}`,
-            nombreImagen: `${localStorage.getItem("nombreImagen")}`,
         },
 
         onSubmit: (values) => {
@@ -167,40 +161,40 @@ const EditarReceta = (props) => {
     });
 
     
-    const guardarImagen = () => {
-        subirImagen();
-    }
+    // const guardarImagen = () => {
+    //     subirImagen();
+    // }
 
-    const subirImagen = async function (receta) {
-        let files = [];
-        let nombres = [];
-        let archivoImagen = '';
+    // const subirImagen = async function (receta) {
+    //     let files = [];
+    //     let nombres = [];
+    //     let archivoImagen = '';
 
-        if (imgAux !== '') {
-            console.log("imgAux", imgAux);
-            files.push(imgAux);
+    //     if (imgAux !== '') {
+    //         console.log("imgAux", imgAux);
+    //         files.push(imgAux);
 
-            //buscar extension archivo
-            let archivoOrig = imgAux.name;
-            let posExt = archivoOrig.indexOf('.');
-            let extension = archivoOrig.substring(posExt, archivoOrig.length);
-            let aleatorio = Math.random().toString().substring(2, 15);
-            nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
+    //         //buscar extension archivo
+    //         let archivoOrig = imgAux.name;
+    //         let posExt = archivoOrig.indexOf('.');
+    //         let extension = archivoOrig.substring(posExt, archivoOrig.length);
+    //         let aleatorio = Math.random().toString().substring(2, 15);
+    //         nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
 
 
-            //subir archivo a servidor
-            console.log(files);
-            console.log(nombres);
+    //         //subir archivo a servidor
+    //         console.log(files);
+    //         console.log(nombres);
 
-            archivoImagen = await uploadImg(files, nombres);
-            validarReceta(nombres);
-        }
-    }
+    //         archivoImagen = await uploadImg(files, nombres);
+    //         validarReceta(nombres);
+    //     }
+    // }
 
     const validarReceta = async function () {
            
         let datos = {
-            id: id,
+            _id: id,
             nombre: formik.values.nombre,
             categoria: formik.values.categoria,
             dificultad: formik.values.dificultad,
@@ -221,10 +215,9 @@ const EditarReceta = (props) => {
 
     }
 
-    //if (toggle === false) {
 
         return (
-            <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+            <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -234,7 +227,7 @@ const EditarReceta = (props) => {
                     <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
 
-                        <Box
+                        {/* <Box
                             sx={{
                                 mt: 5, display: 'flex',
                                 flexDirection: 'column',
@@ -250,7 +243,7 @@ const EditarReceta = (props) => {
                                 }}
                                 getImagen={(i) => setImgAux(i)}
                                 inputProps={{
-                                    placeholder: `${imagen}`
+                                    placeholder: `${nombreImagen}`
                                 }}
                                 endButton={{
                                     buttonProps: {
@@ -264,13 +257,13 @@ const EditarReceta = (props) => {
 
                             />
                         </Box>
-                        <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5>
+                        <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5> */}
 
                         <TextField
                             variant="outlined"
                             margin="normal"
                             color='secondary'
-                            required
+                            required                            
                             fullWidth
                             id="nombre"
                             label="Nombre"
@@ -399,8 +392,6 @@ const EditarReceta = (props) => {
                                 variant="contained"
                                 color="secondary"
                                 className={classes.botón}
-                                //onClick={() => setToggle(!toggle)}
-
                                 disabled={
                                     !(formik.isValid && formik.dirty)
                                     // (formik.errors.nombre)            
@@ -409,7 +400,6 @@ const EditarReceta = (props) => {
                                     // ||
                                     // (formik.errors.procedimiento) 
                                 }
-                               // onClick={() => guardarImagen()}
                                onClick={() => validarReceta()}
                             >
                                 Guardad Cambios
@@ -420,23 +410,7 @@ const EditarReceta = (props) => {
 
             </Container >
         );
-    /*}
-    else
-        return (
-            <div className={classes.paper}>
-                <Exito />
-                <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.botón}>
-                        Continuar
-                    </Button>
-                </NavLink>
-            </div>
-        )*/
+    
 }
 
 export default EditarReceta
