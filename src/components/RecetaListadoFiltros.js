@@ -62,7 +62,11 @@ export default function RecetasListadoFiltros() {
     });
 
 
-    async function mostrar() {
+
+    //window.setInterval(miFuncion, 500, 'Parametro 1', 'Parametro 2');
+
+    async function mostrar(){
+
         let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
         setListaRecetas(rdo.data);
         
@@ -150,7 +154,6 @@ export default function RecetasListadoFiltros() {
                             id="categoria"
                             label="Categoria"
                             size="small"
-                            Categoría
                             options={topCategorias.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
 
@@ -162,7 +165,6 @@ export default function RecetasListadoFiltros() {
                             id="dificultad"
                             label="Dificultad"
                             size="small"
-                            Dificultad
                             options={topDificultades.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
                         />
@@ -170,24 +172,31 @@ export default function RecetasListadoFiltros() {
                     <Grid item xs={12} md={2}>
                         <TextField id="ingrediente" label="Ingrediente" color="secondary" size="small" fullWidth onChange={setearIngredientes} />
                     </Grid>
-
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={mostrar}
-                        endIcon={<FilterListIcon />}>
-                        Aplicar Filtros
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={limpiar}
-                        endIcon={<FilterListIcon />}>
-                        Quitar Filtros
-                    </Button>
+                           
                 </Grid >
             </div >
+
+            
+         
+
+            <div className="title" >
+                
+            </div>
+            <div>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Button
+                    sx={{ fontSize: 20 }}
+                    color="secondary"
+                    onClick={mostrar}>
+                    Aplicar Filtros
+                </Button>
+
+            </Box>
+            </div>
 
             <div className="products">
                 {listaRecetas.map((receta) => {
@@ -213,7 +222,8 @@ export default function RecetasListadoFiltros() {
                         </div>
                     );
                 })}
-            </div>
+            </div> 
+            
 
            
 
