@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+import {NavLink} from 'react-router-dom';
 
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -34,6 +34,9 @@ export default function Navbar() {
             </a>
           </li>
           <li>
+            <a href="#busqueda">Buscar Recetas</a>
+          </li>
+          <li>
             <a href="#recetas">Recetas</a>
           </li>
           <li>
@@ -41,7 +44,6 @@ export default function Navbar() {
 
           </li>
           <li>
-            {/* <a href="#login">Iniciar Sesion</a> */}
             <NavLink to='/Login'>Iniciar Sesion </NavLink>
           </li>
         </ul>
@@ -58,6 +60,11 @@ export default function Navbar() {
             </a>
           </li>
           <li>
+            <a href="#busqueda" onClick={() => setNavbarState(false)}>
+              Buscar Recetas
+            </a>
+          </li>
+          <li>
             <a href="#recetas" onClick={() => setNavbarState(false)}>
               Recetas
             </a>
@@ -68,9 +75,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            {/* <a href="#login" onClick={() => setNavbarState(false)}> */}              
             <NavLink to='/Login'>Iniciar Sesion </NavLink>
-            {/* </a> */}
           </li>
         </ul>
       </ResponsiveNav>

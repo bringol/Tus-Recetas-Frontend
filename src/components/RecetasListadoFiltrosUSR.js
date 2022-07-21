@@ -9,7 +9,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
-import FilterListIcon from '@mui/icons-material/FilterList';
+
 
 import { buscarReceta } from "../controllers/recetaController";
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecetasListadoFiltros() {
+export default function RecetasListadoFiltrosUSR() {
 
     const topCategorias = [
         { title: 'Postres' },
@@ -47,21 +47,31 @@ export default function RecetasListadoFiltros() {
         { title: '5' },
     ];
 
+
     const classes = useStyles();
     const [listaRecetas, setListaRecetas] = useState([]);
     const [nombre, setNombre] = useState('');
     const [categoria, setCategoria] = useState('');
     const [dificultad, setDificultad] = useState('');
     const [ingredientes, setIngredientes] = useState('');
+    const [calificacion, setCalificacion] = useState('');
+    const [calificacionPromedio, setCalificacionPromedio] = useState('');
     const [page, setPage] = useState(1);
     const [pageCount, setpageCount] = useState(0);
-    const myRef = useRef(null);
-    const executeScroll = () => scrollToRef(myRef);
+    const myRef = useRef(null)
+    const executeScroll = () => scrollToRef(myRef)
+    
+    //let nom = document.querySelector("#nombre").value
+    //console.log("nom")
+
+    var data =[];
 
     useEffect(() => {
-    });
+                
+           
+        }
 
-
+    );
 
     //window.setInterval(miFuncion, 500, 'Parametro 1', 'Parametro 2');
 
@@ -79,22 +89,7 @@ export default function RecetasListadoFiltros() {
 
     }
 
-    async function limpiar() {
-        document.getElementById("nombre").value = "";
-        setNombre('');
-        document.getElementById("categoria").value = "";
-        setCategoria('');
-        document.getElementById("dificultad").value = "";
-        setDificultad('');
-        document.getElementById("ingrediente").value = "";
-        setIngredientes('');
-        let rdo = await buscarReceta('', '', '', '', page);
-        setListaRecetas(rdo.data);
-        //setpageCount(rdo.data.pages);
-        //executeScroll()
-    }
-
-    window.onload = function () {
+    window.onload = function (){
         mostrar();
     }
 
@@ -106,7 +101,7 @@ export default function RecetasListadoFiltros() {
 
     const setearIngredientes = e => {
         const ingredientes = e.target.value;
-        console.log("ingredientes seteada", ingredientes);
+        console.log("categoria seteada", ingredientes);
         setIngredientes(ingredientes);
     };
 
@@ -117,17 +112,11 @@ export default function RecetasListadoFiltros() {
     };
 
 
-    const setearDificultad = e => {
-        const dificultad = e;
-        console.log("dificultad seteada", dificultad);
-        setDificultad(dificultad);
-
-    };
-
     function handleAnterior() {
         setPage((p) => {
             if (p === 1)
                 return p
+
             else
                 return p - 1
         })
@@ -148,7 +137,7 @@ export default function RecetasListadoFiltros() {
 
             <div className="title">
                 <h1>
-                    <span>RECETAS</span>
+                    <span>BUSCAR RECETAS</span>
                 </h1>
             </div>
 
@@ -159,20 +148,18 @@ export default function RecetasListadoFiltros() {
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <Autocomplete
-                            onChange={(event, categoria) => setearCategoria(categoria)}
+                           onChange={(event, categoria) => setearCategoria(categoria)}
                             id="categoria"
-                            label="Categoria"
                             size="small"
                             options={topCategorias.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
-
+                            
                         />
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <Autocomplete
-                            onChange={(event, dificultad) => setearDificultad(dificultad)}
+                            onChange={(event, dificultad) => console.log(dificultad)}
                             id="dificultad"
-                            label="Dificultad"
                             size="small"
                             options={topDificultades.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
@@ -183,9 +170,8 @@ export default function RecetasListadoFiltros() {
                     </Grid>
                            
                 </Grid >
-            </div >
 
-            
+            </div>
          
 
             <div className="title" >
@@ -223,7 +209,7 @@ export default function RecetasListadoFiltros() {
                                     {receta.nombre}
                                 </Typography>
                                 <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly sx={{ fontSize: 50 }} />
-                                <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                                <NavLink to={`/login/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
                                     <button>Ver más</button>
                                 </NavLink>
 
@@ -231,92 +217,96 @@ export default function RecetasListadoFiltros() {
                         </div>
                     );
                 })}
-            </div> 
+            </div>
+
             
 
-            {/* // {/* <Box mt={15}></Box>
-            // <div className={classes.container}>
-            //     <Button
-            //         disabled={page === 1}
-            //         onClick={handleAnterior}
-            //         sx={{ fontSize: 20 }}
-            //         color="secondary">
-            //         <ArrowBackIosIcon />
-            //     </Button>
+            {/* <Box mt={15}></Box>
+            <div className={classes.container}>
+                <Button
+                    disabled={page === 1}
+                    onClick={handleAnterior}
+                    sx={{ fontSize: 50 }}
+                >
+                    <ArrowBackIosIcon />
+                </Button>
 
-            //     <Typography sx={{ fontSize: 20 }}>
-            //         {page}<MoreHorizIcon fontSize="small" />{pageCount}
-            //     </Typography>
+                <Typography sx={{ fontSize: 50 }}>
+                    {page}<MoreHorizIcon />{pageCount}
+                </Typography>
 
-            //     <Button
-            //         disabled={page === pageCount}
-            //         onClick={handleSiguiente}
-            //         color="secondary"
-            //         //onClick={executeScroll}
-            //         sx={{ fontSize: 20 }}>
-            //         <ArrowForwardIosIcon />
-            //     </Button>
-            // </div> */}
+                <Button
+                    disabled={page === pageCount}
+                    onClick={handleSiguiente}
+                    //onClick={executeScroll}
+                    sx={{ fontSize: 50 }}
+                >
+                    <ArrowForwardIosIcon />
+                </Button>
+            </div> */}
 
 
-        </Section >
+        </Section>
 
     );
 }
 
 const Section = styled.section`
-  ${TitleStyles};
-  .products {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
-    margin-top: 6rem;
-    .product {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      justify-content: center;
-      align-items: center;
-      h3 {
-        color: #44214e;
+${TitleStyles};
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  margin-top: 3rem;
+  .product {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      color: #44214e;
+    }
+    ${imageZoomEffect};
+    .image {
+      max-height: 20rem;
+      overflow: hidden;
+      border-radius: 1rem;
+      img {
+        height: 20rem;
+        width: 15rem;
+        object-fit: cover;
       }
-      ${imageZoomEffect};
-      .image {
-        max-height: 20rem;
-        overflow: hidden;
-        border-radius: 1rem;
-        img {
-          height: 20rem;
-          width: 15rem;
-          object-fit: cover;
-        }
-      }
-      button {
-        border: none;
-        padding: 1rem 4rem;
-        font-size: 1.4rem;
-        color: white;
-        border-radius: 4rem;
-        transition: 0.5s ease-in-out;
-        cursor: pointer;
+    }
+    button {
+      border: none;
+      padding: 1rem 4rem;
+      font-size: 1.4rem;
+      color: white;
+      border-radius: 4rem;
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+      background: linear-gradient(to right, #572e57, #834e6d, #572e57);
+      text-transform: uppercase;
+      &:hover {
         background: linear-gradient(to right, #572e57, #834e6d, #572e57);
-        text-transform: uppercase;
-        &:hover {
-          background: linear-gradient(to right, #572e57, #834e6d, #572e57);
-        }
-      }      
+      }
     }
+    paginacion{
 
+    }
+    
   }
+}
 
-  @media screen and (min-width: 280px) and (max-width: 720px) {
-    .products {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
+@media screen and (min-width: 280px) and (max-width: 720px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-  @media screen and (min-width: 720px) and (max-width: 1080px) {
-    .products {
-      grid-template-columns: repeat(2, 1fr);
-    }
+}
+@media screen and (min-width: 720px) and (max-width: 1080px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 `;

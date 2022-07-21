@@ -3,12 +3,13 @@ import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRound
 import {Avatar,Button,CssBaseline,TextField,Typography,Container, Box} from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles'; 
 import Exito from "./Exito"
-//
+import { NavLink } from 'react-router-dom'; 
+
 //validacion
 import { useFormik } from 'formik';
 import * as yup from "yup" //libreria de esquemas de validacion
 
-import { NavLink } from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+
 
 //back
 import {createUser} from "../controllers/userController"
@@ -92,7 +93,7 @@ const validationSchema=yup.object
 const Registrarse = () => {
   const classes = useStyles();
 
-  const formik=useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
+  const formik=useFormik
   ({
     initialValues:
     {
@@ -127,7 +128,7 @@ const Registrarse = () => {
   });
 
 
-  //const [count, setCount] = useState(0);
+  
   const [toggle, setToggle] = useState(false);
 
   //la validación sintáctica fue hecha por formik
@@ -143,7 +144,6 @@ const Registrarse = () => {
       let getRegistro = await createUser(datos);
       if (getRegistro.rdo===0 )
       {
-        //setUsuarioValido(true);
         setToggle(!toggle)
         console.log("rdo es cero")
       }
@@ -157,7 +157,7 @@ const Registrarse = () => {
 
   if (toggle === false) {
     return (
-      <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -283,45 +283,11 @@ const Registrarse = () => {
                       disabled={  ///Si no hubo errores, el boton de desbloquea
                         //el submit estará bloq a menos que todos los campos sean validos y los valores iniciales fueron cambiados
                         !(formik.isValid && formik.dirty)
-                        // ( formik.errors.nombre)
-                        // ||
-                        // ( formik.errors.apellido)
-                        // ||
-                        // ( formik.errors.telefono)
-                        // ||
-                        // ( formik.errors.correo)
-                        // ||
-                        // (formik.errors.contraseña) 
-                        // ||
-                        // (formik.errors.repContraseña)                   
-                      
                       }
-                      
-                      //onClick={() => setCount(count + 1)} //cuando le click (ya esta desbloqueado, suma 1) 
-                      //onClick={() => setToggle(!toggle)}
                       onClick={validarRegistro}
                   >
               Confirmar 
-            </Button>
-              {//reemplazado por el toggle
-              /* {count === 0 ? ("") :
-              (
-                
-              <NavLink to='/Home/User' style={{ textDecoration: 'none', color: 'white' }}>
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.botón}>
-                  Siguiente
-                </Button>
-                </NavLink>
-                )
-              //el contador dejo de ser 0, entonces muestro el boton que me va a redirigir 
-              //fuente https://bobbyhadz.com/blog/react-disable-link
-              }          */}
-            
+            </Button>                          
           </form>
         </div>
       </Container>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-//import Button from '@mui/material/Button';
 import {NavLink} from 'react-router-dom';
 
 
@@ -34,7 +33,6 @@ export default function NavbarVacioUSR() {
         <ul className="links">
           <li>
             <a>
-            {/* <Button variant="text">Home</Button> */}
             <NavLink to='/Home/User'>Home </NavLink>
             </a>
           </li>
@@ -45,11 +43,7 @@ export default function NavbarVacioUSR() {
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <ul>
           <li>
-            <a
-              //href="#home"
-              //className="active"
-              //onClick={() => setNavbarState(false)}
-            >
+            <a>
              <NavLink to='/Home/User'>Home </NavLink>
             </a>
           </li>

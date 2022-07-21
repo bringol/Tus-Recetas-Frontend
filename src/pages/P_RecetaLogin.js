@@ -1,6 +1,5 @@
 import React,{Suspense} from "react"
-import Footer from "../components/Footer"//sin el ../ no lo encuentra
-//import RecetaLogin from "../components/RecetaLogin";
+import Footer from "../components/Footer"
 import NavbarVacioUSR from "../components/NavbarVacioUSR";
 import ScrollToTop from "../components/ScrollToTop";
 

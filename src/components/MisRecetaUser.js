@@ -114,15 +114,13 @@ export default function MisRecetaUser() {
                                             <EditIcon />
                                         </IconButton>
                                     </NavLink>
-                                    {/* <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}> */}
+                                   
                                         <IconButton 
                                          aria-label="delete"
-                                         //onClick={eliminar(receta._id)}
                                          onClick={() => eliminar(receta._id)}
                                         >
                                             <DeleteIcon />
                                         </IconButton>
-                                    {/* </NavLink> */}
                                 </Grid>
 
                             </div>

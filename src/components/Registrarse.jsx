@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-//import background from "../assets/portfolio.jpg";
 import background from "../assets/portada.jpg";
 import {NavLink} from 'react-router-dom';
 
