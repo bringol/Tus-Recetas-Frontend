@@ -2,18 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Container, Box, Autocomplete, Grid, FormControl, InputLabel, Select, MenuItem  } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
-import { NavLink } from 'react-router-dom';
-import CustomFileInput from "./CustomFileInput.js";
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import classNames from "classnames";
-import SubirFoto from './SubirFoto';
 import { useParams,useNavigate } from 'react-router-dom';
 
 //validacion
 import { useFormik } from 'formik';
-import * as yup from "yup" //libreria de esquemas de validacion
-import Exito from "./Exito"
-
+import * as yup from "yup"
 //back
 import { editarReceta, uploadImg, obtenerRecetaID } from "../controllers/recetaController"
 
@@ -51,7 +44,6 @@ const validationSchema = yup.object
     ({
         nombre: yup
             .string()
-            //.matches(/^[A-Za-z ]*$/, 'Ingresar título válido')
             .matches(/^[A-ZÑÁÉÍÓÚÜa-zñáéíóúü ]*$/, 'Ingresar título válido')
             .min(2, "Debe contener al menos 2 letras")
             .required(""),
@@ -80,13 +72,9 @@ const validationSchema = yup.object
 const EditarReceta = (props) => {
 
     const classes = useStyles();
-
-    //const [toggle, setToggle] = useState(false);
-    const [imgAux, setImgAux] = React.useState('');
     const { id } = useParams();
     const [categoria, setCategoria] = useState('');
     const [dificultad, setDificultad] = useState('');
-    const [imagen, setImagen] = useState('');
     const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
     const [nombreImagen, setNombreImagen] = useState('');
@@ -105,36 +93,25 @@ const EditarReceta = (props) => {
             
         
             let rdo = await obtenerRecetaID(id);
-                      
-            console.log("dentro de rdo", rdo)            
 
             if (rdo.length > 0) {
-<<<<<<< HEAD
-                
-=======
               
->>>>>>> aa5684c78eb9a54f0c515cc67b0bd6af8cd72156
               setCategoria(rdo[0].categoria);
-              console.log("dentro de categoria", categoria)
-              //localStorage.setItem("categoria",rdo[0].categoria )
-
+              
               setNombreImagen(rdo[0].nombreImagen);
-              //localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
-
+              
               setDificultad(rdo[0].dificultad);
-              //localStorage.setItem("dificultad",rdo[0].dificultad )
-
+              
               setIngredientes(rdo[0].ingredientes);
-              //localStorage.setItem("ingredientes",rdo[0].ingredientes )
-
+             
               setProcedimiento(rdo[0].procedimiento);
-              //localStorage.setItem("procedimiento",rdo[0].procedimiento )
+             
 
               setAutor(rdo[0].autor);
-              localStorage.setItem("autor",rdo[0].autor )
-
+              
+              
               setNombre(rdo[0].nombre);
-              //localStorage.setItem("nombre",rdo[0].nombre )
+              
             }
           }
           
@@ -160,36 +137,7 @@ const EditarReceta = (props) => {
 
     });
 
-    
-    // const guardarImagen = () => {
-    //     subirImagen();
-    // }
 
-    // const subirImagen = async function (receta) {
-    //     let files = [];
-    //     let nombres = [];
-    //     let archivoImagen = '';
-
-    //     if (imgAux !== '') {
-    //         console.log("imgAux", imgAux);
-    //         files.push(imgAux);
-
-    //         //buscar extension archivo
-    //         let archivoOrig = imgAux.name;
-    //         let posExt = archivoOrig.indexOf('.');
-    //         let extension = archivoOrig.substring(posExt, archivoOrig.length);
-    //         let aleatorio = Math.random().toString().substring(2, 15);
-    //         nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
-
-
-    //         //subir archivo a servidor
-    //         console.log(files);
-    //         console.log(nombres);
-
-    //         archivoImagen = await uploadImg(files, nombres);
-    //         validarReceta(nombres);
-    //     }
-    // }
 
     const validarReceta = async function () {
            
@@ -205,9 +153,9 @@ const EditarReceta = (props) => {
         let nuevoDato = await editarReceta(datos);
         console.log(datos._id);
         if (nuevoDato.rdo === 0) {
-            //setUsuarioValido(true);
-            //setToggle(!toggle)
-            console.log("Receta actualizado")
+              alert("Receta actualizada")
+              navigate("/User/Recetas")
+            
         }
         if (nuevoDato.rdo === 1) {
             alert(nuevoDato.mensaje)
@@ -226,39 +174,6 @@ const EditarReceta = (props) => {
                     <h2> Modificar Receta</h2>
                     <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
-
-                        {/* <Box
-                            sx={{
-                                mt: 5, display: 'flex',
-                                flexDirection: 'column',
-                                color: 'secondary',
-                                alignItems: 'center'
-                            }}>
-
-                            <CustomFileInput
-                                className={classes.footerButtons}
-                                color="secondary"
-                                formControlProps={{
-                                    fullWidth: true
-                                }}
-                                getImagen={(i) => setImgAux(i)}
-                                inputProps={{
-                                    placeholder: `${nombreImagen}`
-                                }}
-                                endButton={{
-                                    buttonProps: {
-                                        round: true,
-                                        color: "secondary",
-                                        justIcon: true,
-                                        fileButton: true
-                                    },
-                                    icon: <AddAPhotoIcon />
-                                }}
-
-                            />
-                        </Box>
-                        <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5> */}
-
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -268,7 +183,6 @@ const EditarReceta = (props) => {
                             id="nombre"
                             label="Nombre"
                             name="nombre"
-                            //autoComplete="email"
                             autoFocus
                             value={formik.values.nombre}
                             onChange={formik.handleChange}
@@ -285,7 +199,6 @@ const EditarReceta = (props) => {
                                         <Select
                                             labelId="dificultad"
                                             id="dificultad"
-                                            //defaultValue={dificultad}
                                             value={formik.values.dificultad}
                                             label='dificultad'
                                             name="dificultad"
@@ -373,7 +286,6 @@ const EditarReceta = (props) => {
                             />
                         </Box>
 
-
                         <Box
                             sx={{
                                 mt: 5, display: 'flex',
@@ -393,16 +305,11 @@ const EditarReceta = (props) => {
                                 color="secondary"
                                 className={classes.botón}
                                 disabled={
-                                    !(formik.isValid && formik.dirty)
-                                    // (formik.errors.nombre)            
-                                    // ||
-                                    // ( formik.errors.ingredientes)
-                                    // ||
-                                    // (formik.errors.procedimiento) 
+                                    !(formik.isValid && formik.dirty) 
                                 }
                                onClick={() => validarReceta()}
                             >
-                                Guardad Cambios
+                                Modificar Receta
                             </Button>
                         </Box>
                     </form>

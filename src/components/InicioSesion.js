@@ -1,9 +1,8 @@
 import React, { useState }  from 'react';
-//import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from '@mui/material';
 import {Avatar,Button,CssBaseline,TextField,Link,Grid,Typography,Container} from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles'; //sin esto no funciona por más que lo actualice, probar de sacar el resto para la v5
-import {NavLink} from 'react-router-dom'; //<NavLink to='/lugar'></NavLink>
+import {NavLink} from 'react-router-dom'; 
 
 //validacion
 import { useFormik } from 'formik';
@@ -68,11 +67,6 @@ export default function InicioSesion() {
       contraseña:"",
     },
 
-    onSubmit:(values)=>
-    {
-      //console.log(JSON.stringify(values))
-    },
-
     validationSchema: validationSchema,
 
   });
@@ -88,7 +82,6 @@ export default function InicioSesion() {
       let getLogin = await login(datos);
       if (getLogin.rdo===0 )
       {
-        //setUsuarioValido(true);
         setToggle(!toggle)
         console.log("rdo es cero")
       }
@@ -96,9 +89,6 @@ export default function InicioSesion() {
       {
         alert(getLogin.mensaje)
       }
-      // else{
-      //   alert("error")
-      // }
       
   }
 
@@ -154,7 +144,7 @@ if (toggle === false) {
           </Link>
 
                   
-          {/* <NavLink to='/Home/User' style={{ textDecoration: 'none' , color: 'white' }}> */}
+          
             <Button
               className={classes.botón}
               type="submit"
@@ -162,12 +152,10 @@ if (toggle === false) {
               variant="contained"
               color="secondary"
               disabled={!(formik.isValid && formik.dirty)}
-              //onClick={() => setToggle(!toggle)}
               onClick={validarLogin}
             >
             Ingresar 
             </Button>
-          {/* </NavLink> */}
 
           <Grid container>
             <Grid item xs>

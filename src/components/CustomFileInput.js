@@ -1,5 +1,4 @@
 import React from "react";
-// used for making the prop types of this component
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from "./CustomInput.js";

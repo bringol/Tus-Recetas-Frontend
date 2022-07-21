@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecetasListadoFiltros() {
+export default function RecetasListadoFiltrosUSR() {
 
     const topCategorias = [
         { title: 'Postres' },
@@ -65,7 +65,7 @@ export default function RecetasListadoFiltros() {
     async function mostrar() {
         let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
         setListaRecetas(rdo.data);
-        
+
     }
 
     async function limpiar() {
@@ -205,7 +205,7 @@ export default function RecetasListadoFiltros() {
                                     {receta.nombre}
                                 </Typography>
                                 <Rating defaultValue={receta.calificacionPromedio} precision={1} readOnly sx={{ fontSize: 50 }} />
-                                <NavLink to={`/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                                <NavLink to={`/login/receta/${receta._id}`} style={{ textDecoration: 'none', color: 'white' }}>
                                     <button>Ver más</button>
                                 </NavLink>
 
@@ -214,8 +214,6 @@ export default function RecetasListadoFiltros() {
                     );
                 })}
             </div>
-
-           
 
 
         </Section >

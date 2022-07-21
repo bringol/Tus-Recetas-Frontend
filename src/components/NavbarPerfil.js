@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {NavLink} from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+import {NavLink} from 'react-router-dom';
 
 
 export default function NavbarPerfil() {
@@ -30,36 +30,26 @@ export default function NavbarPerfil() {
         </div>
         <ul className="links">
           <li>
-            {/* <a href="#perfil">Perfil</a> */}
             <NavLink to='/user/perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>               
           </li>
           <li>
-            {/* <a href="#mis-recetas">Mis Recetas</a> */}
             <NavLink to='/user/password' style={{ textDecoration: 'none' , color: 'white' }}>Contraseña</NavLink>
           </li>
-          <li>
-            {/* <a href="#salir"> */}              
-            <NavLink to='/home/user' style={{ textDecoration: 'none' , color: 'white' }}>Home</NavLink>            
-            {/* </a> */}
+          <li>          
+            <NavLink to='/home/user' style={{ textDecoration: 'none' , color: 'white' }}>Home</NavLink>  
           </li>
         </ul>
       </Nav>
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <ul>
           <li>
-            {/* <a href="#perfil" onClick={() => setNavbarState(false)}> */}
             <NavLink to='/user/perfil' style={{ textDecoration: 'none' , color: 'white' }}>Perfil</NavLink>
-            {/* </a> */}
           </li>
           <li>
-            {/* <a href="#salir" onClick={() => setNavbarState(false)}> */}
             <NavLink to='/user/password' style={{ textDecoration: 'none' , color: 'white' }}>Contraseña</NavLink>
-            {/* </a> */}
           </li>
           <li>
-            {/* <a href="#salir" onClick={() => setNavbarState(false)}> */}
             <NavLink to='/home/user' style={{ textDecoration: 'none' , color: 'white' }}>Home</NavLink>
-            {/* </a> */}
           </li>
         </ul>
       </ResponsiveNav>

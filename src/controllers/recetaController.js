@@ -7,13 +7,12 @@ export const obtenerRecetas = async function (pag) {
             method: 'GET',
             mode: "cors",
             headers: {
-                'x-access-token': localStorage.getItem('x'),
+                //'x-access-token': localStorage.getItem('x'),
                 'Origin': 'http://localhost:3000'
             }
         });
         if (response.status === 200) {
             let data = await response.json();
-            //let listaRecetas = data.data.docs;
             let listaRecetas = data
             return listaRecetas;
         }
@@ -34,25 +33,16 @@ export const obtenerRecetaID = async function (id) {
     try {
         let response = await fetch(url, {
             method: 'GET',
-            //method: 'POST',
             mode: "cors",
             headers: {
-                //'x-access-token': localStorage.getItem('x'),
+                // 'x-access-token': localStorage.getItem('x'),
+                // 'Authorization': `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             }
         });
         if (response.status === 200) {
             let respuesta = await response.json();
             let listaRecetas = respuesta.data.docs
-            // console.log("respuesta webservice",respuesta.data.docs)
-            // localStorage.removeItem("receta");
-            // localStorage.setItem("receta",JSON.stringify(respuesta.data.docs));
-            // //sessionStorage.setItem("receta",JSON.stringify(respuesta));
-            // console.log("respuesta webservice localStorage receta")
-            // console.log(localStorage.getItem("receta"))
-            // console.log("respuesta webservice sessionStorage receta")
-            // console.log(sessionStorage.getItem("receta"))
-            // console.log("webservice listaRecetas",data)
             return listaRecetas;
         }
         else {
@@ -72,10 +62,9 @@ export const obtenerRecetaIDUSR = async function (id) {
     try {
         let response = await fetch(url, {
             method: 'GET',
-            //method: 'POST',
             mode: "cors",
             headers: {
-                //    'x-access-token': localStorage.getItem('x'),
+                'x-access-token': localStorage.getItem('x'),
                 'Authorization': `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             }
@@ -109,9 +98,6 @@ export const crearReceta = async function (receta) { //creo la receta
     formData.append('email', receta.email);
     formData.append('autor', receta.autor);
     formData.append('nombreImagen', receta.nombreImagen);
-    //formData.append('email', localStorage.getItem("email"));
-    //formData.append('autor', `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`);
-    //formData.append('nombreImagen', "https://vectorified.com/images/image-placeholder-icon-15.png");
 
     try {
         let response = await fetch(url, {
@@ -161,9 +147,7 @@ export const crearReceta = async function (receta) { //creo la receta
 
 export const uploadImg = async function (files, nombres) //subir receta a cloudinary
 {
-    //url webservices
     let url = urlWebServices.uploadImg;
-
     console.log('files', files)
     console.log('nombres', nombres)
     const formData = new FormData();
@@ -179,8 +163,8 @@ export const uploadImg = async function (files, nombres) //subir receta a cloudi
             headers: {
                 'Accept': 'application/form-data',
                 'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000',
-                //'Content-Type': 'application/form-data'
             },
             body: formData
         });
@@ -223,10 +207,6 @@ export const calificarReceta = async function (calificacion) {
 
         let data = await response.json();
         switch (response.status) {
-            case 200:
-                {
-                    return ({rdo: 1, mensaje: "Calificacion exitosa"});
-                }
             case 201:
                 {
                     return ({ rdo: 0, mensaje: "Ok" });
@@ -244,6 +224,11 @@ export const calificarReceta = async function (calificacion) {
             case 400:
                 {
                     return ({ rdo: 1, mensaje: data.message })
+                }
+            default:
+                {
+                    //otro error
+                    return ({ rdo: 1, mensaje: "Calificacion exitosa" });
                 }
         }
     }
@@ -302,7 +287,7 @@ export const obtenerRecetaMail = async function (pag) {
             mode: "cors",
             headers: {
                 'Accept': 'application/x-www-form-urlencoded',
-                //'x-access-token': localStorage.getItem('x'),
+                'x-access-token': localStorage.getItem('x'),
                 "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -313,7 +298,6 @@ export const obtenerRecetaMail = async function (pag) {
 
         if (response.status === 200) {
             let data = await response.json();
-            //let listaRecetas = data.data.docs;
             let listaRecetas = data
             return listaRecetas;
         }
@@ -331,9 +315,8 @@ export const obtenerRecetaMail = async function (pag) {
 
 
 
-export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, pag) {
-    //let url = urlWebServices.buscarReceta + `?page=${pag}`;
-    let url = urlWebServices.buscarReceta
+export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes) {
+    let url = urlWebServices.buscarReceta;
     const formData = new FormData();
     console.log(nombre);
 
@@ -343,7 +326,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         'dificultad': dificultad,
         'ingredientes': ingredientes,
     };
-
+   
     var formBody = [];
     for (var property in details) {
         var encodedKey = encodeURIComponent(property);
@@ -359,8 +342,6 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
             mode: "cors",
             headers: {
                 'Accept': 'application/x-www-form-urlencoded',
-                //'x-access-token': localStorage.getItem('x'),
-                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -368,7 +349,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         });
         if (response.status === 200) {
             let listaRecetas = await response.json();
-            console.log(listaRecetas)
+            console.log("dentro controller",listaRecetas)
             return listaRecetas;
         }
         else {
@@ -383,13 +364,10 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
     };
 }
 
+
 export const editarReceta = async function (receta) {
 
-<<<<<<< HEAD
-    let url = urlWebServices.editarReceta + "/" + receta._id;;
-=======
     let url = urlWebServices.editarReceta;
->>>>>>> aa5684c78eb9a54f0c515cc67b0bd6af8cd72156
     const formData = new URLSearchParams();
     formData.append('_id', receta._id);
     formData.append('nombre', receta.nombre);
@@ -406,6 +384,7 @@ export const editarReceta = async function (receta) {
             headers: {
                 'Accept': 'application/form-data',
                 'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             },
             body: formData,
@@ -452,12 +431,12 @@ export const obtenerRecetasFiltros = async function (pag, nombre, categoria, dif
             mode: "cors",
             headers: {
                 'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             }
         });
         if (response.status === 200) {
             let data = await response.json();
-            //let listaRecetas = data.data.docs;
             let listaRecetas = data
             return listaRecetas;
         }

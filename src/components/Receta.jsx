@@ -7,6 +7,7 @@ import { obtenerRecetaID } from "../controllers/recetaController";
 import Rating from '@mui/material/Rating';
 import CalificionRating from "./CalificacionRating"
 
+
 export default function Receta() {
 
   const { id } = useParams();
@@ -20,6 +21,8 @@ export default function Receta() {
   const [imagen, setImagen] = useState('');
   const [autor, setAutor] = useState('');
   const [nombre, setNombre] = useState('');
+
+
 
   useEffect(() => {
     async function componentDidMount() {
@@ -41,6 +44,8 @@ export default function Receta() {
     componentDidMount();
   }, [id]);
 
+
+
   return (
 
     <Section id="recetas">
@@ -56,6 +61,7 @@ export default function Receta() {
 
           <div className="recetas">
 
+
             <Grid item xs={12} md={6}>
               <div className="receta">
                 <div className="image">
@@ -70,10 +76,10 @@ export default function Receta() {
                 <h3>Autor: {autor}</h3>
                 <h3>Dificultad</h3>
                 {/* <a>{dificultad}</a> */}
-                <CalificionRating dificultad={parseInt(dificultad)} />
+                <CalificionRating calificacion={parseInt(dificultad)} />
 
                 <h3>Calificación</h3>
-                <Rating value={parseInt(calificacionProm)} precision={1} readOnly sx={{ fontSize: 30 }}/>
+                <Rating value={parseInt(calificacionProm)} precision={1} readOnly sx={{ fontSize: 30 }}                />
                 <>
                 <br></br>
                 {usrTotales} votos</>
@@ -82,6 +88,7 @@ export default function Receta() {
                 <p>{cat}</p>
 
                 <h3>Ingredientes</h3>
+                {/* <p>PLACEHOLDER</p> */}
                 <p align="justify">{ingredientes}</p>
 
                 <h3>Descripción</h3>

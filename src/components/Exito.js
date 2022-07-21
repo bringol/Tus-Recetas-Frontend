@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/material';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-import RestablcerContraseña from "../components/RestablecerContraseña";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

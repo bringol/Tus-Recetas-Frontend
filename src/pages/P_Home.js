@@ -1,30 +1,24 @@
-import { useEffect } from 'react';
 import Footer from "../components/Footer"
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Registrarse from "../components/Registrarse";
 import ScrollToTop from "../components/ScrollToTop";
-import RecetaListadoFiltros from "../components/RecetaListadoFiltros";
-import { Box } from '@mui/material';
+import Recetas from "../components/RecetasListado";
+import Busqueda from "../components/RecetaListadoFiltros";
+import Box from '@mui/material/Box';
 
 export default function P_Home() {
-
-    /*const loadData=async ()=>{
-        //console.log(localStorage);
-        localStorage.clear();
-        //console.log(localStorage);
-      }
-    
-      useEffect(()=>{
-        loadData()
-      },[])*/
 
     return (
     <div>
         <Navbar/>
-        <Hero/>        
-        <RecetaListadoFiltros/>
-        <Registrarse/>
+        <Hero/>
+        <Recetas/>
+        <Box mt={35} mb={55}>          
+            <Registrarse/>
+        </Box>
+        <Busqueda/>
+        <Box mt={55}></Box>
         <Footer/>
         <ScrollToTop />  
     </div>

@@ -95,18 +95,14 @@ const RestablcerContraseña = () => {
       let reinicio = await reinicioPassword(datos);
       if (reinicio.rdo===0 )
       {
-        //setUsuarioValido(true);
         setToggle(!toggle)
         console.log("contraseña cambiada")
       }
       if (reinicio.rdo===1)
       {
-        //alert(reinicio.mensaje)
         alert("Error: Enlace expirado, vuelva a pedir el cambio de contraseña")
       }
-      // else{
-      //   alert("error")
-      // }
+      
       
   }
 
@@ -124,7 +120,6 @@ if (toggle === false) {
       <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
       <Box mt={3}></Box>
-        {/* <TextField id="standard-basic" label="Correo electrónico" variant="standard" size="small" color='secondary' fullWidth required /> */}
         <TextField
         id="contraseña"
         name="contraseña" 
@@ -160,10 +155,8 @@ if (toggle === false) {
         helperText={formik.touched.repContraseña && formik.errors.repContraseña}
         onBlur={formik.handleBlur} 
           />
-        {/* <Button variant="contained" size="medium" align='center'>Confirmar</Button> */}
         
-        <Box sx={{ mt: 5 }}>    {/*margin top 5 pixeles https://mui.com/system/spacing/ */}
-        {/* <NavLink to='/Home' style={{ textDecoration: 'none', color: 'white' }}> */}
+        <Box sx={{ mt: 5 }}> 
           <Button
             type="submit"
             fullWidth
@@ -171,12 +164,10 @@ if (toggle === false) {
             color="secondary"
             className={classes.botón}
             disabled={!(formik.isValid && formik.dirty)}
-            //onClick={() => setToggle(!toggle)}
             onClick={validarReinicio}
           >
             Siguiente
           </Button>
-          {/* </NavLink> */}
         </Box>
       </form>
       </div>

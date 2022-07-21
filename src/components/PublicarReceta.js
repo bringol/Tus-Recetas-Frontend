@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 import CustomFileInput from "./CustomFileInput.js";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import classNames from "classnames";
-import SubirFoto from './SubirFoto';
 
 //validacion
 import { useFormik } from 'formik';
@@ -118,7 +117,6 @@ const PublicarReceta = (props) => {
     }
     let getCrear = await crearReceta(datos);
     if (getCrear.rdo === 0) {
-      //setUsuarioValido(true);
       setToggle(!toggle)
       console.log("los datos enviados", datos)
     }
@@ -218,7 +216,6 @@ const PublicarReceta = (props) => {
               id="nombre"
               label="Nombre"
               name="nombre"
-              //autoComplete="email"
               autoFocus
               value={formik.values.nombre}
               onChange={formik.handleChange}
