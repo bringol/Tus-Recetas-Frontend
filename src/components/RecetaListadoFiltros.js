@@ -67,7 +67,7 @@ export default function RecetasListadoFiltros() {
 
     async function mostrar(){
 
-        let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes, calificacion);
+        let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
         console.log("dentro redo busqe", rdo)
         setListaRecetas(rdo.data);        
         //setpageCount(rdo.data.pages);
