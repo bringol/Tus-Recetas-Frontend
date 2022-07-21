@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../components/Footer"//sin el ../ no lo encuentra
+import Footer from "../components/Footer"
 import NavbarVacio from "../components/NavbarVacio";
 import ScrollToTop from "../components/ScrollToTop";
 import Registro from "../components/Registro"

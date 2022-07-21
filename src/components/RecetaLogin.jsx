@@ -16,7 +16,6 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 export default function Receta() {
 
   const { id } = useParams();
-  //const { calificacionPromedio } = useParams();
   const [cat, setCat] = useState('');
   const [dificultad, setDificultad] = useState('');
   const [ingredientes, setIngredientes] = useState('');
@@ -37,7 +36,6 @@ export default function Receta() {
   useEffect(() => {
     async function componentDidMount() {
       let rdo = await obtenerRecetaIDUSR(id);
-      // console.log("receta",rdo)
       if (rdo.length > 0) {
         setCat(rdo[0].categoria);
         setImagen(rdo[0].nombreImagen);
@@ -108,8 +106,6 @@ export default function Receta() {
 
 
               <h3>Calificación </h3>
-              {/* value={parseInt(calificacionProm)}  onChange={rate => console.log(rate)} */}
-
               <Rating value={parseInt(calificacionProm)} precision={1} sx={{ fontSize: 30 }}
                 onChange={(event, newValue) => {
                   if(condition === false && autor === `${localStorage.getItem("nombre")} ${localStorage.getItem("apellido")}`){

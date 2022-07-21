@@ -64,15 +64,7 @@ const OlvidoConstraseña = () => {
     initialValues:
     {
       correo:"",
-
-      
     },
-
-    // onSubmit:(values)=>
-    // {
-    //   console.log(JSON.stringify(values))
-    // },
-
     validationSchema: validationSchema,
 
   });
@@ -88,18 +80,12 @@ const OlvidoConstraseña = () => {
     let envio = await olvidoPassword(datos);
     if (envio.rdo===0 )
     {
-      // console.log("Correo Enviado")
-      // alert("Correo Enviado")
-      setToggle(!toggle)
-      
+      setToggle(!toggle)      
     }
     if (envio.rdo===1)
     {//No se dará indicios del resultado
      //por mas que el email sea inválido
      //se mostrará el mismo mensaje
-
-      //alert(envio.mensaje)
-      //alert("error")
       setToggle(!toggle)
     }
     
@@ -137,7 +123,6 @@ const OlvidoConstraseña = () => {
           
             <Box sx={{ mt: 5 }}>
               <Button
-                //onClick={() => setToggle(!toggle)}
                 onClick={validarDatos}
                 type="submit"
                 fullWidth
@@ -151,7 +136,7 @@ const OlvidoConstraseña = () => {
             </Box>
             </form>
          
-          {/* {toggle && ( <RestablcerContraseña/>)} */}
+         
         </div>
 
       </Container >

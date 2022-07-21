@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import { Button, Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
 
@@ -119,7 +118,6 @@ export default function RecetasListado() {
             disabled={page === pageCount}
             onClick={handleSiguiente}
             color="secondary"
-            //onClick={executeScroll}
             sx={{ fontSize: 20 }}
           >
             <ArrowForwardIosIcon />

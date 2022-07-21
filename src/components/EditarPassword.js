@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { CssBaseline, Container, Avatar, TextField, Button, Box } from '@mui/material';
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
-import { NavLink } from 'react-router-dom'; // <NavLink to='/Lugar' style={{ textDecoration: 'none' , color: 'white' }}>texto </NavLink>
+import { NavLink } from 'react-router-dom'; 
 import { makeStyles } from '@material-ui/core/styles';
 
 
 //validacion
 import { useFormik } from 'formik';
-import * as yup from "yup" //libreria de esquemas de validacion
+import * as yup from "yup"
 import Exito from "./Exito"
 //comunicacion con el back
 import {editarPassword} from "../controllers/userController"
@@ -61,7 +61,7 @@ const EditarPassword = () => {
 
   const classes = useStyles();
 
-  const formik=useFormik //ahora puedo usar los valores de formik referenciando esa variable ubicandola en las diferentes secciones del fomulario
+  const formik=useFormik
   ({
     initialValues:
     {
@@ -71,10 +71,6 @@ const EditarPassword = () => {
       
     },
 
-    // onSubmit:(values)=>
-    // {
-    //   console.log(JSON.stringify(values))
-    // },
 
     validationSchema: validationSchema
 
@@ -91,7 +87,6 @@ const EditarPassword = () => {
       let nuevaPass = await editarPassword(datos);
       if (nuevaPass.rdo===0 )
       {
-        //setUsuarioValido(true);
         setToggle(!toggle)
         console.log("Contraseña actualizada")
       }
@@ -149,7 +144,7 @@ const EditarPassword = () => {
             />
 
 
-            <Box sx={{ mt: 5 }}>{/*margin top 5 pixeles https://mui.com/system/spacing/ */}
+            <Box sx={{ mt: 5 }}>
 
               <Button
                 type="submit"
@@ -158,13 +153,9 @@ const EditarPassword = () => {
                 color="secondary"
                 className={classes.botón}
                 disabled={ 
-                  //el submit estará bloq a menos que todos los campos sean validos y los valores iniciales fueron cambiados
-                  //https://stackoverflow.com/questions/59443005/react-formik-form-validation-how-to-initially-have-submit-button-disabled
-                  !(formik.isValid && formik.dirty)
-                          
-                
+                  !(formik.isValid && formik.dirty)                                  
                 }
-                //onClick={() => setToggle(!toggle)}
+               
                 onClick={validarPassword}
 
               >
