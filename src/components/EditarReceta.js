@@ -93,50 +93,10 @@ const EditarReceta = (props) => {
     const [nombre, setNombre] = useState('');
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     async function componentDidMount() {
-            
-    //             async function componentDidMount() {
-            
-        
-    //         let rdo = await obtenerRecetaID(id);
-    //         //window.location.reload();
-    //         console.log("dentro de rdo", rdo)            
-
-    //         if (rdo.length > 0) {
-              
-    //           setCategoria(rdo[0].categoria);
-    //           console.log("dentro de categoria", categoria)
-    //           localStorage.setItem("categoria",rdo[0].categoria )
-
-    //           setNombreImagen(rdo[0].nombreImagen);
-    //           localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
-
-    //           setDificultad(rdo[0].dificultad);
-    //           localStorage.setItem("dificultad",rdo[0].dificultad )
-
-    //           setIngredientes(rdo[0].ingredientes);
-    //           localStorage.setItem("ingredientes",rdo[0].ingredientes )
-
-    //           setProcedimiento(rdo[0].procedimiento);
-    //           localStorage.setItem("procedimiento",rdo[0].procedimiento )
-
-    //           setAutor(rdo[0].autor);
-    //           localStorage.setItem("autor",rdo[0].autor )
-              
-    //           setNombre(rdo[0].nombre);
-    //           localStorage.setItem("nombre",rdo[0].nombre )
-    //         }
-    //       }
-          
-            
-    //       }
-    //       componentDidMount();
-    //     }, [id]);
+   
 
     useEffect(() => {               
         componentDidMount();
-        //window.location.reload()
     }, []); 
    
 
@@ -178,22 +138,6 @@ const EditarReceta = (props) => {
         enableReinitialize: true,
         initialValues:
         {
-            // nombre: `${localStorage.getItem("nombre")}`,
-            // categoria: ``,
-            // dificultad: `${localStorage.getItem("dificultad")}`,
-            // ingredientes: ``,
-            // procedimiento: ``,
-            // nombreImagen: `${imagen}`,
-
-
-            // nombre: {nombre},
-            // categoria: `${localStorage.getItem("categoria")}`,
-            // dificultad: `${localStorage.getItem("dificultad")}`,
-            // ingredientes: `${localStorage.getItem("ingredientes")}`,
-            // procedimiento: `${localStorage.getItem("procedimiento")}`,
-            // nombreImagen: `${localStorage.getItem("nombreImagen")}`,
-
-
             nombre: `${nombre}`,
             categoria: `${categoria}`,
             dificultad: `${dificultad}`,
@@ -212,35 +156,35 @@ const EditarReceta = (props) => {
     });
 
     
-    const guardarImagen = () => {
-        subirImagen();
-    }
+    // const guardarImagen = () => {
+    //     subirImagen();
+    // }
 
-    const subirImagen = async function (receta) {
-        let files = [];
-        let nombres = [];
-        let archivoImagen = '';
+    // const subirImagen = async function (receta) {
+    //     let files = [];
+    //     let nombres = [];
+    //     let archivoImagen = '';
 
-        if (imgAux !== '') {
-            console.log("imgAux", imgAux);
-            files.push(imgAux);
+    //     if (imgAux !== '') {
+    //         console.log("imgAux", imgAux);
+    //         files.push(imgAux);
 
-            //buscar extension archivo
-            let archivoOrig = imgAux.name;
-            let posExt = archivoOrig.indexOf('.');
-            let extension = archivoOrig.substring(posExt, archivoOrig.length);
-            let aleatorio = Math.random().toString().substring(2, 15);
-            nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
+    //         //buscar extension archivo
+    //         let archivoOrig = imgAux.name;
+    //         let posExt = archivoOrig.indexOf('.');
+    //         let extension = archivoOrig.substring(posExt, archivoOrig.length);
+    //         let aleatorio = Math.random().toString().substring(2, 15);
+    //         nombres.push("img" + localStorage.getItem('nombre') + "_" + aleatorio + extension);
 
 
-            //subir archivo a servidor
-            console.log(files);
-            console.log(nombres);
+    //         //subir archivo a servidor
+    //         console.log(files);
+    //         console.log(nombres);
 
-            archivoImagen = await uploadImg(files, nombres);
-            validarReceta(nombres);
-        }
-    }
+    //         archivoImagen = await uploadImg(files, nombres);
+    //         validarReceta(nombres);
+    //     }
+    // }
 
     const validarReceta = async function () {
            
@@ -256,19 +200,9 @@ const EditarReceta = (props) => {
         let nuevoDato = await editarReceta(datos);
         console.log(datos._id);
         if (nuevoDato.rdo === 0) {
-            //setUsuarioValido(true);
-            //setToggle(!toggle)
               alert("Receta actualizada")
-               
-              localStorage.removeItem("categoria")
-              localStorage.removeItem("nombreImagen")
-              localStorage.removeItem("dificultad")
-              localStorage.removeItem("ingredientes")
-              localStorage.removeItem("procedimiento")
-              localStorage.removeItem("nombre")
-              //window.location.reload();
               navigate("/User/Recetas")
-            console.log("Receta actualizado")
+            
         }
         if (nuevoDato.rdo === 1) {
             alert(nuevoDato.mensaje)
@@ -276,10 +210,9 @@ const EditarReceta = (props) => {
 
     }
 
-    //if (toggle === false) {
 
         return (
-            <Container component="main" maxWidth="xs">{/*ajustar para pantallas mas grandes*/}
+            <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -289,7 +222,7 @@ const EditarReceta = (props) => {
                     <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
 
 
-                        <Box
+                        {/* <Box
                             sx={{
                                 mt: 5, display: 'flex',
                                 flexDirection: 'column',
@@ -319,7 +252,7 @@ const EditarReceta = (props) => {
 
                             />
                         </Box>
-                        <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5>
+                        <h5>Recorda que el tamaño maximo de la imagen es 3MB</h5> */}
 
                         <TextField
                             variant="outlined"
@@ -453,12 +386,9 @@ const EditarReceta = (props) => {
                                 variant="contained"
                                 color="secondary"
                                 className={classes.botón}
-                                //onClick={() => setToggle(!toggle)}
-
                                 disabled={
                                     !(formik.isValid && formik.dirty) 
                                 }
-                               // onClick={() => guardarImagen()}
                                onClick={() => validarReceta()}
                             >
                                 Modificar Receta
@@ -469,23 +399,7 @@ const EditarReceta = (props) => {
 
             </Container >
         );
-    /*}
-    else
-        return (
-            <div className={classes.paper}>
-                <Exito />
-                <NavLink to='/User/Recetas' style={{ textDecoration: 'none', color: 'white' }}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.botón}>
-                        Continuar
-                    </Button>
-                </NavLink>
-            </div>
-        )*/
+    
 }
 
 export default EditarReceta

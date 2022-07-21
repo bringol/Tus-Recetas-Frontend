@@ -253,16 +253,22 @@ export const calificarReceta = async function (calificacion) {
     };
 }
 
-export const eliminarReceta = async function (id) {
-    let url = urlWebServices.deleteReceta + "/" + id;
+export const eliminarReceta = async function (receta) {
+    let url = urlWebServices.eliminarReceta;
+    const formData = new URLSearchParams();
+    formData.append('id', receta.id);
     try {
         let response = await fetch(url, {
             method: 'DELETE',
             mode: "cors",
             headers: {
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'x-access-token': localStorage.getItem('x'),
-                'Origin': 'http://localhost:3000'
-            }
+                'Origin': 'http://localhost:3000',
+                'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
         });
 
         let data = await response.json();
