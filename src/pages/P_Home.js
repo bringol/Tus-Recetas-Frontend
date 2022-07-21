@@ -4,8 +4,6 @@ import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Registrarse from "../components/Registrarse";
 import ScrollToTop from "../components/ScrollToTop";
-import Search from "../components/Search";
-import RecetasListado from "../components/RecetasListado";
 import RecetaListadoFiltros from "../components/RecetaListadoFiltros";
 import { Box } from '@mui/material';
 
@@ -25,7 +23,6 @@ export default function P_Home() {
     <div>
         <Navbar/>
         <Hero/>        
-        {/*<Search/>*/}
         <RecetaListadoFiltros/>
         <Registrarse/>
         <Footer/>

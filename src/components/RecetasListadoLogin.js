@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
+import { Autocomplete, TextField, Paper, Grid, Stack, flex } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Button, Box, Typography } from '@mui/material';
@@ -8,10 +9,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
-
-
-import { obtenerRecetas } from "../controllers/recetaController";
+import { buscarReceta } from "../controllers/recetaController";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
@@ -25,31 +25,96 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 export default function RecetasListadoLogin() {
+
+  const topCategorias = [
+    { title: 'Postres' },
+    { title: 'Carnes' },
+    { title: 'Frituras' },
+    { title: 'Pasteleria' },
+    { title: 'Guisos y sopas' },
+    { title: 'Arroces y pastas' },
+    { title: 'Pizzas' },
+    { title: 'Panes' },
+    { title: 'Vegetarianas' },
+  ];
+
+  const topDificultades = [
+    { title: '1' },
+    { title: '2' },
+    { title: '3' },
+    { title: '4' },
+    { title: '5' },
+  ];
 
   const classes = useStyles();
   const [listaRecetas, setListaRecetas] = useState([]);
+  const [nombre, setNombre] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [dificultad, setDificultad] = useState('');
+  const [ingredientes, setIngredientes] = useState('');
   const [page, setPage] = useState(1);
   const [pageCount, setpageCount] = useState(0);
-  const myRef = useRef(null)
-  const executeScroll = () => scrollToRef(myRef)
-
+  const myRef = useRef(null);
+  const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
-    async function componentDidMount() {
-      let rdo = await obtenerRecetas(page);
-      //console.log("numberOfPagesANTES", numberOfPages);
-      setListaRecetas(rdo.data.docs);
-      //console.log("total paginas",rdo.data.pages);
-      //console.log(listaRecetas)
-      setpageCount(rdo.data.pages);
-      executeScroll()
-      //console.log(listaRecetas);
-      //console.log("dato",rdo.data.docs);
-    }
-    componentDidMount();
-  }, [page]);
+
+  });
+
+  async function mostrar() {
+    let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
+    setListaRecetas(rdo.data);
+    //let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes, page);
+    //setpageCount(rdo.data.pages);
+    //executeScroll();
+
+  }
+
+  async function limpiar() {
+    document.getElementById("nombre").value = "";
+    setNombre('');
+    document.getElementById("categoria").value = "";
+    setCategoria('');
+    document.getElementById("dificultad").value = "";
+    setDificultad('');
+    document.getElementById("ingrediente").value = "";
+    setIngredientes('');
+    let rdo = await buscarReceta('', '', '', '', page);
+    setListaRecetas(rdo.data);
+    //setpageCount(rdo.data.pages);
+    //executeScroll()
+  }
+
+  window.onload = function () {
+    mostrar();
+  }
+
+  const setearNombre = e => {
+    const nombre = e.target.value;
+    console.log("nombre seteado", nombre);
+    setNombre(nombre);
+  };
+
+  const setearIngredientes = e => {
+    const ingredientes = e.target.value;
+    console.log("ingredientes seteada", ingredientes);
+    setIngredientes(ingredientes);
+  };
+
+  const setearCategoria = e => {
+    const categoria = e;
+    console.log("categoria seteada", categoria);
+    setCategoria(categoria);
+  };
+
+
+  const setearDificultad = e => {
+    const dificultad = e;
+    console.log("dificultad seteada", dificultad);
+    setDificultad(dificultad);
+
+  };
 
   function handleAnterior() {
     setPage((p) => {
@@ -71,14 +136,65 @@ export default function RecetasListadoLogin() {
     })
   }
 
-
   return (
     <Section id="recetas">
-      <div className="title" ref={myRef}>
+
+      <div className="title">
         <h1>
-          <span>Recetas</span>
+          <span>RECETAS</span>
         </h1>
       </div>
+
+      <div className="filtros">
+        <Grid container direction="row">
+          <Grid item xs={12} md={2}>
+            <TextField id="nombre" label="Nombre" color="secondary" size="small" fullWidth onChange={setearNombre} />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <Autocomplete
+              onChange={(event, categoria) => setearCategoria(categoria)}
+              id="categoria"
+              label="Categoria"
+              size="small"
+              Categoría
+              options={topCategorias.map((option) => option.title)}
+              renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
+
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <Autocomplete
+              onChange={(event, dificultad) => setearDificultad(dificultad)}
+              id="dificultad"
+              label="Dificultad"
+              size="small"
+              Dificultad
+              options={topDificultades.map((option) => option.title)}
+              renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <TextField id="ingrediente" label="Ingrediente" color="secondary" size="small" fullWidth onChange={setearIngredientes} />
+          </Grid>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={mostrar}
+            endIcon={<FilterListIcon />}>
+            Aplicar Filtros
+          </Button>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={limpiar}
+            endIcon={<FilterListIcon />}>
+            Quitar Filtros
+          </Button>
+        </Grid >
+      </div >
+
       <div className="products">
         {listaRecetas.map((receta) => {
           return (
@@ -87,7 +203,6 @@ export default function RecetasListadoLogin() {
                 <div className="image">
                   <img src={receta.nombreImagen} alt="" />
                 </div>
-                {/* <>{receta._id}</> */}
                 <Typography
                   sx={{ textAlign: "center", fontWeight: 'bold' }}
                   variant="overline"
@@ -105,15 +220,12 @@ export default function RecetasListadoLogin() {
         })}
       </div>
 
-      <Box mt={5}> </Box>
-
       <div className={classes.container}>
         <Button
           disabled={page === 1}
           onClick={handleAnterior}
           sx={{ fontSize: 20 }}
-          color="secondary"
-        >
+          color="secondary">
           <ArrowBackIosIcon />
         </Button>
 
@@ -126,8 +238,7 @@ export default function RecetasListadoLogin() {
           onClick={handleSiguiente}
           color="secondary"
           //onClick={executeScroll}
-          sx={{ fontSize: 20 }}
-        >
+          sx={{ fontSize: 20 }}>
           <ArrowForwardIosIcon />
         </Button>
       </div>
@@ -144,7 +255,7 @@ const Section = styled.section`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 3rem;
-    margin-top: 3rem;
+    margin-top: 6rem;
     .product {
       display: flex;
       flex-direction: column;
@@ -178,12 +289,9 @@ const Section = styled.section`
         &:hover {
           background: linear-gradient(to right, #572e57, #834e6d, #572e57);
         }
-      }
-      paginacion{
-
-      }
-      
+      }      
     }
+
   }
 
   @media screen and (min-width: 280px) and (max-width: 720px) {

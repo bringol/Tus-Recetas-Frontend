@@ -87,6 +87,7 @@ const EditarReceta = (props) => {
     const { id } = useParams();
     const [categoria, setCategoria] = useState('');
     const [dificultad, setDificultad] = useState('');
+    const [imagen, setImagen] = useState('');
     const [ingredientes, setIngredientes] = useState('');
     const [procedimiento, setProcedimiento] = useState('');
     const [calificacionProm, setcalificacionProm] = useState('');
@@ -111,7 +112,6 @@ const EditarReceta = (props) => {
             //window.location.reload();
             console.log("dentro de rdo", rdo)
             if (rdo.length > 0) {
-<<<<<<< HEAD
                 
               setCategoria(rdo[0].categoria);
               localStorage.setItem("categoria",rdo[0].categoria )
@@ -119,13 +119,6 @@ const EditarReceta = (props) => {
               setNombreImagen(rdo[0].nombreImagen);
               localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
 
-=======
-              
-              setCat(rdo[0].categoria);
-              localStorage.setItem("categoria",rdo[0].categoria )
-              setImagen(rdo[0].nombreImagen);
-              localStorage.setItem("nombreImagen",rdo[0].nombreImagen )
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
               setDificultad(rdo[0].dificultad);
               localStorage.setItem("dificultad",rdo[0].dificultad )
 
@@ -137,10 +130,7 @@ const EditarReceta = (props) => {
 
               setAutor(rdo[0].autor);
               localStorage.setItem("autor",rdo[0].autor )
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
               setNombre(rdo[0].nombre);
               localStorage.setItem("nombre",rdo[0].nombre )
             }
@@ -223,20 +213,6 @@ const EditarReceta = (props) => {
         if (nuevoDato.rdo === 0) {
             //setUsuarioValido(true);
             //setToggle(!toggle)
-<<<<<<< HEAD
-=======
-              alert("Receta actualizada")
-               
-              localStorage.removeItem("categoria")
-              localStorage.removeItem("nombreImagen")
-              localStorage.removeItem("dificultad")
-              localStorage.removeItem("ingredientes")
-              localStorage.removeItem("procedimiento")
-              localStorage.removeItem("categoria")
-              localStorage.removeItem("nombre")
-              //window.location.reload();
-              navigate("/User/Recetas")
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
             console.log("Receta actualizado")
         }
         if (nuevoDato.rdo === 1) {
@@ -299,13 +275,8 @@ const EditarReceta = (props) => {
                             id="nombre"
                             label="Nombre"
                             name="nombre"
-<<<<<<< HEAD
                             //autoComplete="email"
                             autoFocus
-=======
-                            autoFocus
-                            //defaultValue={nombre}
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                             value={formik.values.nombre}
                             onChange={formik.handleChange}
                             error={formik.touched.nombre && Boolean(formik.errors.nombre)}
@@ -431,25 +402,17 @@ const EditarReceta = (props) => {
                                 //onClick={() => setToggle(!toggle)}
 
                                 disabled={
-<<<<<<< HEAD
                                     !(formik.isValid && formik.dirty)
                                     // (formik.errors.nombre)            
                                     // ||
                                     // ( formik.errors.ingredientes)
                                     // ||
                                     // (formik.errors.procedimiento) 
-=======
-                                    !(formik.isValid && formik.dirty) 
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                                 }
                                // onClick={() => guardarImagen()}
                                onClick={() => validarReceta()}
                             >
-<<<<<<< HEAD
                                 Guardad Cambios
-=======
-                                Modificar Receta
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
                             </Button>
                         </Box>
                     </form>

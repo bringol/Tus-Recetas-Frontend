@@ -223,6 +223,10 @@ export const calificarReceta = async function (calificacion) {
 
         let data = await response.json();
         switch (response.status) {
+            case 200:
+                {
+                    return ({rdo: 1, mensaje: "Calificacion exitosa"});
+                }
             case 201:
                 {
                     return ({ rdo: 0, mensaje: "Ok" });
@@ -240,11 +244,6 @@ export const calificarReceta = async function (calificacion) {
             case 400:
                 {
                     return ({ rdo: 1, mensaje: data.message })
-                }
-            default:
-                {
-                    //otro error
-                    return ({ rdo: 1, mensaje: "Calificacion exitosa" });
                 }
         }
     }
@@ -326,9 +325,9 @@ export const obtenerRecetaMail = async function (pag) {
 
 
 
-export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, calificacion) {
-    //let url = urlWebServices.buscarReceta +`${nombre}`+ `${categoria}` + `${dificultad}` + `${ingrediente}` + `${calificacion}`;
-    let url = urlWebServices.buscarReceta;
+export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, pag) {
+    //let url = urlWebServices.buscarReceta + `?page=${pag}`;
+    let url = urlWebServices.buscarReceta
     const formData = new FormData();
     console.log(nombre);
 
@@ -337,9 +336,8 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         'categoria': categoria,
         'dificultad': dificultad,
         'ingredientes': ingredientes,
-        'calificacion': calificacion,
     };
-   
+
     var formBody = [];
     for (var property in details) {
         var encodedKey = encodeURIComponent(property);
@@ -364,8 +362,6 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         });
         if (response.status === 200) {
             let listaRecetas = await response.json();
-            //et listaRecetas = data.data.docs;
-            //let listaRecetas = data.docs
             console.log(listaRecetas)
             return listaRecetas;
         }
@@ -383,11 +379,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
 
 export const editarReceta = async function (receta) {
 
-<<<<<<< HEAD
     let url = urlWebServices.editarReceta + "/" + receta._id;;
-=======
-    let url = urlWebServices.editarReceta;
->>>>>>> 9d8556e512669b94cdee212ad88b8fa932dc2aa3
     const formData = new URLSearchParams();
     formData.append('id', receta.id);
     formData.append('nombre', receta.nombre);

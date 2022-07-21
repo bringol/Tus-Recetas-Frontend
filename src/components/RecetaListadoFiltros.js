@@ -9,7 +9,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
-
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 import { buscarReceta } from "../controllers/recetaController";
 
@@ -47,62 +47,59 @@ export default function RecetasListadoFiltros() {
         { title: '5' },
     ];
 
-    const topCalificaciones = [
-        { title: '1 estrella' },
-        { title: '2 estrellas' },
-        { title: '3 estrellas' },
-        { title: '4 estrellas' },
-        { title: '5 estrellas' },
-    ];
-
     const classes = useStyles();
     const [listaRecetas, setListaRecetas] = useState([]);
     const [nombre, setNombre] = useState('');
     const [categoria, setCategoria] = useState('');
     const [dificultad, setDificultad] = useState('');
     const [ingredientes, setIngredientes] = useState('');
-    const [calificacion, setCalificacion] = useState('');
-    const [calificacionPromedio, setCalificacionPromedio] = useState('');
     const [page, setPage] = useState(1);
     const [pageCount, setpageCount] = useState(0);
-    const myRef = useRef(null)
-    const executeScroll = () => scrollToRef(myRef)
-    
-    //let nom = document.querySelector("#nombre").value
-    //console.log("nom")
-
-    var data =[];
+    const myRef = useRef(null);
+    const executeScroll = () => scrollToRef(myRef);
 
     useEffect(() => {
-                
-           
+    });
+
+    /*
+    useEffect(() => {
+        async function componentDidMount() {
+            let rdo = await obtenerRecetas(page);
+            setListaRecetas(rdo.data.docs);
+            setpageCount(rdo.data.pages);
+            executeScroll()
         }
+        componentDidMount();
+    }, [page]);
+    */
 
-    );
-
-    //window.setInterval(miFuncion, 500, 'Parametro 1', 'Parametro 2');
-
-    async function mostrar(){
-
-        let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes, calificacion);
+    async function mostrar() {
+        let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
         setListaRecetas(rdo.data);
-
-         //console.log("listado", setListaRecetas)
-            //setpageCount(rdo.data.pages);
-            //executeScroll()
+        //let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes, page);
+        //setpageCount(rdo.data.pages);
+        //executeScroll();
 
     }
 
-    window.onload = function (){
+    async function limpiar() {
+        document.getElementById("nombre").value = "";
+        setNombre('');
+        document.getElementById("categoria").value = "";
+        setCategoria('');
+        document.getElementById("dificultad").value = "";
+        setDificultad('');
+        document.getElementById("ingrediente").value = "";
+        setIngredientes('');
+        let rdo = await buscarReceta('', '', '', '', page);
+        setListaRecetas(rdo.data);
+        //setpageCount(rdo.data.pages);
+        //executeScroll()
+    }
+
+    window.onload = function () {
         mostrar();
     }
-
-function miFuncion(a,b) {
-  // Aquí va tu código
-  // Los parámetros son opcionales completamente
-  console.log(a);
-  console.log(b);
-}
 
     const setearNombre = e => {
         const nombre = e.target.value;
@@ -112,7 +109,7 @@ function miFuncion(a,b) {
 
     const setearIngredientes = e => {
         const ingredientes = e.target.value;
-        console.log("categoria seteada", ingredientes);
+        console.log("ingredientes seteada", ingredientes);
         setIngredientes(ingredientes);
     };
 
@@ -123,11 +120,17 @@ function miFuncion(a,b) {
     };
 
 
+    const setearDificultad = e => {
+        const dificultad = e;
+        console.log("dificultad seteada", dificultad);
+        setDificultad(dificultad);
+
+    };
+
     function handleAnterior() {
         setPage((p) => {
             if (p === 1)
                 return p
-
             else
                 return p - 1
         })
@@ -148,7 +151,7 @@ function miFuncion(a,b) {
 
             <div className="title">
                 <h1>
-                    <span>BUSCAR RECETAS</span>
+                    <span>RECETAS</span>
                 </h1>
             </div>
 
@@ -159,19 +162,21 @@ function miFuncion(a,b) {
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <Autocomplete
-                           onChange={(event, categoria) => setearCategoria(categoria)}
+                            onChange={(event, categoria) => setearCategoria(categoria)}
                             id="categoria"
+                            label="Categoria"
                             size="small"
                             Categoría
                             options={topCategorias.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
-                            
+
                         />
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <Autocomplete
-                            onChange={(event, dificultad) => console.log(dificultad)}
+                            onChange={(event, dificultad) => setearDificultad(dificultad)}
                             id="dificultad"
+                            label="Dificultad"
                             size="small"
                             Dificultad
                             options={topDificultades.map((option) => option.title)}
@@ -181,27 +186,25 @@ function miFuncion(a,b) {
                     <Grid item xs={12} md={2}>
                         <TextField id="ingrediente" label="Ingrediente" color="secondary" size="small" fullWidth onChange={setearIngredientes} />
                     </Grid>
-                    <Grid item xs={12} md={2}>
-                        <Autocomplete
-                            onChange={(event, calificacion) => console.log(calificacion)}
-                            id="calificacion"
-                            size="small"
-                            border-color="#572e57"
-                            Calificación
-                            options={topCalificaciones.map((option) => option.title)}
-                            renderInput={(params) => <TextField {...params} label="Calificación" color="secondary" />}
-                        />
-                    </Grid>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={mostrar}
+                        endIcon={<FilterListIcon />}>
+                        Aplicar Filtros
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={limpiar}
+                        endIcon={<FilterListIcon />}>
+                        Quitar Filtros
+                    </Button>
                 </Grid >
+            </div >
 
-            </div>
-         
-
-            <div className="title" ref={myRef}>
-                <h1>
-                    <span>Recetas</span>
-                </h1>
-            </div>
             <div className="products">
                 {listaRecetas.map((receta) => {
                     return (
@@ -228,100 +231,88 @@ function miFuncion(a,b) {
                 })}
             </div>
 
-            <div className="container">
-                <button
-                    type="button"
-                    onClick={mostrar}>
-                    Aplicar Filtros
-                </button>
-            </div>
-
-            <Box mt={15}></Box>
             <div className={classes.container}>
                 <Button
                     disabled={page === 1}
                     onClick={handleAnterior}
-                    sx={{ fontSize: 50 }}
-                >
+                    sx={{ fontSize: 20 }}
+                    color="secondary">
                     <ArrowBackIosIcon />
                 </Button>
 
-                <Typography sx={{ fontSize: 50 }}>
-                    {page}<MoreHorizIcon />{pageCount}
+                <Typography sx={{ fontSize: 20 }}>
+                    {page}<MoreHorizIcon fontSize="small" />{pageCount}
                 </Typography>
 
                 <Button
                     disabled={page === pageCount}
                     onClick={handleSiguiente}
+                    color="secondary"
                     //onClick={executeScroll}
-                    sx={{ fontSize: 50 }}
-                >
+                    sx={{ fontSize: 20 }}>
                     <ArrowForwardIosIcon />
                 </Button>
             </div>
 
 
-        </Section>
+        </Section >
 
     );
 }
 
 const Section = styled.section`
-${TitleStyles};
-.products {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-  margin-top: 3rem;
-  .product {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    justify-content: center;
-    align-items: center;
-    h3 {
-      color: #44214e;
-    }
-    ${imageZoomEffect};
-    .image {
-      max-height: 20rem;
-      overflow: hidden;
-      border-radius: 1rem;
-      img {
-        height: 20rem;
-        width: 15rem;
-        object-fit: cover;
+  ${TitleStyles};
+  .products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 6rem;
+    .product {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      justify-content: center;
+      align-items: center;
+      h3 {
+        color: #44214e;
       }
-    }
-    button {
-      border: none;
-      padding: 1rem 4rem;
-      font-size: 1.4rem;
-      color: white;
-      border-radius: 4rem;
-      transition: 0.5s ease-in-out;
-      cursor: pointer;
-      background: linear-gradient(to right, #572e57, #834e6d, #572e57);
-      text-transform: uppercase;
-      &:hover {
+      ${imageZoomEffect};
+      .image {
+        max-height: 20rem;
+        overflow: hidden;
+        border-radius: 1rem;
+        img {
+          height: 20rem;
+          width: 15rem;
+          object-fit: cover;
+        }
+      }
+      button {
+        border: none;
+        padding: 1rem 4rem;
+        font-size: 1.4rem;
+        color: white;
+        border-radius: 4rem;
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
         background: linear-gradient(to right, #572e57, #834e6d, #572e57);
-      }
+        text-transform: uppercase;
+        &:hover {
+          background: linear-gradient(to right, #572e57, #834e6d, #572e57);
+        }
+      }      
     }
-    paginacion{
 
+  }
+
+  @media screen and (min-width: 280px) and (max-width: 720px) {
+    .products {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
-    
   }
-}
-
-@media screen and (min-width: 280px) and (max-width: 720px) {
-  .products {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
-}
-@media screen and (min-width: 720px) and (max-width: 1080px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 `;

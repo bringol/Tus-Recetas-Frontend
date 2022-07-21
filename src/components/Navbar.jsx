@@ -34,9 +34,6 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#busqueda">Buscar Receta</a>
-          </li>
-          <li>
             <a href="#recetas">Recetas</a>
           </li>
           <li>
@@ -58,11 +55,6 @@ export default function Navbar() {
               onClick={() => setNavbarState(false)}
             >
               Nosotros
-            </a>
-          </li>
-          <li>
-            <a href="#busqueda" onClick={() => setNavbarState(false)}>
-              Buscar Receta
             </a>
           </li>
           <li>
