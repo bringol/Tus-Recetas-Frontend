@@ -4,10 +4,10 @@ import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { Autocomplete, TextField, Paper, Grid, Stack, flex } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Button, Box, Typography } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+ import { Button, Box, Typography } from '@mui/material';
+// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
@@ -111,24 +111,24 @@ export default function RecetasListadoFiltrosUSR() {
 
     };
 
-    function handleAnterior() {
-        setPage((p) => {
-            if (p === 1)
-                return p
-            else
-                return p - 1
-        })
-    }
+    // function handleAnterior() {
+    //     setPage((p) => {
+    //         if (p === 1)
+    //             return p
+    //         else
+    //             return p - 1
+    //     })
+    // }
 
-    function handleSiguiente() {
-        setPage((p) => {
-            if (p === pageCount)
-                return p
-            else {
-                return (p + 1)
-            }
-        })
-    }
+    // function handleSiguiente() {
+    //     setPage((p) => {
+    //         if (p === pageCount)
+    //             return p
+    //         else {
+    //             return (p + 1)
+    //         }
+    //     })
+    // }
 
     return (
         <Section id="recetas">
