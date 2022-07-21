@@ -314,7 +314,7 @@ export const obtenerRecetaMail = async function (pag) {
 
 
 
-export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes, calificacion) {
+export const buscarReceta = async function (nombre, categoria, dificultad, ingredientes) {
     let url = urlWebServices.buscarReceta;
     const formData = new FormData();
     console.log(nombre);
@@ -324,7 +324,6 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         'categoria': categoria,
         'dificultad': dificultad,
         'ingredientes': ingredientes,
-        'calificacion': calificacion,
     };
    
     var formBody = [];
@@ -349,7 +348,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         });
         if (response.status === 200) {
             let listaRecetas = await response.json();
-            console.log(listaRecetas)
+            console.log("dentro controller",listaRecetas)
             return listaRecetas;
         }
         else {
@@ -363,6 +362,7 @@ export const buscarReceta = async function (nombre, categoria, dificultad, ingre
         console.log("Error", error);
     };
 }
+
 
 export const editarReceta = async function (receta) {
 

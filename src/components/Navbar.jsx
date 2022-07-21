@@ -34,7 +34,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#busqueda">Buscar Receta</a>
+            <a href="#busqueda">Buscar Recetas</a>
           </li>
           <li>
             <a href="#recetas">Recetas</a>
@@ -61,7 +61,7 @@ export default function Navbar() {
           </li>
           <li>
             <a href="#busqueda" onClick={() => setNavbarState(false)}>
-              Buscar Receta
+              Buscar Recetas
             </a>
           </li>
           <li>
