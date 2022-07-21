@@ -7,7 +7,7 @@ export const obtenerRecetas = async function (pag) {
             method: 'GET',
             mode: "cors",
             headers: {
-                'x-access-token': localStorage.getItem('x'),
+                //'x-access-token': localStorage.getItem('x'),
                 'Origin': 'http://localhost:3000'
             }
         });
@@ -35,7 +35,8 @@ export const obtenerRecetaID = async function (id) {
             method: 'GET',
             mode: "cors",
             headers: {
-                //'x-access-token': localStorage.getItem('x'),
+                // 'x-access-token': localStorage.getItem('x'),
+                // 'Authorization': `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             }
         });
@@ -383,6 +384,7 @@ export const editarReceta = async function (receta) {
             headers: {
                 'Accept': 'application/form-data',
                 'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             },
             body: formData,
@@ -429,6 +431,7 @@ export const obtenerRecetasFiltros = async function (pag, nombre, categoria, dif
             mode: "cors",
             headers: {
                 'x-access-token': localStorage.getItem('x'),
+                "Authorization": `Bearer ${localStorage.getItem('x')}`,
                 'Origin': 'http://localhost:3000'
             }
         });
