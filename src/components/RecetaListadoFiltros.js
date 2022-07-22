@@ -4,10 +4,10 @@ import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import { Autocomplete, TextField, Paper, Grid, Stack, flex } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Button, Box, Typography } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+ import { Button, Box, Typography } from '@mui/material';
+// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Rating from '@mui/material/Rating';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecetasListadoFiltros() {
+export default function RecetasListadoFiltrosUSR() {
 
     const topCategorias = [
         { title: 'Postres' },
@@ -62,14 +62,10 @@ export default function RecetasListadoFiltros() {
     });
 
 
-
-    //window.setInterval(miFuncion, 500, 'Parametro 1', 'Parametro 2');
-
-    async function mostrar(){
-
+    async function mostrar() {
         let rdo = await buscarReceta(nombre, categoria, dificultad, ingredientes);
         setListaRecetas(rdo.data);
-        
+
     }
 
     async function limpiar() {
@@ -115,24 +111,24 @@ export default function RecetasListadoFiltros() {
 
     };
 
-    function handleAnterior() {
-        setPage((p) => {
-            if (p === 1)
-                return p
-            else
-                return p - 1
-        })
-    }
+    // function handleAnterior() {
+    //     setPage((p) => {
+    //         if (p === 1)
+    //             return p
+    //         else
+    //             return p - 1
+    //     })
+    // }
 
-    function handleSiguiente() {
-        setPage((p) => {
-            if (p === pageCount)
-                return p
-            else {
-                return (p + 1)
-            }
-        })
-    }
+    // function handleSiguiente() {
+    //     setPage((p) => {
+    //         if (p === pageCount)
+    //             return p
+    //         else {
+    //             return (p + 1)
+    //         }
+    //     })
+    // }
 
     return (
         <Section id="recetas">
@@ -154,6 +150,7 @@ export default function RecetasListadoFiltros() {
                             id="categoria"
                             label="Categoria"
                             size="small"
+                            Categoría
                             options={topCategorias.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Categoria" color="secondary" />}
 
@@ -165,6 +162,7 @@ export default function RecetasListadoFiltros() {
                             id="dificultad"
                             label="Dificultad"
                             size="small"
+                            Dificultad
                             options={topDificultades.map((option) => option.title)}
                             renderInput={(params) => <TextField {...params} label="Dificultad" color="secondary" />}
                         />
@@ -172,31 +170,24 @@ export default function RecetasListadoFiltros() {
                     <Grid item xs={12} md={2}>
                         <TextField id="ingrediente" label="Ingrediente" color="secondary" size="small" fullWidth onChange={setearIngredientes} />
                     </Grid>
-                           
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={mostrar}
+                        endIcon={<FilterListIcon />}>
+                        Aplicar Filtros
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={limpiar}
+                        endIcon={<FilterListIcon />}>
+                        Quitar Filtros
+                    </Button>
                 </Grid >
             </div >
-
-            
-         
-
-            <div className="title" >
-                
-            </div>
-            <div>
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Button
-                    sx={{ fontSize: 20 }}
-                    color="secondary"
-                    onClick={mostrar}>
-                    Aplicar Filtros
-                </Button>
-
-            </Box>
-            </div>
 
             <div className="products">
                 {listaRecetas.map((receta) => {
@@ -222,10 +213,7 @@ export default function RecetasListadoFiltros() {
                         </div>
                     );
                 })}
-            </div> 
-            
-
-           
+            </div>
 
 
         </Section >
